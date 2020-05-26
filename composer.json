@@ -1,5 +1,5 @@
 {
-    "name": "mert/paket",
+    "name": "teamrevise/cms-package",
     "type": "project",
     "description": "Team Revise CMS",
     "keywords": [
@@ -31,16 +31,16 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
-    "extra": {
-        "laravel": {
-             "providers": [
-	            "CMS\\Providers\\CMS"
-	        ],
-        }
-    },
     "autoload": {
         "psr-4": {
             "CMS\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "CMS\\Providers\\CMS"
+            ],
         }
     }
 }
