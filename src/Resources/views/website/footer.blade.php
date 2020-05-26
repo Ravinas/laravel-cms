@@ -1,0 +1,3 @@
+@section('footer')
+    bqq
+@endsection
