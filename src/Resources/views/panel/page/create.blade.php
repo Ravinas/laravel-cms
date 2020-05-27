@@ -104,50 +104,33 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-block">
+                            <h1 class="card-title">
+                                <div class="form-group page-status">
+                                @if($type)
+                                    {!! trans('cms::page.creating_subpage',['parent' => $parent->detail->name ]) !!}
+                                @else
+                                    {!! trans('cms::page.creating_page') !!}
+                                @endif
+                                </div>
+                            </h1>
                             <form method="POST" action="{!! route('pages.store') !!}">
                                 @method('POST')
                                 @csrf
                                 @if($type)
-                                <div class="form-group page-status col-lg-3">
-                                        <label>{!! trans('cms::panel.generating')." ".$parent->detail->name !!}</label>
-                                        <input type="hidden" name="page_id" value="{!! $parent->id !!}">
-                                </div>
-                                <div class="form-group page-order col-lg-3">
-                                    <label>{!! trans('cms::panel.order') !!}</label>
-                                    <input type="number" class="form-control col-sm" id="order"  placeholder="{!! trans('cms::panel.order') !!}" value="{!! $order !!}" disabled>
-                                    <input type="hidden" name="order" value="{!! $order !!}">
-
-                                </div>
-                                <div class="form-group page-status col-sm-7 float-left">
-                                    <label>{!! trans('cms::panel.categories') !!}</label>
-                                    <div>
-                                        <select class="form-control form-group" multiple name="category[]" id="multiselect">
-                                          @foreach($categories as $category)
-                                              <option value="{!! $category->id !!}">{!! $category->detail->name !!}</option>
-                                          @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                @else
-                                <div class="form-group page-status col-lg-2">
-                                    <label>{!! trans('cms::panel.type') !!}</label>
-                                    <div>
-                                        <select class="custom-select custom-select-lg mb-3" name="type">
-                                            <option value="0">{!! trans('cms::panel.static') !!}</option>
-                                            <option value="1">{!! trans('cms::panel.dynamic') !!}</option>
-                                        </select>
-                                    </div>
-                                </div>
+                                    <input type="hidden" name="page_id" value="{!! $parent->id !!}">
                                 @endif
-                                <div class="form-group page-status col-lg-2">
-                                    <label>{!! trans('cms::panel.status') !!}</label>
-                                    <div>
-                                        <input type="radio" id="ac" value="1" class="form-control" name="status" > <label for="ac">{!! trans('cms::panel.active') !!}</label>
+                                @if(Auth::user()->role_id == 1)
+                                    <div class="form-group page-status col-lg-2">
+                                        <label>{!! trans('cms::panel.type') !!}</label>
+                                        <div>
+                                            <select class="custom-select custom-select-lg mb-3" name="type">
+                                                <option value="0">{!! trans('cms::panel.static') !!}</option>
+                                                <option value="1">{!! trans('cms::panel.dynamic') !!}</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <input type="radio" value="0" id="ps" class="form-control" name="status" checked> <label for="ps">{!! trans('cms::panel.passive') !!}</label>
-                                    </div>
-                                </div>
+                                @endif
+
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     @foreach( \CMS\Facades\LanguageFacade::all() as $l)
                                             <li class="nav-item">
@@ -189,40 +172,17 @@
                                                     </div>
                                                 </div>
                                             </div>
-{{--                                        <div class="card">--}}
-{{--                                            <div class="card-block">--}}
-{{--                                                <div class="form-group">--}}
-{{--                                                    <input type="checkbox" id="{!! $l->id  !!}" value="1" class="form-control-user" name="detail_status[{!! $l->id !!}]" /> <label for="{!! $l->id !!}">{!! $l->name !!}</label>--}}
-{{--                                                </div>--}}
-{{--                                                <div id="lang{!! $l !!}" >--}}
-{{--                                                    <div class="form-group">--}}
-{{--                                                        <label>{!! trans('cms::panel.name') !!}</label>--}}
-{{--                                                        <input type="text" class="form-control page-name"  name="name[{!! $l->id !!}]" placeholder="{!! trans('cms::panel.name') !!}" lang-code="{!! \CMS\Facades\LanguageFacade::isDefault($l->id) ? '/' :  '/'.$l->code.'/' !!}" parent-url="{!! $type ? $parent->detail->url.'/' : '' !!}"/>--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="form-group">--}}
-{{--                                                        <label>{!! trans('cms::panel.url') !!}</label>--}}
-{{--                                                        @if($type)--}}
 
-{{--                                                        <input type="text" class="form-control urls {!! \CMS\Facades\LanguageFacade::isDefault($l->id) ? 'default_lang' : ''!!}"  name="url[{!! $l->id !!}]" placeholder="{!! trans('cms::panel.url') !!}"/>--}}
-{{--                                                        @else--}}
-{{--                                                        <input type="text" class="form-control urls {!! \CMS\Facades\LanguageFacade::isDefault($l->id) ? 'default_lang' : ''!!}"  name="url[{!! $l->id !!}]" placeholder="{!! trans('cms::panel.url') !!}"/>--}}
-{{--                                                        @endif--}}
-{{--                                                        <div class="result"></div>--}}
-{{--                                                        @if(session('error'))--}}
-{{--                                                            <div class="alert alert-danger mt-1">--}}
-{{--                                                                This url is already in use.--}}
-{{--                                                            </div>--}}
-{{--                                                        @endif--}}
-
-{{--                                                    </div>--}}
-{{--                                                    <div class="form-group">--}}
-{{--                                                        <label>{!! trans('cms::panel.content') !!}</label>--}}
-{{--                                                        <textarea class="form-control ck" name="content[{!! $l->id !!}]" placeholder="{!! trans('cms::panel.content') !!}"></textarea>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
                                     @endforeach
+                                </div>
+                                <div class="form-group page-status col-lg-2">
+                                    <label>{!! trans('cms::panel.status') !!}</label>
+                                    <div>
+                                        <input type="radio" id="ac" value="1" class="form-control" name="status" > <label for="ac">{!! trans('cms::panel.active') !!}</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" value="0" id="ps" class="form-control" name="status" checked> <label for="ps">{!! trans('cms::panel.passive') !!}</label>
+                                    </div>
                                 </div>
                                 <div class="form-group page-date">
                                     <input type="submit" class="btn btn-success float-right" id="submit" value="{!! trans('cms::panel.create') !!}">
