@@ -14,8 +14,8 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-block">
-                            <h4 class="card-title">{!! trans('cms::panel.pages') !!}</h4>
-                            <a class="btn-success btn float-right" href="{!! route('pages.create',['page' => $parent_id]).'&type=dynamic' !!}">{!! trans('cms::panel.create') !!}</a>
+                            <h4 class="card-title">{!! trans('cms::page.subpages',['parent' => $parent->detail->name]) !!}</h4>
+                            <a class="btn-success btn float-right" href="{!! route('pages.create',['page' => $parent_id]).'&type=subpage' !!}">{!! trans('cms::panel.create') !!}</a>
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
@@ -35,7 +35,7 @@
                                             <td>{!! $page->id !!}</td>
                                             <td>{!! $page->name !!}</td>
                                             <td>{!! $page->url !!}</td>
-                                            <td><a href="{!! route('pages.edit' , ['page' => $page->id]).'?type=dynamic' !!}" class="btn waves-effect waves-light btn-warning hidden-sm-down">{!! trans('cms::panel.edit') !!}</a>
+                                            <td><a href="{!! route('pages.edit' , ['page' => $page->id]).'?type=subpage' !!}" class="btn waves-effect waves-light btn-warning hidden-sm-down">{!! trans('cms::panel.edit') !!}</a>
                                                 @if($page->type)
                                                     <a href="{!! route('subpages' , ['id' => $page->id]) !!}" class="btn waves-effect waves-light btn-success hidden-sm-down ml-1">{!! trans('cms::panel.sub_pages') !!}</a>
                                                 @endif

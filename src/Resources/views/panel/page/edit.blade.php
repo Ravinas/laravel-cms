@@ -46,9 +46,8 @@
                     method : 'POST' ,
                     data :{ "_token": "{{ csrf_token() }}", "url" : code+"/"+url ,"page_id" : page_id } ,
                     success:function (response) {
-                        if (response.status)
+                        if (response.Status)
                         {
-                            alert(1);
                             $(el).parent('.form-group').find('.urls').css("border-color","green");
 
                         }else {
@@ -58,7 +57,6 @@
                     }
                 });
             }
-
 
         });
 
@@ -70,39 +68,28 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-10">
-                    <div class="card  mt-3 col-12">
+                    <div class="card  mt-3 col-12 bg-light-inverse">
                         <div class="card-block">
                             <form method="POST" action="{!! route('pages.update',array('page'=>$page)) !!}" enctype="multipart/form-data">
                                 @method('PUT')
                                 @csrf
-                                @if($page->page_id)
-                                <div class="form-group page-order col-sm-6">
-                                    <label>{!! trans('cms::panel.order') !!}</label>
-                                    <input type="text" class="form-control" id="order" name="order" placeholder="{!! trans('cms::panel.order') !!}" value="{!! $page->order !!}">
-                                </div>
-                                    <input type="hidden" class="form-control" id="order" name="page_id" placeholder="{!! trans('cms::panel.order') !!}" value="{!! $page->page_id !!}">
-                                    <div class="form-group page-status col-sm-7 float-left">
-                                    <label>{!! trans('cms::panel.categories') !!}</label>
-                                    <div>
-                                        <select class="form-control form-group" multiple name="category[]" id="multiselect">
-                                          @foreach($categories as $category)
-                                              <option value="{!! $category->id !!}" {!! in_array($category->id, $page_categories) ? 'selected' : '' !!}>{!! $category->detail->name !!}</option>
-                                          @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                @endif
-                                <div class="form-group page-status col-sm-5 float-left">
-                                    <label>{!! trans('cms::panel.status') !!}</label>
-                                    <div>
-                                        <input type="radio" id="ac" value="1" class="form-control-user" name="status" @if($page->status) checked @endif> <label  for="ac">{!! trans('cms::panel.active') !!}</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" value="0" id="ps" class="form-control-user" name="status" @if(!$page->status) checked @endif> <label  for="ps">{!! trans('cms::panel.passive') !!}</label>
-                                    </div>
-                                </div>
 
-                        </div>
+                                @if($page->page_id)
+                                    <input type="hidden" class="form-control" name="page_id" value="{!! $page->page_id !!}">
+                                @endif
+
+                            </div>
+                        @if(Auth::user()->role_id == 1)
+                            <div class="form-group page-status">
+                                <label>{!! trans('cms::panel.type') !!}</label>
+                                <div>
+                                    <select class="custom-select custom-select-lg mb-3" name="type">
+                                        <option value="0">{!! trans('cms::panel.static') !!}</option>
+                                        <option value="1">{!! trans('cms::panel.dynamic') !!}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        @endif
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         @foreach( $pageDetails as $pd)
                             @if($pd->language)
@@ -159,8 +146,19 @@
                         @endif
 
                     </div>
+                        <div class="form-group page-status col-sm-5 float-left">
+                            <label>{!! trans('cms::panel.status') !!}</label>
+                            <div>
+                                <input type="radio" id="ac" value="1" class="form-control-user" name="status" @if($page->status) checked @endif> <label  for="ac">{!! trans('cms::panel.active') !!}</label>
+                            </div>
+                            <div>
+                                <input type="radio" value="0" id="ps" class="form-control-user" name="status" @if(!$page->status) checked @endif> <label  for="ps">{!! trans('cms::panel.passive') !!}</label>
+                            </div>
+                        </div>
+
+
                     <div class="form-group page-date">
-                        <input type="submit" class="btn btn-success float-right" id="submit" value="{!! trans('cms::panel.update') !!}">
+                        <input type="submit" class="btn btn-success " id="submit" value="{!! trans('cms::panel.update') !!}">
                     </div>
 
                     </form>

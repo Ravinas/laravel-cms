@@ -90,6 +90,10 @@ class CMS extends ServiceProvider
             return '<input type="text" class="form-control" name="detail_extras['.$arguments[1].']['.$arguments[0].']" value="{!! $pd->'.$arguments[0].' !!}"/>';
         });
 
+        Blade::directive('order', function ($arguments) {
+            return '<input type="text" class="form-control" id="order" name="order" placeholder="{!! trans(\'cms::panel.order\') !!}" value="{!! $page->order !!}">';
+        });
+
         //date
 
         //select
