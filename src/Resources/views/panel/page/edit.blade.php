@@ -38,6 +38,15 @@
             var page_id = el.attr('page-id');
             var code = $(this).attr('lang-code');
             var old = $(this).data('old');
+            $(this).val($(this).val().toLowerCase()
+                .replace(/ı/g,'i')
+                .replace(/ö/g,'o')
+                .replace(/ç/g,'c')
+                .replace(/ş/g,'s')
+                .replace(/ü/g,'u')
+                .replace(/ğ/g,'g')
+                .replace(/ /g,'-')
+                .replace(/[^\w-]+/g,''));
             if(url != old){
                 $(el).parent('.form-group').find('.urls').css("border-color","green");
                 $(el).parent('.form-group').find('.result').html( "" );
@@ -84,8 +93,8 @@
                                 <label>{!! trans('cms::panel.type') !!}</label>
                                 <div>
                                     <select class="custom-select custom-select-lg mb-3" name="type">
-                                        <option value="0">{!! trans('cms::panel.static') !!}</option>
-                                        <option value="1">{!! trans('cms::panel.dynamic') !!}</option>
+                                        <option value="0" @if($page->type == 0) selected @endif>{!! trans('cms::panel.static') !!}</option>
+                                        <option value="1" @if($page->type == 1) selected @endif>{!! trans('cms::panel.dynamic') !!}</option>
                                     </select>
                                 </div>
                             </div>
@@ -116,8 +125,8 @@
                                                 <div class="form-group">
                                                     <label>{!! trans('cms::panel.url') !!}</label>
                                                     <br/>
-                                                    <strong>{!! env('APP_URL') !!}/{!! $pd->language->code !!}/</strong>
-                                                    <input style="width:50%;" type="text" class="form-control urls {!! \CMS\Facades\LanguageFacade::isDefault($pd->language->id) ? 'default_lang' : '' !!}"
+                                                    <strong>{!! env('APP_URL') !!}/{!! ($pd->showLanguageCode) ? $pd->language->code."/" : "" !!}</strong>
+                                                    <input style="width:50%;" type="text" class="form-control urls {!! app()->defaultLanguage == $pd->language ? 'default_lang' : '' !!}"
                                                            lang-code="{!! $pd->language->code !!}"
                                                            page-id="{!! $pd->id !!}"
                                                            name="url[{!! $pd->lang_id !!}]"

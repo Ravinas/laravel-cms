@@ -22,6 +22,45 @@ class PageController extends Controller
     public function __construct()
     {
         $this->authorizeResource(Page::class);
+        //file
+        Blade::directive('filePage', function ($expression) {
+            return '<button type="button" class="btn btn-primary file-select" data-toggle="modal" data-target="#filemanager" data-key="'.$expression.'">
+                    '.trans("cms::panel.select_file").'
+                </button>';
+        });
+        Blade::directive('filePageDetail', function ($arguments) {
+            return '<button type="button" class="btn btn-primary file-select-detail" data-toggle="modal" data-target="#filemanager" data-key="'.$arguments.'" data-pageDetail="{!! $pd->id !!}">
+                    '.trans("cms::panel.select_file").'
+                </button>';
+        });
+
+        //text
+        Blade::directive('textExtra', function ($arguments) {
+            return '<input type="text" class="form-control" name="extras['.$arguments.']" value="{!! $page->'.$arguments.' !!}"/>';
+        });
+        Blade::directive('textDetailExtra', function ($arguments) {
+            return '<input type="text" class="form-control" name="detail_extras[{!! $pd->id !!}]['.$arguments.']" value="{!! $pd->'.$arguments.' !!}"/>';
+        });
+
+        Blade::directive('order', function ($arguments) {
+            return '<input type="text" class="form-control" id="order" name="order" placeholder="{!! trans(\'cms::panel.order\') !!}" value="{!! $page->order !!}">';
+        });
+
+        Blade::directive('date', function ($arguments) {
+            return '<input type="date" class="form-control" name="extras['.$arguments.']" value="{!! $page->'.$arguments.' !!}">';
+        });
+
+        Blade::directive('dateDetail', function ($arguments) {
+            return '<input type="date" class="form-control" name="detail_extras[{!! $pd->id !!}]['.$arguments.']" value="{!! $pd->'.$arguments.' !!}">';
+        });
+
+
+        //select
+
+        //checkbox
+
+        //radio
+
         $this->options ="";
     }
 
@@ -204,6 +243,13 @@ class PageController extends Controller
 
         //urllerden tr/ en/ varsa at
         foreach($pageDetails as $pd){
+            $cond1 = app()->showDefaultLanguageCode;
+            $cond2 = (app()->defaultLanguage->id == $pd->lang_id);
+            if(!$cond1 && $cond2){
+                $pd->showLanguageCode = false;
+            } else {
+                $pd->showLanguageCode = true;
+            }
             if(mb_substr($pd->url, 0, 3) == $pd->language->code."/"){
                 $pd->url = substr($pd->url, 3);
             }
@@ -280,9 +326,17 @@ class PageController extends Controller
         foreach($allPageDetails as $k => $pd){
             if ($pd->language)
             {
+
                 $pd->name = $request->post('name')[$pd->lang_id];
                 $pd->content = $request->post('content')[$pd->lang_id];
-                $pd->url = $pd->language->code."/".$request->post('url')[$pd->lang_id];
+                $cond1 = app()->showDefaultLanguageCode;
+                $cond2 = app()->defaultLanguage->id == $pd->lang_id;
+                if(!$cond1 && $cond2){
+                    $pd->url = $request->post('url')[$pd->lang_id];
+                } else {
+                    $pd->url = $pd->language->code."/".$request->post('url')[$pd->lang_id];
+                }
+
                 $pd->status = $request->post('detail_status')[$pd->lang_id] ?? 0;
                 $pd->save();
             }

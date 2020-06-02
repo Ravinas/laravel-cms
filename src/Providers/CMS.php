@@ -3,7 +3,9 @@
 namespace CMS\Providers;
 
 use CMS\Facades\LanguageFacade;
+use CMS\Models\Language;
 use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Config;
@@ -35,8 +37,21 @@ class CMS extends ServiceProvider
      */
     public function boot()
     {
+//        if(file_exists(app_path().'/Http/Controllers/MertController.php')){
+//            app('App\Http\Controllers\MertController')->deneme();
+//        }
+
         $packageDir = dirname(__DIR__);
-        app()->showDefaultLanguageCode = false;
+
+        //default dilin kodu urlde gözüksün mü
+        app()->showDefaultLanguageCode = true;
+
+        app()->activeLanguages = Language::where('status',1)->get();
+        app()->defaultLanguage = Language::where('default',1)->first();
+        app()->currentLanguage = Language::where('code',App::getLocale())->first();
+        app()->otherLanguages = Language::where('code', '!=',App::getLocale())->where('status',1)->first();
+
+
         define('CONTENT',1);
         define('LANGUAGE',2);
         define('FORM',3);
@@ -55,7 +70,6 @@ class CMS extends ServiceProvider
         $this->loadTranslationsFrom($packageDir.'/Resources/lang', 'cms');
         $this->loadMigrationsFrom($packageDir.'/Migrations');
         $this->loadViewsFrom($packageDir.'/Resources/views', 'cms');
-        $this->loadBladeDirectives();
 
         //projenin resourceunda app.blade oluşturulacak
 
@@ -64,43 +78,6 @@ class CMS extends ServiceProvider
             $packageDir.'/Seeds' => base_path('/database/seeds'),
         ]);
 
-    }
-
-    public function loadBladeDirectives(){
-
-        //file
-        Blade::directive('filePage', function ($expression) {
-            return '<button type="button" class="btn btn-primary file-select" data-toggle="modal" data-target="#filemanager" data-key="'.$expression.'">
-                    '.trans("cms::panel.select_file").'
-                </button>';
-        });
-        Blade::directive('filePageDetail', function ($arguments) {
-            $arguments = explode(',',$arguments);
-            return '<button type="button" class="btn btn-primary file-select-detail" data-toggle="modal" data-target="#filemanager" data-key="'.$arguments[0].'" data-pageDetail="'.$arguments[1].'">
-                    '.trans("cms::panel.select_file").'
-                </button>';
-        });
-
-        //text
-        Blade::directive('textExtra', function ($arguments) {
-            return '<input type="text" class="form-control" name="extras['.$arguments.']" value="{!! $page->'.$arguments.' !!}"/>';
-        });
-        Blade::directive('textDetailExtra', function ($arguments) {
-            $arguments = explode(',',$arguments);
-            return '<input type="text" class="form-control" name="detail_extras['.$arguments[1].']['.$arguments[0].']" value="{!! $pd->'.$arguments[0].' !!}"/>';
-        });
-
-        Blade::directive('order', function ($arguments) {
-            return '<input type="text" class="form-control" id="order" name="order" placeholder="{!! trans(\'cms::panel.order\') !!}" value="{!! $page->order !!}">';
-        });
-
-        //date
-
-        //select
-
-        //checkbox
-
-        //radio
     }
 
 }
