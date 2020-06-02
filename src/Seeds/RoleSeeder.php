@@ -1,13 +1,8 @@
 <?php
-use CMS\Models\DetailExtra;
-use CMS\Models\Extra;
-use CMS\Models\Page;
-use CMS\Models\PageDetail;
+namespace CMS\Seeds;
 use CMS\Models\Role;
-use CMS\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
+
 
 class RoleSeeder extends Seeder
 {

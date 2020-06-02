@@ -7,20 +7,20 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{!! asset("assets/images/favicon.png") !!}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{!! asset("vendor/cms/assets/images/favicon.png") !!}">
     <title>EKMEK TEKNESİ</title>
     <!-- Bootstrap Core CSS -->
-    <link href="{!! asset("assets/plugins/bootstrap/css/bootstrap.min.css") !!}" rel="stylesheet">
+    <link href="{!! asset("vendor/cms/assets/plugins/bootstrap/css/bootstrap.min.css") !!}" rel="stylesheet">
     <!-- chartist CSS -->
-    <link href="{!! asset("assets/plugins/chartist-js/dist/chartist.min.css") !!}" rel="stylesheet">
-    <link href="{!! asset("assets/plugins/chartist-js/dist/chartist-init.css") !!}" rel="stylesheet">
-    <link href="{!! asset("assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css") !!}" rel="stylesheet">
+    <link href="{!! asset("vendor/cms/assets/plugins/chartist-js/dist/chartist.min.css") !!}" rel="stylesheet">
+    <link href="{!! asset("vendor/cms/assets/plugins/chartist-js/dist/chartist-init.css") !!}" rel="stylesheet">
+    <link href="{!! asset("vendor/cms/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css") !!}" rel="stylesheet">
     <!--This page css - Morris CSS -->
-    <link href="{!! asset("assets/plugins/c3-master/c3.min.css") !!}" rel="stylesheet">
+    <link href="{!! asset("vendor/cms/assets/plugins/c3-master/c3.min.css") !!}" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="{!! asset("css/style.css") !!}" rel="stylesheet">
+    <link href="{!! asset("vendor/cms/css/style.css") !!}" rel="stylesheet">
     <!-- You can change the theme colors from here -->
-    <link href="{!! asset("css/colors/blue.css") !!}" id="theme" rel="stylesheet">
+    <link href="{!! asset("vendor/cms/css/colors/blue.css") !!}" id="theme" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -35,7 +35,7 @@
         <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
 </div>
 <div id="main-wrapper">
-    @include('panel.inc.header')
+    @include('cms::panel.inc.header')
     <br>
     <div class="container">
         <div class="row justify-content-center">
@@ -101,34 +101,34 @@
         </div>
     </div>
 
-    @include('panel.inc.footer')
+    @include('cms::panel.inc.footer')
 </div>
 </body>
-<script src="{!! asset("assets/plugins/jquery/jquery.min.js") !!}"></script>
+<script src="{!! asset("vendor/cms/assets/plugins/jquery/jquery.min.js") !!}"></script>
 <!-- Bootstrap tether Core JavaScript -->
-<script src="{!! asset("assets/plugins/bootstrap/js/tether.min.js") !!}"></script>
-<script src="{!! asset("assets/plugins/bootstrap/js/bootstrap.min.js") !!}"></script>
+<script src="{!! asset("vendor/cms/assets/plugins/bootstrap/js/tether.min.js") !!}"></script>
+<script src="{!! asset("vendor/cms/assets/plugins/bootstrap/js/bootstrap.min.js") !!}"></script>
 <!-- slimscrollbar scrollbar JavaScript -->
-<script src="{!! asset("js/jquery.slimscroll.js") !!}"></script>
+<script src="{!! asset("vendor/cms/js/jquery.slimscroll.js") !!}"></script>
 <!--Wave Effects -->
-<script src="{!! asset("js/waves.js") !!}"></script>
+<script src="{!! asset("vendor/cms/js/waves.js") !!}"></script>
 <!--Menu sidebar -->
-<script src="{!! asset("js/sidebarmenu.js") !!}"></script>
+<script src="{!! asset("vendor/cms/js/sidebarmenu.js") !!}"></script>
 <!--stickey kit -->
-<script src="{!! asset("assets/plugins/sticky-kit-master/dist/sticky-kit.min.js") !!}"></script>
+<script src="{!! asset("vendor/cms/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js") !!}"></script>
 <!--Custom JavaScript -->
-<script src="{!! asset("js/custom.min.js") !!}"></script>
+<script src="{!! asset("vendor/cms/js/custom.min.js") !!}"></script>
 <!-- ============================================================== -->
 <!-- This page plugins -->
 <!-- ============================================================== -->
 <!-- chartist chart -->
-<script src="{!! asset("assets/plugins/chartist-js/dist/chartist.min.js") !!}"></script>
-<script src="{!! asset("assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js") !!}"></script>
+<script src="{!! asset("vendor/cms/assets/plugins/chartist-js/dist/chartist.min.js") !!}"></script>
+<script src="{!! asset("vendor/cms/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js") !!}"></script>
 <!--c3 JavaScript -->
-<script src="{!! asset("assets/plugins/d3/d3.min.js") !!}"></script>
-<script src="{!! asset("assets/plugins/c3-master/c3.min.js") !!}"></script>
+<script src="{!! asset("vendor/cms/assets/plugins/d3/d3.min.js") !!}"></script>
+<script src="{!! asset("vendor/cms/assets/plugins/c3-master/c3.min.js") !!}"></script>
 <!-- Chart JS -->
-<script src="{!! asset("js/dashboard1.js") !!}"></script>
+<script src="{!! asset("vendor/cms/js/dashboard1.js") !!}"></script>
 @stack('js')
 </html>
 

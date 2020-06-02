@@ -2,14 +2,10 @@
 
 namespace CMS\Providers;
 
-use CMS\Facades\LanguageFacade;
+use CMS\Commands\Seed;
 use CMS\Models\Language;
-use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -40,6 +36,11 @@ class CMS extends ServiceProvider
 //        if(file_exists(app_path().'/Http/Controllers/MertController.php')){
 //            app('App\Http\Controllers\MertController')->deneme();
 //        }
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                'cms' => Seed::class,
+            ]);
+        }
 
         $packageDir = dirname(__DIR__);
 
@@ -75,7 +76,6 @@ class CMS extends ServiceProvider
 
         $this->publishes([
             $packageDir.'/Assets' => public_path('vendor/cms'),
-            $packageDir.'/Seeds' => base_path('/database/seeds'),
         ]);
 
     }
