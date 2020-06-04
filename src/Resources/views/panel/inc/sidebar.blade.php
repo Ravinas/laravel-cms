@@ -9,6 +9,20 @@
                         <i class="mdi mdi-gauge"></i><span class="hide-menu">{!! trans('cms::panel.dashboard') !!}</span>
                     </a>
                 </li>
+                @if(Auth::user()->hasModulePermission(REDIRECT,'R'))
+                    <li>
+                        <a class="waves-effect waves-dark" href="{!! route('menu.index') !!}">
+                            <i class="mdi mdi-chart-timeline"></i><span class="hide-menu">{!! trans('cms::panel.menu') !!}</span>
+                        </a>
+                    </li>
+                @endif
+                @if(Auth::user()->hasModulePermission(REDIRECT,'R'))
+                    <li>
+                        <a class="waves-effect waves-dark" href="{!! route('slider.index') !!}">
+                            <i class="mdi mdi-airplay"></i><span class="hide-menu">{!! trans('cms::panel.slider') !!}</span>
+                        </a>
+                    </li>
+                @endif
                 @if(Auth::user()->hasModulePermission(CONTENT,'R'))
                 <li>
                     <a class="waves-effect waves-dark" href="{!! route('pages.index') !!}">
