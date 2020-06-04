@@ -19,7 +19,7 @@ class MenuController extends Controller
     {
         $menu = Menu::all();
         $lang = Language::where('status',1)->get();
-        return view('panel.menu.index',compact('menu','lang'));
+        return view('cms::panel.menu.index',compact('menu','lang'));
     }
 
     /**
@@ -69,7 +69,7 @@ class MenuController extends Controller
     public function edit(Menu $menu)
     {
         $menu_items = MenuItem::where('parent_id', 0)->orderby('order')->get();
-        return view('panel.menu.items',compact('menu_items','menu'));
+        return view('cms::panel.menu.items',compact('menu_items','menu'));
 
     }
 

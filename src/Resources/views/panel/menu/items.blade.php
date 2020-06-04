@@ -88,7 +88,7 @@
 
 <div class="page-wrapper">
     <div class="container-fluid">
-        @include('panel.inc.breadcrumb')
+        @include('cms::panel.inc.breadcrumb')
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">

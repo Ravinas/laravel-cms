@@ -19,7 +19,7 @@ class SliderController extends Controller
     {
         $lang = Language::where('status',1)->get();
         $slider = Slider::all();
-        return view('panel.slider.index',compact('slider','lang'));
+        return view('cms::panel.slider.index',compact('slider','lang'));
     }
 
     /**
@@ -70,7 +70,7 @@ class SliderController extends Controller
     public function edit(Slider $slider)
     {
         $images = SliderItems::where('slider_id',$slider->id)->get();
-        return view('panel.slider.images',compact('images','slider'));
+        return view('cms::panel.slider.images',compact('images','slider'));
     }
 
     /**
