@@ -92,4 +92,10 @@ return [
     'category_name' => 'Category Name',
     'select_file' => "Select a File",
     'confirm_text' => 'Are you sure?',
+
+    //Menu
+    'menu' => 'Menu',
+
+    //Slider
+    'slider' => 'Slider',
 ];

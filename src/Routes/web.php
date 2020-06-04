@@ -72,6 +72,17 @@ Route::prefix('/panel')->middleware('auth')->group( function () {
 
     Route::get('googleAnalytics','AnalyticsController@google')->name('analytics.google');
 
+    Route::resource('slider','SliderController');
+    Route::post('slider/add-image','SliderController@addImage')->name('addImage');
+    Route::post('slider/delete-image','SliderController@deleteImage')->name('delimage');
+    Route::post('slider/get-slider-image','SliderController@getSliderImage')->name('getSliderImage');
+    Route::post('slider/edit-image','SliderController@editImage')->name('editImage');
+    //Menu
+    Route::resource('menu', 'MenuController');
+    Route::post('menu/ajax','MenuController@ajax')->name('menuajax');
+    Route::get('menu/item/{menuitem}/delete','MenuController@destroyMenuItem')->name('delete-item');
+    Route::post('menuitem/ajax/','MenuController@storeMenuItem')->name('menuitemajax');
+
 });
 //Route::get('panel/login',function (){ return view('auth/login');})->name('login');
 
