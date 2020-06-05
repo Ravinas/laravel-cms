@@ -4,9 +4,8 @@
 @endpush
 
 @push('js')
-    <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+    <script src="{!! asset("/vendor/laravel-filemanager/js/stand-alone-button.js") !!}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <script src="sweetalert2.all.min.js"></script>
     <script type="text/javascript">
         $('#lfm').filemanager('image');
         $('#lft').filemanager('image');
