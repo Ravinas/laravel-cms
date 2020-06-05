@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace CMS\Controllers;
 
-use App\Language;
-use App\Slider;
-use App\SliderItems;
+use CMS\Models\Language;
+use CMS\Models\Slider;
+use CMS\Models\SliderItems;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
