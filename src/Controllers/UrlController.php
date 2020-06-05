@@ -26,11 +26,25 @@ class UrlController extends Controller
                 abort(404);
             }
 
-            app()->setLocale($pageDetail->language->code);
             $page = $pageDetail->page;
             app()->page = $page;
             app()->pageDetail = $pageDetail;
-            return view($page->view ?? 'cms::default', compact('page'));
+            app()->setLocale($pageDetail->language->code);
+
+            // page->id ile main fonksiyon var mı
+            if(method_exists ( 'App\Http\Controllers\Page'.$page->id.'Controller' , 'main')){
+                return app('App\Http\Controllers\Page'.$page->id.'Controller')->main($request);
+            }
+            // page->page_id ile sub
+            elseif(method_exists ( 'App\Http\Controllers\Page'.$page->page_id.'Controller' , 'sub'))
+            {
+                return app('App\Http\Controllers\Page'.$page->page_id.'Controller')->sub($request);
+
+            } else{
+                return view($page->view ?? 'cms::default', compact('page'));
+            }
+
+
         } else {
             abort(404);
         }
