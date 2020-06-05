@@ -17,10 +17,10 @@ class CreateSliderItemsTable extends Migration
             ['slider_id','file_id','general_text','sub_text','sub_text2','status','order'];
             $table->id();
             $table->unsignedInteger('slider_id');
-            $table->unsignedInteger('filepath');
-            $table->string('general_text');
-            $table->string('sub_text');
-            $table->string('sub_text2');
+            $table->string('filepath');
+            $table->string('general_text')->nullable();
+            $table->string('sub_text')->nullable();;
+            $table->string('sub_text2')->nullable();;
             $table->unsignedInteger('status');
             $table->unsignedInteger('order');
             $table->timestamps();

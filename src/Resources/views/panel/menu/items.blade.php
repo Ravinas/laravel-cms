@@ -91,7 +91,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-block">
-                        <h4 class="card-title">{!! trans('panel.items') !!}</h4>
+                        <h4 class="card-title">{!! trans('cms::panel.items') !!}</h4>
                         <ol class="sortable">
                             @foreach($menu_items as $item)
                             <li id="menuItem-{{$item->id}}">
@@ -100,7 +100,7 @@
                                         {!! $item->text !!}
                                     </span>
                                 <div class="menu-options">
-                                    <a class="btn-danger btn float-right" data-id="{!! $item->id !!}" href="{!! route('delete-item',['menuitem' => $item->id]) !!}">{!! trans('panel.delete') !!}</a>
+                                    <a class="btn-danger btn float-right" data-id="{!! $item->id !!}" href="{!! route('delete-item',['menuitem' => $item->id]) !!}">{!! trans('cms::panel.delete') !!}</a>
                                 </div>
                                 </div>
                             @if($item->children)
@@ -109,8 +109,8 @@
                             @endforeach
                             </li>
                             </ol>
-                            <button type="button" class="btn btn-warning float-right" data-toggle="modal" data-target="#exampleModal">{!! trans('panel.add') !!}</button>
-                            <button type="button" class="btn btn-success float-right mr-3" id="serialize">{!! trans('panel.update') !!}</button>
+                            <button type="button" class="btn btn-warning float-right" data-toggle="modal" data-target="#exampleModal">{!! trans('cms::panel.add') !!}</button>
+                            <button type="button" class="btn btn-success float-right mr-3" id="serialize">{!! trans('cms::panel.update') !!}</button>
                     </div>
                     <div class="alert alert-success hide" role="alert">
                         Saved
