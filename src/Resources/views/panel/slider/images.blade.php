@@ -104,9 +104,9 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-block">
-                            <h4 class="card-title">{!! trans('panel.menu') !!}</h4>
+                            <h4 class="card-title">{!! trans('cms::panel.menu') !!}</h4>
                             <div class="form-group m-3">
-                                <input type="submit" class="btn btn-success float-right mb-3" data-toggle="modal" data-target="#exampleModal" id="submit" value="{!! trans('panel.create') !!}">
+                                <input type="submit" class="btn btn-success float-right mb-3" data-toggle="modal" data-target="#exampleModal" id="submit" value="{!! trans('cms::panel.create') !!}">
                             </div>
                             <table class="table">
                                 <thead>
@@ -128,8 +128,8 @@
                                             <td>Passive</td>
                                         @endif
                                         <td>
-                                            <input type="button" class="btn btn-danger float-right mb-3 del"  slider="{!! $image->id !!}" value="{!! trans('panel.delete') !!}">
-                                            <input type="button" class="btn btn-warning float-right mb-3 mr-2 editimage"  id="{!! $image->id !!}" value="{!! trans('panel.edit') !!}" data-toggle="modal" data-target="#editModal">
+                                            <input type="button" class="btn btn-danger float-right mb-3 del"  slider="{!! $image->id !!}" value="{!! trans('cms::panel.delete') !!}">
+                                            <input type="button" class="btn btn-warning float-right mb-3 mr-2 editimage"  id="{!! $image->id !!}" value="{!! trans('cms::panel.edit') !!}" data-toggle="modal" data-target="#editModal">
                                         </td>
                                     </tr>
                                     @endforeach

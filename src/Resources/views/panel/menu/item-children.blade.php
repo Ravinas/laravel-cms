@@ -6,7 +6,7 @@
                                             {!!  $children->text !!}
                                         </span>
                 <div class="menu-options">
-                    <a class="btn-danger btn float-right" data-id="{!! $item->id !!}" href="{!! route('delete-item',['menuitem' => $children->id]) !!}">{!! trans('panel.delete') !!}</a>
+                    <a class="btn-danger btn float-right" data-id="{!! $item->id !!}" href="{!! route('delete-item',['menuitem' => $children->id]) !!}">{!! trans('cms::panel.delete') !!}</a>
                 </div>
             </div>
             @if($children->children)

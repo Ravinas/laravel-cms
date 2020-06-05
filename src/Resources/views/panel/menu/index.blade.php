@@ -36,7 +36,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-block">
-                            <h4 class="card-title">{!! trans('panel.menu') !!}</h4>
+                            <h4 class="card-title">{!! trans('cms::panel.menu') !!}</h4>
                             <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#exampleModal">
                                 {!! trans('panel.create') !!}
                             </button>
