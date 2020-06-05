@@ -1,4 +1,4 @@
-@extends('panel.inc.app')
+@extends('cms::panel.inc.app')
 @push('css')
     <link rel="stylesheet" href="sweetalert2.min.css">
 @endpush

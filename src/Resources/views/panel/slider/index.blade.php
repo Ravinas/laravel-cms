@@ -1,4 +1,4 @@
-@extends('panel.inc.app')
+@extends('cms::panel.inc.app')
 @push('css')
 
 @endpush
@@ -46,7 +46,7 @@
                                     <li class="list-group-item mt-2  justify-content-between bg-light">{!! $s->name  !!}
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a href="{!! route('slider.edit',['slider' => $s->id ]) !!}" type="button" class="btn-success btn">{!! trans('panel.images') !!}</a>
-                                            @include('panel.inc.delete_modal',['trans_file' => 'panel', 'model' => $s, 'route_group' => 'slider', 'route_parameter' => 'slider'])
+                                            @include('cms::panel.inc.delete_modal',['trans_file' => 'panel', 'model' => $s, 'route_group' => 'slider', 'route_parameter' => 'slider'])
                                         </div>
                                     </li>
                                 @endforeach

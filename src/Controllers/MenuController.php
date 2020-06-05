@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace CMS\Controllers;
 
-use App\Language;
-use App\Menu;
-use App\MenuItem;
+use CMS\Models\Language;
+use CMS\Models\Menu;
+use CMS\Models\MenuItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -82,7 +82,7 @@ class MenuController extends Controller
      */
     public function update(Request $request, Menu $menu)
     {
-        
+
     }
 
     /**
@@ -137,11 +137,11 @@ class MenuController extends Controller
             $menu_item->order = $order;
             if($parent_id == 'null')
             {
-                $menu_item->parent_id = 0; 
+                $menu_item->parent_id = 0;
             }else
             {
                 $menu_item->parent_id = $parent_id;
-            }         
+            }
             $menu_item->save();
             $order++;
         }
