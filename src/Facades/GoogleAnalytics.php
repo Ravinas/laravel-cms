@@ -8,11 +8,11 @@ use Google_Service_Analytics;
 
 class GoogleAnalytics
 {
-    private $VIEW_ID = "217663781"; //env'den çekebiliriz..
+    private $VIEW_ID;
     private $analytics;
 
     function __construct() {
-
+        $this->VIEW_ID = env('VIEW_ID');
         $KEY_FILE_LOCATION = app_path( 'local-test-a22b0e8c360a.json');
         $client = new Google_Client();
         $client->setApplicationName("Analytics Reporting");
