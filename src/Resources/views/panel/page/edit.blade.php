@@ -98,6 +98,10 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label>{!! trans('cms::panel.view') !!}</label>
+                                <input type="text" class="form-control" name="view"  placeholder="{!! trans('cms::panel.view') !!}" value="{!! $page->view !!}" required/>
+                            </div>
                         @endif
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         @foreach( $pageDetails as $pd)
