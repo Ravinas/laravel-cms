@@ -47,7 +47,7 @@
         "laravel": {
             "providers": [
                 "CMS\\Providers\\CMS",
-            ],
+            ]
         }
     }
 }
