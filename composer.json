@@ -1,7 +1,13 @@
 {
-    "name": "teamrevise/cms-package",
+    "name": "revise/prime-cms",
     "type": "project",
-    "description": "Team Revise CMS",
+    "description": "Laravel Based CMS",
+    "authors": [
+        {
+            "name": "Aras Şanıvar , Tevfik Mert Çağıran",
+            "email": "dev.arassanivar@gmail.com"
+        }
+    ],
     "keywords": [
         "framework",
         "laravel",
