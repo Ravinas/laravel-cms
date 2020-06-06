@@ -46,7 +46,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "CMS\\Providers\\CMS"
+                "CMS\\Providers\\CMS",
             ],
         }
     }
