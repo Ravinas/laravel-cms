@@ -7,6 +7,7 @@ use CMS\Models\DetailExtra;
 use CMS\Models\Extra;
 use CMS\Models\File;
 use CMS\Models\Language;
+use CMS\Models\Meta;
 use CMS\Models\Page;
 use CMS\Models\Category;
 use CMS\Models\PageDetail;
@@ -372,6 +373,12 @@ class PageController extends Controller
         $pd->url = $language->code."/".trans('cms::page.example_page_url')."_".$page_id;
         $pd->status = 0;
         $pd->save();
+        $meta = new Meta();
+        $meta->page_detail_id = $pd->id;
+        $meta->description = "null";
+        $meta->keywords = "keywords";
+        $meta->robots = 1;
+        $meta->save();
     }
 
     public function subPages($id)

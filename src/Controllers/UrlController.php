@@ -21,7 +21,7 @@ class UrlController extends Controller
 
         if ($url == "/")
         {
-            $url = "/".app()->getLocale();
+            $url = app()->getLocale()."/";
         }
         $pageDetail = PageDetail::where('url', $url)->where('status', 1)->first();
         if ($pageDetail) {
