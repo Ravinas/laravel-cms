@@ -100,7 +100,7 @@
                             </div>
                             <div class="form-group">
                                 <label>{!! trans('cms::panel.view') !!}</label>
-                                <input type="text" class="form-control" name="view"  placeholder="{!! trans('cms::panel.view') !!}" value="{!! $page->view !!}" required/>
+                                <input type="text" class="form-control" name="view"  placeholder="{!! trans('cms::panel.view') !!}" value="{!! $page->view !!}"/>
                             </div>
                         @endif
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -136,7 +136,7 @@
                                                            name="url[{!! $pd->lang_id !!}]"
                                                            placeholder="{!! trans('cms::panel.url') !!}"
                                                            value="{!! $pd->url !!}"
-                                                           data-old="{!! $pd->url !!}"required/>
+                                                           data-old="{!! $pd->url !!}"/>
                                                         <div class="result"></div>
                                                     @if(session('error'))
                                                         <div class="alert alert-danger mt-1">
