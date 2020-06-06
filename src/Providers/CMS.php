@@ -36,6 +36,7 @@ class CMS extends ServiceProvider
 //        if(file_exists(app_path().'/Http/Controllers/MertController.php')){
 //            app('App\Http\Controllers\MertController')->deneme();
 //        }
+        app()->setLocale('tr');
         if ($this->app->runningInConsole()) {
             $this->commands([
                 'cms' => Seed::class,
@@ -46,7 +47,6 @@ class CMS extends ServiceProvider
 
         //default dilin kodu urlde gözüksün mü
         app()->showDefaultLanguageCode = true;
-
         app()->activeLanguages = Language::where('status',1)->get();
         app()->defaultLanguage = Language::where('default',1)->first();
         app()->currentLanguage = Language::where('code',App::getLocale())->first();
@@ -76,6 +76,7 @@ class CMS extends ServiceProvider
 
         $this->publishes([
             $packageDir.'/Assets' => public_path('vendor/cms'),
+            $packageDir.'/Resources/views/website' => resource_path('views/vendor/prime')
         ]);
 
     }

@@ -129,6 +129,11 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label>{!! trans('cms::panel.view') !!}</label>
+
+                                        <input type="text" class="form-control page-name" name="name[{!! $l->id !!}]" lang-code="{!! '/'.$l->code.'/' !!}" placeholder="{!! trans('cms::panel.name') !!}"  required/>
+                                    </div>
                                 @endif
 
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">

@@ -139,7 +139,6 @@ class PageController extends Controller
             $page->type = 0;
             $page->order = 0;
         }
-
         $page->status = 0;
         $page->save();
 
@@ -315,6 +314,7 @@ class PageController extends Controller
         if(Auth::user()->role_id == 1 && $request->has('type')){
             $page->type = $request->post('type');
         }
+        $page->view = $request->post('view');
         $page->status = $request->post('status');
         $page->save();
 

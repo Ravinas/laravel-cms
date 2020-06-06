@@ -4,15 +4,16 @@ namespace CMS\Controllers;
 
 use Google_Client;
 use Google_Service_Analytics;
+use http\Env;
 use Illuminate\Http\Request;
 
 class AnalyticsController extends Controller
 {
-    private $VIEW_ID = "217663781"; //env'den çekebiliriz..
+    private $VIEW_ID; //env'den çekebiliriz..
     private $analytics;
 
     function __construct() {
-
+        $this->VIEW_ID = env("VIEW_ID");
         $KEY_FILE_LOCATION = app_path( 'local-test-a22b0e8c360a.json');
         $client = new Google_Client();
         $client->setApplicationName("Analytics Reporting");

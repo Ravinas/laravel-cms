@@ -84,25 +84,11 @@ Route::prefix('/panel')->middleware('auth')->group( function () {
     Route::post('menuitem/ajax/','MenuController@storeMenuItem')->name('menuitemajax');
 
 });
-//Route::get('panel/login',function (){ return view('auth/login');})->name('login');
 
-
-//Route::get('login', function (){
-//    return view('auth/login');
-//});
-
-Route::get('welcome', function (){
-    return view('welcome');
-});
-
-
-Route::get('test', function (){
-    return view('test');
-})->name('test');
-
+Route::get('/','UrlController@url');
 Route::get('apptest',function (){
     $class = 'CMS\Controllers\PageController';
-   return app($class)->index();
+    return app($class)->index();
 });
 
 Route::group(['prefix'=>'ebulletin'],function(){
@@ -126,6 +112,3 @@ Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderC
 Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
     ->name('ckfinder_browser');
 
-Route::get('mert',function (){
-    return dd("mmeeeerrt");
-});
