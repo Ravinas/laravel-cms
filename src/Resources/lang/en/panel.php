@@ -57,6 +57,7 @@ return [
     'roles' => 'Roles',
     'metas' => 'Metas',
     'redirects' => 'Redirects',
+    'add' => 'Add',
 
     // FORMS MEGA THREAD
     'forms' => 'Forms',
@@ -95,6 +96,7 @@ return [
 
     //Menu
     'menu' => 'Menu',
+    'items' => 'Items',
 
     //Slider
     'slider' => 'Slider',
