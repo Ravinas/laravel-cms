@@ -38,14 +38,14 @@
                         <div class="card-block">
                             <h4 class="card-title">{!! trans('cms::panel.menu') !!}</h4>
                             <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#exampleModal">
-                                {!! trans('panel.create') !!}
+                                {!! trans('cms::panel.create') !!}
                             </button>
                             <div class="table-responsive"></div>
                             <ul class="list-group">
                                 @foreach($menu as $m)
                                     <li class="list-group-item mt-2  justify-content-between bg-light">{!! $m->name  !!}
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a href="{!! route('menu.edit',['menu' => $m->id ]) !!}" type="button" class="btn-success btn">{!! trans('panel.items') !!}</a>
+                                            <a href="{!! route('menu.edit',['menu' => $m->id ]) !!}" type="button" class="btn-success btn">{!! trans('cms::panel.items') !!}</a>
                                             @include('cms::panel.inc.delete_modal',['trans_file' => 'panel', 'model' => $m, 'route_group' => 'menu', 'route_parameter' => 'menu'])
                                         </div>
                                     </li>

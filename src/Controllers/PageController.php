@@ -204,10 +204,10 @@ class PageController extends Controller
     {
         $include = false;
 
-        if(View::exists('panel.extras.page'.$page->id.'.main')){
-            $include = "panel.extras.page".$page->id.".main";
+        if(View::exists('pages.page'.$page->id.'.main')){
+            $include = "pages.page".$page->id.".main";
         } elseif($page->page_id && View::exists('panel.extras.page'.$page->page_id.'.sub')){
-            $include = "panel.extras.page".$page->page_id.".sub";
+            $include = "pages.page".$page->page_id.".sub";
         }
         $files = File::all();
         $categories = Category::all();

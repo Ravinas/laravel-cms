@@ -68,7 +68,7 @@ class MenuController extends Controller
      */
     public function edit(Menu $menu)
     {
-        $menu_items = MenuItem::where('parent_id', 0)->orderby('order')->get();
+        $menu_items = MenuItem::where('parent_id', 0)->where('menu_id',$menu->id)->orderby('order')->get();
         return view('cms::panel.menu.items',compact('menu_items','menu'));
 
     }
