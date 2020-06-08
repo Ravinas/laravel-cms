@@ -27,6 +27,10 @@
                                     </thead>
                                     <tbody>
                                     @foreach($messages as $message)
+                                        @php
+                                            $decode = json_decode($message->data,true);
+                                            $message->email = $decode["email"];
+                                        @endphp
                                     <tr>
                                         <td>{!! $message->id !!}</td>
                                         <td>{!! $message->email !!}</td>
