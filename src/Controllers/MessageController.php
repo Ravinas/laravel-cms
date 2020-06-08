@@ -26,9 +26,10 @@ class MessageController extends Controller
         $messages = Message::where('form_id',$form->id)
             ->orderBy('created_at','desc')
             ->paginate(15);
-        foreach($messages as $m){
-            $m->email = json_decode($m->data)->email;
-        }
+        /*foreach($messages as $m){
+            $decode = json_decode($m->data);
+            $messages->email = $decode["email"];
+        }*/
         return view('cms::panel.message.index',compact('messages','form'));
     }
 
@@ -64,7 +65,7 @@ class MessageController extends Controller
             }
             $message->data = json_encode($inputs);
             $message->save();
-            return redirect()->back()->with('success',true);
+            return redirect()->back()->with(['success' => true,'message'=>$message]);
         }
     }
 
