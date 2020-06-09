@@ -18,7 +18,7 @@ class CreatePageDetailsTable extends Migration
             $table->unsignedInteger('page_id')->nullable();;
             $table->unsignedSmallInteger('lang_id');
             $table->string('name')->nullable();
-            $table->string('content',1000)->nullable();
+            $table->longtext()->nullable();
             $table->string('url')->nullable();
             $table->boolean('status');
             $table->timestamps();
