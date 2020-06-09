@@ -19,10 +19,6 @@ class UrlController extends Controller
 
         $url = $request->path();
 
-        if ($url == "/")
-        {
-            $url = app()->getLocale()."/";
-        }
         $pageDetail = PageDetail::where('url', $url)->where('status', 1)->first();
         if ($pageDetail) {
 
