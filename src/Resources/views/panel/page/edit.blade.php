@@ -29,6 +29,7 @@
         var allEditors = document.querySelectorAll('.ck');
         for (var i = 0; i < allEditors.length; ++i) {
             CKEDITOR.replace(allEditors[i]);
+            CKEDITOR.config.allowedContent = true;
         }
 
         $('.urls').keyup(function (e) {

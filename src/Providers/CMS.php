@@ -46,7 +46,7 @@ class CMS extends ServiceProvider
         $packageDir = dirname(__DIR__);
 
         //default dilin kodu urlde gözüksün mü
-        app()->showDefaultLanguageCode = true;
+        app()->showDefaultLanguageCode = false;
         app()->activeLanguages = Language::where('status',1)->get();
         app()->defaultLanguage = Language::where('default',1)->first();
         app()->currentLanguage = Language::where('code',App::getLocale())->first();
