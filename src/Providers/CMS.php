@@ -47,10 +47,14 @@ class CMS extends ServiceProvider
 
         //default dilin kodu urlde gözüksün mü
         app()->showDefaultLanguageCode = false;
-        app()->activeLanguages = Language::where('status',1)->get();
-        app()->defaultLanguage = Language::where('default',1)->first();
-        app()->currentLanguage = Language::where('code',App::getLocale())->first();
-        app()->otherLanguages = Language::where('code', '!=',App::getLocale())->where('status',1)->first();
+        try {
+            app()->activeLanguages = Language::where('status',1)->get();
+            app()->defaultLanguage = Language::where('default',1)->first();
+            app()->currentLanguage = Language::where('code',App::getLocale())->first();
+            app()->otherLanguages = Language::where('code', '!=',App::getLocale())->where('status',1)->first();
+        } catch ( \Exception $exception){
+            echo PHP_EOL." FAILED TO ACCESS LANGUAGES ".PHP_EOL.$exception.PHP_EOL;
+        }
 
 
         define('CONTENT',1);
