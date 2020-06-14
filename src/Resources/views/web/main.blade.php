@@ -10,9 +10,9 @@
         <meta name="author" content="Araspress">
         <meta name="robots" content="{!! ($page->detail->meta->robots ? "index, follow":"noindex, nofollow") !!}">
         <link rel="canonical" href="{!! url()->full() !!}">
-        <link rel="icon" type="image/png" sizes="16x16" href="{!! asset("assets/images/favicon.png") !!}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{!! asset("favicon.png") !!}">
 
-        <link href="{!! asset("assets/plugins/bootstrap/css/bootstrap.min.css") !!}" rel="stylesheet">
+        <link href="{!! asset("vendor/cms/assets/plugins/bootstrap/css/bootstrap.min.css") !!}" rel="stylesheet">
     </head>
     @stack('css')
 
@@ -26,10 +26,10 @@
 
     @yield('footer')
 
-        <script src="{!! asset("assets/plugins/jquery/jquery.min.js") !!}"></script>
+        <script src="{!! asset("vendor/cms/assets/plugins/jquery/jquery.min.js") !!}"></script>
         <!-- Bootstrap tether Core JavaScript -->
-        <script src="{!! asset("assets/plugins/bootstrap/js/tether.min.js") !!}"></script>
-        <script src="{!! asset("assets/plugins/bootstrap/js/bootstrap.min.js") !!}"></script>
+        <script src="{!! asset("vendor/cms/assets/plugins/bootstrap/js/tether.min.js") !!}"></script>
+        <script src="{!! asset("vendor/cms/assets/plugins/bootstrap/js/bootstrap.min.js") !!}"></script>
     @stack('js')
 
     </body>
