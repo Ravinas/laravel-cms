@@ -52,6 +52,30 @@
              }
          });
      });
+     $(document).ready(function () {
+         $('#external').hide();
+         $('#exlabel').hide();
+
+         $('#link_type').change(function () {
+             var type = $(this).val();
+             switch (type) {
+                 case '0':
+                     $('#external').hide();
+                     $('#exlabel').hide();
+                     $('#internal').show();
+                     $('#intlabel').show();
+                     break;
+                 case '1':
+                     $('#external').show();
+                     $('#exlabel').show();
+                     $('#internal').hide();
+                     $('#intlabel').hide();
+                     break;
+                 default:
+                     alert("Error");
+             }
+         });
+     });
 </script>
 
 
@@ -141,14 +165,29 @@
                                         <option value="2">Dropdown</option>
                                     </select>
                                 </div>
+                                <label>Link Type</label>
+                                <div>
+                                    <select class="custom-select custom-select-lg mb-3" id="link_type" name="link_type">
+                                        <option value="0">Internal</option>
+                                        <option value="1">External</option>
+                                    </select>
+                                </div>
                                 <input type="hidden" name="menu_id" value="{!! $menu->id !!}">
                                 <label>Title</label>
                                 <div>
                                     <input type="text" class="form-control" autocomplete="off" name="text"/>
                                 </div>
-                                <label>Link</label>
-                                <div>
-                                    <input type="text" class="form-control" autocomplete="off" name="link"/>
+                                <label id="exlabel">External Link</label>
+                                <div id="external">
+                                    <input type="text" class="form-control" autocomplete="off" name="external"/>
+                                </div>
+                                <label id="intlabel">Url</label>
+                                <div id="internal">
+                                    <select class="custom-select custom-select-lg mb-3" name="link">
+                                        @foreach($urls as $url)
+                                            <option value="{!! $url->url !!}">{!!  $url->url !!}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
                             </form>

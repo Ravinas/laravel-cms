@@ -5,6 +5,7 @@ namespace CMS\Controllers;
 use CMS\Models\Language;
 use CMS\Models\Menu;
 use CMS\Models\MenuItem;
+use CMS\Models\PageDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -68,8 +69,9 @@ class MenuController extends Controller
      */
     public function edit(Menu $menu)
     {
+        $urls = PageDetail::select('url')->get();
         $menu_items = MenuItem::where('parent_id', 0)->where('menu_id',$menu->id)->orderby('order')->get();
-        return view('cms::panel.menu.items',compact('menu_items','menu'));
+        return view('cms::panel.menu.items',compact('menu_items','menu','urls'));
 
     }
 
@@ -111,9 +113,11 @@ class MenuController extends Controller
         $item->menu_id = $request->menu_id;
         $item->parent_id = 0;
         $item->type = $request->type;
+        $item->link_type = $request->link_type;
         $item->order = 99;
         $item->text = $request->text;
         $item->url = $request->link;
+        $item->external = $request->external;
         $item->save();
         return response()->json(['Message' => 'Ok'],200);
     }

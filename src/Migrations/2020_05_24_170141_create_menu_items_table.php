@@ -18,9 +18,11 @@ class CreateMenuItemsTable extends Migration
             $table->unsignedInteger('menu_id');
             $table->unsignedInteger('parent_id');
             $table->string('type');
+            $table->string('link_type');
             $table->unsignedInteger('order');
             $table->string('text');
-            $table->string('url');
+            $table->string('url')->nullable();
+            $table->string('external')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
