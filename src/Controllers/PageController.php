@@ -333,9 +333,19 @@ class PageController extends Controller
                 $cond1 = app()->showDefaultLanguageCode;
                 $cond2 = app()->defaultLanguage->id == $pd->lang_id;
                 if(!$cond1 && $cond2){
-                    $pd->url = $request->post('url')[$pd->lang_id];
+
+                    if($request->post('url')[$pd->lang_id] == null){
+                        $pd->url = "/";
+                    } else {
+                        $pd->url = $request->post('url')[$pd->lang_id];
+                    }
                 } else {
-                    $pd->url = $pd->language->code."/".$request->post('url')[$pd->lang_id];
+                    if($request->post('url')[$pd->lang_id] == null){
+                        $pd->url = $pd->language->code;
+                    } else {
+                        $pd->url = $pd->language->code."/".$request->post('url')[$pd->lang_id];
+                    }
+
                 }
 
                 $pd->status = $request->post('detail_status')[$pd->lang_id] ?? 0;
