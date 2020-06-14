@@ -2,6 +2,7 @@
 
 namespace CMS\Providers;
 
+use CMS\Commands\Install;
 use CMS\Commands\Seed;
 use CMS\Models\Language;
 use Illuminate\Support\Facades\App;
@@ -33,13 +34,11 @@ class CMS extends ServiceProvider
      */
     public function boot()
     {
-//        if(file_exists(app_path().'/Http/Controllers/MertController.php')){
-//            app('App\Http\Controllers\MertController')->deneme();
-//        }
         app()->setLocale('tr');
         if ($this->app->runningInConsole()) {
             $this->commands([
                 'cms' => Seed::class,
+                'cms' => Install::class
             ]);
         }
 
@@ -47,6 +46,8 @@ class CMS extends ServiceProvider
 
         //default dilin kodu urlde gözüksün mü
         app()->showDefaultLanguageCode = false;
+        //app()->showDefaultLanguageCode = env('PRIME_DEFAULT_LANGUAGE_CODE');
+
         try {
             app()->activeLanguages = Language::where('status',1)->get();
             app()->defaultLanguage = Language::where('default',1)->first();
@@ -76,7 +77,6 @@ class CMS extends ServiceProvider
         $this->loadMigrationsFrom($packageDir.'/Migrations');
         $this->loadViewsFrom($packageDir.'/Resources/views', 'cms');
 
-        //projenin resourceunda app.blade oluşturulacak
 
         $this->publishes([
             $packageDir.'/Assets' => public_path('vendor/cms'),
