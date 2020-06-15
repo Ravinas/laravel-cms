@@ -251,7 +251,14 @@ class PageController extends Controller
                 $pd->showLanguageCode = true;
             }
             if(mb_substr($pd->url, 0, 3) == $pd->language->code."/"){
+                //urlin ilk 3 karakteri tr/ en/ ise editable kısımdan çıkar
                 $pd->url = substr($pd->url, 3);
+            } elseif (mb_substr($pd->url, 0, 2) == $pd->language->code){
+                //urlin ilk 2 karakteri tr en ise dilin anasayfasıdır heralde, host/en/ inputun solunda yazacağı için boş gönder
+                $pd->url = "";
+            } elseif($pd->url == "/"){
+                // url sadece / ise default dil gösterilmiyor ve anasayfadır, host/tr/ inputun solunda yazacağı için boş gönder
+                $pd->url = "";
             }
         }
         $this->options = "";

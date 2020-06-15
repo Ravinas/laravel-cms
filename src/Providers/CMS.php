@@ -37,15 +37,15 @@ class CMS extends ServiceProvider
         app()->setLocale('tr');
         if ($this->app->runningInConsole()) {
             $this->commands([
-                'cms' => Seed::class,
-                'cms' => Install::class
+                 Seed::class,
+                 Install::class
             ]);
         }
 
         $packageDir = dirname(__DIR__);
 
         //default dilin kodu urlde gözüksün mü
-        app()->showDefaultLanguageCode = false;
+        app()->showDefaultLanguageCode = true;
         //app()->showDefaultLanguageCode = env('PRIME_DEFAULT_LANGUAGE_CODE');
 
         try {
@@ -80,7 +80,7 @@ class CMS extends ServiceProvider
 
         $this->publishes([
             $packageDir.'/Assets' => public_path('vendor/cms'),
-            $packageDir.'/Resources/views/website' => resource_path('views/vendor/prime')
+            //$packageDir.'/Resources/views/website' => resource_path('views/vendor/prime')
         ]);
 
     }
