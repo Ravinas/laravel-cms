@@ -47,7 +47,8 @@
                 .replace(/ü/g,'u')
                 .replace(/ğ/g,'g')
                 .replace(/ /g,'-')
-                .replace(/[^\w-]+/g,''));
+                .replace('//','/')
+                .replace(/[^\w/-]+/g,''));
             if(url != old){
                 $(el).parent('.form-group').find('.urls').css("border-color","green");
                 $(el).parent('.form-group').find('.result').html( "" );
