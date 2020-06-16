@@ -7,7 +7,7 @@
         <title>{!! $page->detail->name !!}</title>
         <meta name="description" content="{!! $page->detail->meta->description !!}">
         <meta name="keywords" content="{!! $page->detail->meta->keywords !!}">
-        <meta name="author" content="Araspress">
+        <meta name="author" content="PrimeCMS">
         <meta name="robots" content="{!! ($page->detail->meta->robots ? "index, follow":"noindex, nofollow") !!}">
         <link rel="canonical" href="{!! url()->full() !!}">
         <link rel="icon" type="image/png" sizes="16x16" href="{!! asset("favicon.png") !!}">
@@ -26,11 +26,12 @@
 
     @yield('footer')
 
-        <script src="{!! asset("vendor/cms/assets/plugins/jquery/jquery.min.js") !!}"></script>
-        <!-- Bootstrap tether Core JavaScript -->
-        <script src="{!! asset("vendor/cms/assets/plugins/bootstrap/js/tether.min.js") !!}"></script>
-        <script src="{!! asset("vendor/cms/assets/plugins/bootstrap/js/bootstrap.min.js") !!}"></script>
-    @stack('js')
 
     </body>
+
+    <script src="{!! asset("vendor/cms/assets/plugins/jquery/jquery.min.js") !!}"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="{!! asset("vendor/cms/assets/plugins/bootstrap/js/tether.min.js") !!}"></script>
+    <script src="{!! asset("vendor/cms/assets/plugins/bootstrap/js/bootstrap.min.js") !!}"></script>
+    @stack('js')
 </html>

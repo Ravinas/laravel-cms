@@ -387,13 +387,18 @@ class PageController extends Controller
         $pd->lang_id = $language->id;
         $pd->name = $language->code."_".trans('cms::page.example_page_name')."_".$page_id;
         $pd->content = "";
-        $pd->url = $language->code."/".trans('cms::page.example_page_url')."_".$page_id;
+        if($language->code == app()->defaultLanguage->code && app()->showDefaultLanguageCode == false){
+            $pd->url = trans('cms::page.example_page_url')."_".$page_id;
+        } else {
+            $pd->url = $language->code."/".trans('cms::page.example_page_url')."_".$page_id;
+        }
+
         $pd->status = 0;
         $pd->save();
         $meta = new Meta();
         $meta->page_detail_id = $pd->id;
-        $meta->description = "null";
-        $meta->keywords = "keywords";
+        $meta->description = "";
+        $meta->keywords = "";
         $meta->robots = 1;
         $meta->save();
     }
