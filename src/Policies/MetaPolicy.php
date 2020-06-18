@@ -30,6 +30,11 @@ class MetaPolicy
         return $user->hasModulePermission($this->module_id,'C');
     }
 
+    public function edit(User $user, Meta $meta)
+    {
+        return $user->hasModulePermission($this->module_id,'U');
+    }
+
     public function update(User $user, Meta $meta)
     {
         return $user->hasModulePermission($this->module_id,'U');

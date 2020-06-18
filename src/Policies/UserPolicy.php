@@ -25,6 +25,11 @@ class UserPolicy
         return ($user->role_id <= 2 ? true : false );
     }
 
+    public function edit(User $user, User $model)
+    {
+        return ($user->role_id <= 2 ? true : false );
+    }
+
     public function update(User $user, User $model)
     {
         return ($user->role_id <= 2 ? true : false );

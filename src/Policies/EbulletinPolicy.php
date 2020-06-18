@@ -30,6 +30,11 @@ class EbulletinPolicy
         return $user->hasModulePermission($this->module_id,'C');
     }
 
+    public function edit(User $user,Ebulletin $ebulletin)
+    {
+        return $user->hasModulePermission($this-> module_id,'U');
+    }
+
     public function update(User $user,Ebulletin $ebulletin)
     {
         return $user->hasModulePermission($this-> module_id,'U');

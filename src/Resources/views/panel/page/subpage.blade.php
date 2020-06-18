@@ -35,11 +35,16 @@
                                             <td>{!! $page->id !!}</td>
                                             <td>{!! $page->name !!}</td>
                                             <td>{!! $page->url !!}</td>
-                                            <td><a href="{!! route('pages.edit' , ['page' => $page->id]).'?type=subpage' !!}" class="btn waves-effect waves-light btn-warning hidden-sm-down">{!! trans('cms::panel.edit') !!}</a>
-                                                @if($page->type)
+                                            <td>
+                                                @can('edit',$page)
+                                                    <a href="{!! route('pages.edit' , ['page' => $page->id]).'?type=subpage' !!}" class="btn waves-effect waves-light btn-warning hidden-sm-down">{!! trans('cms::panel.edit') !!}</a>
+                                                @endcan
+                                                @if($page->type == 1)
                                                     <a href="{!! route('subpages' , ['id' => $page->id]) !!}" class="btn waves-effect waves-light btn-success hidden-sm-down ml-1">{!! trans('cms::panel.sub_pages') !!}</a>
                                                 @endif
-                                                <button type="submit" class="btn waves-effect waves-light btn-danger hidden-sm-down ml-1">{!! trans('cms::panel.delete') !!}</button>
+                                                @can('delete',$page)
+                                                    @include('cms::panel.inc.delete_modal',['trans_file' => 'page', 'model' => $page, 'route_group' => 'pages', 'route_parameter' => 'page'])
+                                                @endcan
                                             </td>
                                             </form>
                                         </tr>

@@ -30,6 +30,11 @@ class LanguagePolicy
         return $user->hasModulePermission($this->module_id,'C');
     }
 
+    public function edit(User $user,Language $language)
+    {
+        return $user->hasModulePermission($this-> module_id,'U');
+    }
+
     public function update(User $user,Language $language)
     {
         return $user->hasModulePermission($this-> module_id,'U');

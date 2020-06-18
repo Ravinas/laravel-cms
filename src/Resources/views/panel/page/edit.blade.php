@@ -97,10 +97,12 @@
                                     <select class="custom-select custom-select-lg mb-3" name="type">
                                         <option value="0" @if($page->type == 0) selected @endif>{!! trans('cms::panel.static') !!}</option>
                                         <option value="1" @if($page->type == 1) selected @endif>{!! trans('cms::panel.dynamic') !!}</option>
+                                        <option value="2" @if($page->type == 2) selected @endif>{!! trans('cms::panel.homepage') !!}</option>
+                                        <option value="3" @if($page->type == 3) selected @endif>{!! trans('cms::panel.search') !!}</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" >
                                 <label>{!! trans('cms::panel.view') !!}</label>
                                 <input type="text" class="form-control" name="view"  placeholder="{!! trans('cms::panel.view') !!}" value="{!! $page->view !!}"/>
                             </div>
