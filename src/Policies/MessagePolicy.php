@@ -30,6 +30,11 @@ class MessagePolicy
         return true;
     }
 
+    public function edit(User $user, Message $message)
+    {
+        return $user->hasModulePermission($this->module_id,'U');
+    }
+
     public function update(User $user, Message $message)
     {
         return $user->hasModulePermission($this->module_id,'U');

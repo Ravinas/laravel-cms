@@ -29,6 +29,11 @@ class CategoryPolicy
         return $user->hasModulePermission($this->module_id,'C');
     }
 
+    public function edit(User $user, Category $category)
+    {
+        return $user->hasModulePermission($this->module_id,'U');
+    }
+
     public function update(User $user, Category $category)
     {
         return $user->hasModulePermission($this->module_id,'U');
