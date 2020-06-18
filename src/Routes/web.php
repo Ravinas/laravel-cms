@@ -3,37 +3,6 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-//Route::group(['prefix' => 'panel'], function () {
-//    Route::resource('pages' , 'PageController');
-//    Route::get('pages/{id}/subpages','PageController@subPages')->name('subpages');
-//    Route::post('pages/checkurl','PageController@urlControl')->name('pages.checkurl');
-//    Route::resource('pages' , 'PageController');
-//    Route::resource('forms','FormController');
-//    Route::resource('forms.messages','MessageController');
-//    Route::resource('messages','MessageController')->only(['show']);
-//    Route::resource('files' , 'FileController');
-//    Route::resource('languages' , 'LanguageController');
-//    Route::resource('ebulletins' , 'EbulletinController');
-//
-//    Route::post('languages/update','LanguageController@update')->name('languages_update');
-//
-//    Route::get('/', function () {
-//        return view('panel.index');
-//    });
-//
-//});
-
 
 Route::prefix('/panel')->middleware('auth')->group( function () {
     Route::resource('pages' , 'PageController');
@@ -85,11 +54,10 @@ Route::prefix('/panel')->middleware('auth')->group( function () {
 
 });
 
-Route::get('/','UrlController@url');
-Route::get('apptest',function (){
-    $class = 'CMS\Controllers\PageController';
-    return app($class)->index();
-});
+Route::get('panel/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('panel/login/', 'Auth\LoginController@login');
+Route::post('panel/logout', 'Auth\LoginController@logout')->name('logout');
+
 
 Route::group(['prefix'=>'ebulletin'],function(){
     Route::get('activate/{token}', 'EbulletinController@activate')->name('ebulletin-activate');
@@ -100,10 +68,6 @@ Route::group(['prefix'=>'ebulletin'],function(){
 
 Route::post('form/store','MessageController@store')->name('form');
 Route::fallback('UrlController@url');
-
-Route::get('panel/login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('panel/login/', 'Auth\LoginController@login');
-Route::post('panel/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
