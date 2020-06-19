@@ -80,7 +80,7 @@ class CMS extends ServiceProvider
 
         $this->publishes([
             $packageDir.'/Assets' => public_path('vendor/cms'),
-            //$packageDir.'/Resources/views/website' => resource_path('views/vendor/prime')
+            $packageDir.'/Resources/views/website' => resource_path('views/vendor/prime')
         ]);
 
     }

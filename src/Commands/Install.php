@@ -43,11 +43,16 @@ class Install extends Command
 
         //clear routes/web.php
         $webRouteContent = "<?php
-use Illuminate\Support\Facades\Route;
+        use Illuminate\Support\Facades\Route;
 ";
         copy(base_path()."/routes/web.php",base_path()."/routes/old_web.php");
         file_put_contents(base_path()."/routes/web.php" ,$webRouteContent);
         $this->info('routes/web.php düzenlendi');
+
+        if (file_exists(base_path("database/migrations/2014_10_12_000000_create_users_table.php")))
+        {
+            unlink(base_path("database/migrations/2014_10_12_000000_create_users_table.php"));
+        }
 
         //copy website app,header,footer blades
         $bladez = "";
