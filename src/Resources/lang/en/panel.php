@@ -19,6 +19,10 @@ return [
     'parent' => 'Parent Page',
     'no_parent' => 'No Parent Page',
     'order' => 'Order',
+    'delete' => 'Delete',
+    'close' => 'Close',
+
+    'create_socialmedia'=> 'Create SocialMedia',
     'date' => 'Date',
     'status' => 'Status',
         'active' => 'Active',
