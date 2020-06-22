@@ -6,11 +6,16 @@ use CMS\Models\Language;
 use CMS\Models\PageDetail;
 use CMS\Models\Redirect;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Validator;
 use function Couchbase\defaultDecoder;
+use Illuminate\Support\Collection;
 
 class UrlController extends Controller
 {
     private $key ;
+    private $keyPart ;
+    private $resultsPerPage;
     public function url(Request $request)
     {
 
@@ -77,39 +82,57 @@ class UrlController extends Controller
 
     public function search(Request $request){
         $this->key = $request->get("k");
+        $this->resultsPerPage = 10;
+        $searchResults= new Collection();
         if($this->key){
-            $searchResults = PageDetail::where('lang_id',app()->currentLanguage->id)
-                ->where('status',1)
-                ->where(function($q){
-                    $q->where('name','LIKE','%'.$this->key.'%')
-                        ->orWhere('content','LIKE','%'.$this->key.'%');
-                })
-                ->get();
-            $detailExtraSearch = PageDetail::join('detail_extras','detail_extras.page_detail_id','page_details.id')
-                ->where('page_details.status',1)
-                ->where('page_details.lang_id',app()->currentLanguage->id)
-                ->where('detail_extras.value','LIKE','%'.$this->key.'%')
-                ->select('page_details.*')
-                ->get();
-            $extraSearch = PageDetail::join('extras','extras.page_id','page_details.page_id')
-                ->where('page_details.status',1)
-                ->where('page_details.lang_id',app()->currentLanguage->id)
-                ->where('extras.value','LIKE','%'.$this->key.'%')
-                ->select('page_details.*')
-                ->get();
-            $searchResults = $searchResults->merge($extraSearch);
-            $searchResults = $searchResults->merge($detailExtraSearch);
-            $searchResults = $searchResults->unique();
-            $searchResults = $searchResults->forPage(1,1);
+            $keyParts = explode(" ",$this->key);
+            foreach($keyParts as $k){
+                $this->keyPart = $k;
+                $pageDetailSearch = PageDetail::where('lang_id',app()->currentLanguage->id)
+                    ->where('status',1)
+                    ->where(function($q){
+                        $q->where('name','LIKE','%'.$this->keyPart.'%')
+                            ->orWhere('content','LIKE','%'.$this->keyPart.'%');
+                    })
+                    ->get();
+                $detailExtraSearch = PageDetail::join('detail_extras','detail_extras.page_detail_id','page_details.id')
+                    ->where('page_details.status',1)
+                    ->where('page_details.lang_id',app()->currentLanguage->id)
+                    ->where('detail_extras.value','LIKE','%'.$this->keyPart.'%')
+                    ->select('page_details.*')
+                    ->get();
+                $extraSearch = PageDetail::join('extras','extras.page_id','page_details.page_id')
+                    ->where('page_details.status',1)
+                    ->where('page_details.lang_id',app()->currentLanguage->id)
+                    ->where('extras.value','LIKE','%'.$this->keyPart.'%')
+                    ->select('page_details.*')
+                    ->get();
+
+                if($pageDetailSearch->count() > 0) {
+                    $searchResults = $searchResults->merge($pageDetailSearch);
+                }
+                if($extraSearch->count() > 0){
+                    $searchResults = $searchResults->merge($extraSearch);
+                }
+
+                if($detailExtraSearch->count() > 0){
+                    $searchResults = $searchResults->merge($detailExtraSearch);
+                }
+
+                $searchResults = $searchResults->unique();
+
+            }
 
             $page = app()->page;
-            app()->searchResults = $searchResults;
+            app()->searchKey = $this->key;
+            app()->paginator = $searchResults->paginate($this->resultsPerPage)->appends(['k' => $this->key])->links();
+            app()->searchResults = $searchResults->paginate($this->resultsPerPage);
         } else {
             $searchResults = -1;
             $page = app()->page;
             app()->searchResults = $searchResults;
         }
-        return view(app()->page->view,compact('page','searchResults'));
+        return view(app()->page->view,compact('page'));
 
     }
 
