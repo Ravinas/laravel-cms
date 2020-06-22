@@ -17,6 +17,8 @@ class MetaController extends Controller
     {
         $metas = Meta::join('page_details','metas.page_detail_id','=','page_details.id')
             ->join('pages','page_details.page_id','=','pages.id')
+            ->where('pages.deleted_at',null)
+            ->where('page_details.deleted_at',null)
             ->select('pages.*','page_details.*','metas.*')
             ->get();
         return view('cms::panel.meta.index',compact('metas'));
