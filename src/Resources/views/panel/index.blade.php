@@ -120,7 +120,7 @@
                                     @foreach($forms as $form)
                                         @foreach($form->messages as $message)
                                             <!-- Message -->
-                                                <a href="#">
+                                                <a href="{!! route('messages.show',$message->id) !!}">
                                                     <div class="user-img"> <img src="{!! asset('vendor/cms/assets/images/information.png') !!}" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
                                                     <div class="mail-contnet">
                                                         <h5>{!! $form->name !!}</h5> <span class="mail-desc">Okundu</span></div>
