@@ -4,6 +4,7 @@ namespace CMS\Controllers;
 
 
 use CMS\Facades\GoogleAnalytics;
+use CMS\Models\Form;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -26,6 +27,7 @@ class HomeController extends Controller
     public function index()
     {
 
-        return view('cms::panel.index');
+        $forms = Form::with('messages')->get();
+        return view('cms::panel.index',compact('forms'));
     }
 }

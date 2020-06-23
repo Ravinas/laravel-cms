@@ -4,7 +4,7 @@
 @endpush
 
 @push('js')
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         var csrf = "{!! csrf_token() !!}";
         function getGoogleAnalytics(){
@@ -97,71 +97,52 @@
                 <!-- Column -->
                 <div class="col-12">
                     <div class="col-12">
-                            <div class="card">
-                                <div class="card-block">
+                        <div class="card">
+                            <div class="card-block">
 
-                                        <div id="chart">
-
-                                        </div>
+                                <div id="chart">
 
                                 </div>
-                            </div>
-                    </div>
-                        {{--<div class="col-lg-12">
-                            <div class="card col-4 float-left">
-                                <div class="card-block">
-                                    <h3 class="card-title">Devices </h3>
-                                    <h6 class="card-subtitle" id="total_page_views">Last 30 days : </h6>
-                                    <div id="donut_single" style="height:260px; width:100%;"></div>
-                                </div>
-
 
                             </div>
-                            <div class="card col-4">
-                        <div class="card-block bg-info">
-                            <h4 class="text-white card-title">From isteklerini buraya alabiliriz</h4>
-                            <h6 class="card-subtitle text-white m-b-0 op-5">Checkout my contacts here</h6>
                         </div>
-                        <div class="card-block">
-                            <div class="message-box contact-box">
-                                <h2 class="add-ct-btn"><button type="button" class="btn btn-circle btn-lg btn-success waves-effect waves-dark">+</button></h2>
-                                <div class="message-widget contact-widget">
-                                    <!-- Message -->
-                                    <a href="#">
-                                        <div class="user-img"> <img src="../assets/images/users/1.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
-                                        <div class="mail-contnet">
-                                            <h5>Pavan kumar</h5> <span class="mail-desc">info@wrappixel.com</span></div>
-                                    </a>
-                                    <!-- Message -->
-                                    <a href="#">
-                                        <div class="user-img"> <img src="../assets/images/users/2.jpg" alt="user" class="img-circle"> <span class="profile-status busy pull-right"></span> </div>
-                                        <div class="mail-contnet">
-                                            <h5>Sonu Nigam</h5> <span class="mail-desc">pamela1987@gmail.com</span></div>
-                                    </a>
-                                    <!-- Message -->
-                                    <a href="#">
-                                        <div class="user-img"> <span class="round">A</span> <span class="profile-status away pull-right"></span> </div>
-                                        <div class="mail-contnet">
-                                            <h5>Arijit Sinh</h5> <span class="mail-desc">cruise1298.fiplip@gmail.com</span></div>
-                                    </a>
-                                    <!-- Message -->
+                    </div>
+                    <div class="col-lg-12">
 
+                        <div class="card col-4">
+                            <div class="card-block bg-info">
+                                <h4 class="text-white card-title">{!! trans('cms::panel.received') !!}</h4>
+                                <h6 class="card-subtitle text-white m-b-0 op-5">{!! trans('cms::panel.forms') !!}</h6>
+                            </div>
+                            <div class="card-block">
+                                <div class="message-box contact-box">
+                                    <div class="message-widget contact-widget">
+                                    @foreach($forms as $form)
+                                        @foreach($form->messages as $message)
+                                            <!-- Message -->
+                                                <a href="#">
+                                                    <div class="user-img"> <img src="{!! asset('vendor/cms/assets/images/information.png') !!}" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
+                                                    <div class="mail-contnet">
+                                                        <h5>{!! $form->name !!}</h5> <span class="mail-desc">Okundu</span></div>
+                                                </a>
+                                            @endforeach
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                        </div>--}}
                 </div>
-            <!-- Row -->
-            <!-- Row -->
-            <div class="row">
-                <!-- Column -->
-                <div class="col-lg-4 col-xlg-3 col-md-5">
+                <!-- Row -->
+                <!-- Row -->
+                <div class="row">
                     <!-- Column -->
+                    <div class="col-lg-4 col-xlg-3 col-md-5">
+                        <!-- Column -->
 
-                    <!-- Column -->
+                        <!-- Column -->
 
-                </div>
+                    </div>
                 </div>
             </div>
             <!-- ============================================================== -->
