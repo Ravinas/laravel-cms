@@ -21,7 +21,7 @@ return [
     'order' => 'Order',
     'delete' => 'Delete',
     'close' => 'Close',
-
+    'received' => 'Received Forms',
     'create_socialmedia'=> 'Create SocialMedia',
     'date' => 'Date',
     'status' => 'Status',
