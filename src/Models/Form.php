@@ -11,4 +11,9 @@ class Form extends Model
     protected $fillable = [
         'name', 'email', 'slug', 'rules', 'error_messages'
     ];
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }
