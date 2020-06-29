@@ -5,10 +5,12 @@ namespace CMS\Controllers;
 
 use CMS\Facades\GoogleAnalytics;
 use CMS\Models\Form;
+use CMS\Traits\LogAgent;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    use LogAgent;
     /**
      * Create a new controller instance.
      *
@@ -27,7 +29,8 @@ class HomeController extends Controller
     public function index()
     {
 
+        $logs = $this->getLogs();
         $messages = Message::where('read',0)->paginate(5);
-        return view('cms::panel.index',compact('messages'));
+        return view('cms::panel.index',compact('messages','logs'));
     }
 }

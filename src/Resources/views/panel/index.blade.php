@@ -139,16 +139,15 @@
                             <div class="card-block">
                                 <div class="message-box contact-box">
                                     <div class="message-widget contact-widget">
-                                        @foreach($messages as $message)
-                                            <!-- Message -->
-                                            <a href="{!! route('messages.show',$message->id) !!}">
-                                                <div class="user-img"> <img src="{!! asset('vendor/cms/assets/images/email.png') !!}" alt="user" class="img-circle"></div>
-                                                <div class="mail-contnet">
-    
-                                                <h5 @if($message->read == 0) class="font-weight-bold" @endif>{!! $message->form->name !!}</h5></div>
-                                            </a>
-                                        @endforeach
-                                        {{ $messages->links() }}
+                                        @foreach($logs as $log)
+                                        <!-- Message -->
+                                        <a href="$">
+                                            <div class="user-img"> <img src="{!! asset('vendor/cms/assets/images/info.png') !!}" alt="user" class="img-circle"></div>
+                                            <div class="mail-contnet">
+
+                                            <h5>{!! $log !!}</h5></div>
+                                        </a>
+                                    @endforeach
                                     </div>
                                 </div>
                             </div>
