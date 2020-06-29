@@ -18,6 +18,7 @@ class CreateMessagesTable extends Migration
             $table->unsignedSmallInteger('form_id');
             $table->ipAddress('ip');
             $table->json('data');
+            $table->boolean('read')->nullable()->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

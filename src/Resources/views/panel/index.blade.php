@@ -109,24 +109,46 @@
                     </div>
                     <div class="col-lg-12">
 
-                        <div class="card col-4">
+                        <div class="card col-6">
                             <div class="card-block bg-info">
                                 <h4 class="text-white card-title">{!! trans('cms::panel.received') !!}</h4>
+                                <h6 class="card-subtitle text-white m-b-0 op-5">You have  {!! count($messages) !!} unread notifications</h6>
+                            </div>
+                            <div class="card-block">
+                                <div class="message-box contact-box">
+                                    <div class="message-widget contact-widget">
+                                        @foreach($messages as $message)
+                                            <!-- Message -->
+                                            <a href="{!! route('messages.show',$message->id) !!}">
+                                                <div class="user-img"> <img src="{!! asset('vendor/cms/assets/images/information.png') !!}" alt="user" class="img-circle"></div>
+                                                <div class="mail-contnet">
+
+                                                <h5 @if($message->read == 0) class="font-weight-bold" @endif>{!! $message->form->name !!}</h5></div>
+                                            </a>
+                                        @endforeach
+                                        {{ $messages->links() }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card col-6">
+                            <div class="card-block bg-info">
+                                <h4 class="text-white card-title">Kullanıcı logları gelecek</h4>
                                 <h6 class="card-subtitle text-white m-b-0 op-5">{!! trans('cms::panel.forms') !!}</h6>
                             </div>
                             <div class="card-block">
                                 <div class="message-box contact-box">
                                     <div class="message-widget contact-widget">
-                                    @foreach($forms as $form)
-                                        @foreach($form->messages as $message)
+                                        @foreach($messages as $message)
                                             <!-- Message -->
-                                                <a href="{!! route('messages.show',$message->id) !!}">
-                                                    <div class="user-img"> <img src="{!! asset('vendor/cms/assets/images/information.png') !!}" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
-                                                    <div class="mail-contnet">
-                                                        <h5>{!! $form->name !!}</h5> <span class="mail-desc">Okundu</span></div>
-                                                </a>
-                                            @endforeach
+                                            <a href="{!! route('messages.show',$message->id) !!}">
+                                                <div class="user-img"> <img src="{!! asset('vendor/cms/assets/images/email.png') !!}" alt="user" class="img-circle"></div>
+                                                <div class="mail-contnet">
+    
+                                                <h5 @if($message->read == 0) class="font-weight-bold" @endif>{!! $message->form->name !!}</h5></div>
+                                            </a>
                                         @endforeach
+                                        {{ $messages->links() }}
                                     </div>
                                 </div>
                             </div>
