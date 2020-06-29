@@ -27,7 +27,7 @@ class HomeController extends Controller
     public function index()
     {
 
-        $forms = Form::with('messages')->get();
-        return view('cms::panel.index',compact('forms'));
+        $messages = Message::where('read',0)->paginate(5);
+        return view('cms::panel.index',compact('messages'));
     }
 }

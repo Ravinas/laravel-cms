@@ -78,6 +78,8 @@ class MessageController extends Controller
     public function show(Message $message)
     {
         $m = $message;
+        $m->read = 1;
+        $m->save();
         $message->inputs = json_decode($m->data);
         $message->form_name = Form::where('id',$m->form_id)->first()->name;
         return view('cms::panel.message.show',compact('message'));

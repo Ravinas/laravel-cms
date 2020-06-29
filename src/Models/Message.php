@@ -9,6 +9,11 @@ class Message extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'form_id', 'ip', 'data'
+        'form_id', 'ip', 'data','read'
     ];
+
+    public function form()
+    {
+        return $this->belongsTo(Form::class, 'form_id');
+    }
 }
