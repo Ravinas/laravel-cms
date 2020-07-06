@@ -6,10 +6,11 @@ use CMS\Models\Form;
 use CMS\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use CMS\Traits\LogAgent;
 
 class FormController extends Controller
 {
-
+    use LogAgent;
     private $rules;
     private $error_messages;
     public function __construct()
@@ -70,6 +71,7 @@ class FormController extends Controller
             $form->rules = $request->post('rules');
             $form->error_messages = $request->post('error_messages');
             $form->save();
+            $this->createLog($form,Auth::user()->id,"C");
             return redirect()->route('forms.index')->with(['type' => 'success', 'message' => 'form_created']);
         }
     }
@@ -116,6 +118,7 @@ class FormController extends Controller
             $form->slug = $request->post('slug');
             $form->rules = $request->post('rules');
             $form->save();
+            $this->createLog($form,Auth::user()->id,"U");
             return redirect()->route('forms.edit',['form' => $form])->with(['type' => 'success', 'message' => trans('cms::panel.form_saved')]);
         }
     }
@@ -132,5 +135,6 @@ class FormController extends Controller
         return redirect()->route('forms.index')
             ->with('message',trans('cms::panel.form_deleted',['form_name'=> $form->name]))
             ->with('type','danger');
+            $this->createLog($form,Auth::user()->id,"D");
     }
 }

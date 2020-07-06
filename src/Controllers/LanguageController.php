@@ -9,10 +9,13 @@ use CMS\Models\PageDetail;
 use CMS\Policies\BasePolicy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use CMS\Traits\LogAgent;
 
 
 class LanguageController extends Controller
 {
+    use LogAgent;
+    
     public function __construct()
     {
         $this->authorizeResource(Language::class);
@@ -67,6 +70,8 @@ class LanguageController extends Controller
             // tr en şeklinde olan sayfaları / olarak kaydet
             PageDetail::where('lang_id',$default->id)->where('url',$default->code)->update(['url'=> '/']);
         }
+
+        $this->createLog($language,Auth::user()->id,"U");
 
 
 //        dd($request->def_lang_id,$request->langs);
