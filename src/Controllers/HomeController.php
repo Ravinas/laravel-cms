@@ -7,6 +7,7 @@ use CMS\Facades\GoogleAnalytics;
 use CMS\Models\Form;
 use CMS\Traits\LogAgent;
 use Illuminate\Http\Request;
+use CMS\Models\Messages;
 
 class HomeController extends Controller
 {

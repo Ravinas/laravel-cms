@@ -20,7 +20,7 @@
                             <div class="table-responsive"></div>
                             <ul class="list-group">
                              @foreach($categories as $category)
-                                 <li class="list-group-item mt-2  justify-content-between bg-light">{!! $category->name.">".$category->id  !!}
+                                 <li class="list-group-item mt-2  justify-content-between bg-light">{!! $category->name  !!}
                                      <div class="btn-group" role="group" aria-label="Basic example">
                                           <a href="{!! route('categories.edit',['category' => $category->id ]) !!}" type="button" class="btn-success btn">{!! trans('cms::panel.edit') !!}</a>
                                           @include('cms::panel.inc.delete_modal',['trans_file' => 'category', 'model' => $category, 'route_group' => 'categories', 'route_parameter' => 'category'])

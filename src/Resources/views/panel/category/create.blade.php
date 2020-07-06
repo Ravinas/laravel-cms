@@ -74,7 +74,7 @@
                         </div>
                             </div>
                                 <div class="form-group page-language">
-                                    @foreach( lang() as $l)
+                                    @foreach( app()->activeLanguages as $l)
                                         <div class="card">
                                             <div class="card-block">
                                                 <div class="form-group">

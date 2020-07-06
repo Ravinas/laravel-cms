@@ -1,5 +1,5 @@
 @foreach($childs as $child)
-    <li class="list-group-item mt-2  justify-content-between" style="margin-left:{!! $margin !!}px;">{!! $child->detail->name.">".$child->id !!}
+    <li class="list-group-item mt-2  justify-content-between" style="margin-left:{!! $margin !!}px;">{!! $child->detail->name !!}
          <div class="btn-group" role="group" aria-label="Basic example">
               <a href="{!! route('categories.edit',['category' => $child->id ]) !!}" type="button" class="btn-success btn">{!! trans('cms::panel.edit') !!}</a>
              @include('cms::panel.inc.delete_modal',['trans_file' => 'category', 'model' => $category, 'route_group' => 'categories', 'route_parameter' => 'category'])

@@ -133,8 +133,8 @@
                         </div>
                         <div class="card col-6">
                             <div class="card-block bg-info">
-                                <h4 class="text-white card-title">Kullanıcı logları gelecek</h4>
-                                <h6 class="card-subtitle text-white m-b-0 op-5">{!! trans('cms::panel.forms') !!}</h6>
+                                <h4 class="text-white card-title">Logs</h4>
+                                <h6 class="card-subtitle text-white m-b-0 op-5">Last 5 Logs</h6>
                             </div>
                             <div class="card-block">
                                 <div class="message-box contact-box">

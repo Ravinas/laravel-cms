@@ -8,9 +8,12 @@ use CMS\Models\CategoryDetail;
 use Illuminate\Http\Request;
 use Str;
 use CMS\Models\File;
+use CMS\Traits\LogAgent;
+use Auth;
 
 class CategoryController extends Controller
 {
+    use LogAgent;
     /**
      * Display a listing of the resource.
      *
@@ -76,6 +79,8 @@ class CategoryController extends Controller
             $this->storeDetail($category->id,$lang->id,$request);
         }
 
+        $this->createLog($category,Auth::user()->id,"C");
+
         return redirect()->route('categories.index');
     }
 
@@ -104,7 +109,7 @@ class CategoryController extends Controller
         ->get();
         $orders = Category::where('parent_id',$category->parent_id)->select('order')->pluck('order')->toArray();
         $files = File::all();
-        return view('cms::panel.category.edit',compact('categories','files','orders'));
+        return view('cms::panel.category.edit',compact('categories','files','orders','category'));
     }
 
     /**
@@ -118,24 +123,31 @@ class CategoryController extends Controller
     {
         $category->parent_id = $request->parent_id;
         $category->status = $request->status;
-        $category->order = $request->order;
+        $category->order = $request->order ?? 0;
             if ($request->hasFile('picture')) {
                 $file_controller = new FileController();
                 $file_controller->validateImageFile($request->file('picture'));
                 $category->image =  $file_controller->storeCategoryFile($request->file('picture'));
             }
         $category->save();
-
-        $update_orders = Category::where('order','>=',$category->order)->where('parent_id',$category->parent_id)->where('id','!=',$category->id)->get();
+        $update_orders = Category::where('order','>=',$category->order)->where('parent_id',$category->parent_id)->where('id','=!',$category->id)->get();
             foreach ($update_orders as $category_order)
             {
                 $category_order->order = $category_order->order + 1;
                 $category_order->save();
             }
 
-        foreach (LanguageFacade::all() as $lang) {
-            $this->storeDetail($category->id,$lang->id,$request);
+          
+ 
+        foreach (app()->activeLanguages as $lang) {
+             $detail = CategoryDetail::where('category_id',$category->id)->where('lang_id',$lang->id)->first();
+             $detail->name = $request->name[$lang->id];
+             $detail->slug = Str::slug($request->name[$lang->id]);
+             $detail->save();
         }
+
+        $this->createLog($category,Auth::user()->id,"U");
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -152,6 +164,7 @@ class CategoryController extends Controller
             $cat->save();
         }
         $category->delete();
+        $this->createLog($category,Auth::user()->id,"D");
         return redirect()->route('categories.index');
     }
 
@@ -164,6 +177,7 @@ class CategoryController extends Controller
         $detail->slug = Str::slug($request->post('name')[$lang_id]);
         $detail->status = $request->post('detail_status')[$lang_id];
         $detail->save();
+        $this->createLog($detail,Auth::user()->id,"C");
     }
 
     public function order(Request $request)

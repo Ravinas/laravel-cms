@@ -61,7 +61,7 @@
                         </div>
                             </div>
                                 <div class="form-group page-language">
-                                    @foreach( lang() as $l)
+                                    @foreach( app()->activeLanguages as $l)
                                         <div class="card">
                                             <div class="card-block">
                                                 <div class="form-group">
@@ -78,7 +78,7 @@
                                     @endforeach
                                 </div>
                                 <div class="form-group page-date">
-                                    <input type="submit" class="btn btn-success float-right" id="submit" value="{!! trans('cms::panel.create') !!}">
+                                    <input type="submit" class="btn btn-success float-right" id="submit" value="{!! trans('cms::panel.edit') !!}">
                                 </div>
                             </form>
                         </div>

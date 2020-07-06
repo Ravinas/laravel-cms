@@ -7,7 +7,7 @@ trait LogAgent {
 
     public function getLogs()
     {
-        $crud = ["c" => "Oluşturdu","d" => "Sildi","u" => "Güncelledi"];
+        $crud = ["C" => "Oluşturdu","D" => "Sildi","U" => "Güncelledi"];
         $logs = Log::orderBy('id','desc')->take(5)->get();
         $organized_logs = [];
         foreach($logs as $log)
@@ -17,6 +17,11 @@ trait LogAgent {
         }
 
         return $organized_logs;
+    }
+
+    public function createLog($model,$user,$crud)
+    {
+        Log::create(["user_id" => $user,"loggable_id" => $model->id,"loggable_type" => get_class($model),"crud" => $crud]);
     }
 
 }
