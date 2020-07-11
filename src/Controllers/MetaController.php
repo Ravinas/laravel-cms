@@ -5,9 +5,12 @@ namespace CMS\Controllers;
 use CMS\Models\Meta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use CMS\Traits\LogAgent;
+use Auth;
 
 class MetaController extends Controller
 {
+    use LogAgent;
     public function __construct()
     {
         $this->authorizeResource(Meta::class);
@@ -90,6 +93,7 @@ class MetaController extends Controller
             $meta->keywords = $request->post('keywords');
             $meta->robots = $request->post('robots');
             $meta->save();
+            $this->createLog($meta,Auth::user()->id,"U");    
             return response('success',200);
         }
     }

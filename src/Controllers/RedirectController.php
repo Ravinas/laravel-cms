@@ -5,9 +5,12 @@ namespace CMS\Controllers;
 use CMS\Models\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use CMS\Traits\LogAgent;
+use Auth;
 
 class RedirectController extends Controller
 {
+    use LogAgent;
     /**
      * Display a listing of the resource.
      *
@@ -56,6 +59,7 @@ class RedirectController extends Controller
             $redirect->code = $request->post('code');
             $redirect->status = $request->post('status');
             $redirect->save();
+            $this->createLog($redirect,Auth::user()->id,"C");
             return redirect()->route('redirects.index')->with(['type' => 'success', 'message' => 'redirect.created']);
         }
     }
@@ -109,6 +113,7 @@ class RedirectController extends Controller
             $redirect->code = $request->post('code');
             $redirect->status = $request->post('status');
             $redirect->save();
+            $this->createLog($redirect,Auth::user()->id,"U");
             return redirect()->route('redirects.index')->with(['type' => 'success', 'message' => 'redirect.edited']);
         }
     }
@@ -122,6 +127,7 @@ class RedirectController extends Controller
     public function destroy(Redirect $redirect)
     {
         $redirect->delete();
+        $this->createLog($redirect,Auth::user()->id,"D");
         return redirect()->route('redirects.index')
             ->with('message',trans('cms::redirect.deleted'))
             ->with('type','danger');

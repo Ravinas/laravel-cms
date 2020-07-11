@@ -7,9 +7,12 @@ use CMS\Models\Slider;
 use CMS\Models\SliderItems;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use CMS\Traits\LogAgent;
+use Auth;
 
 class SliderController extends Controller
 {
+    use LogAgent;
     /**
      * Display a listing of the resource.
      *
@@ -47,6 +50,7 @@ class SliderController extends Controller
                 'slug' => Str::slug($request->name,'-')
                 ]
         );
+        $this->createLog(Slider::class,Auth::user()->id,"C");
         return response()->json(['Message'=>'Ok'],200);
     }
 
@@ -94,6 +98,7 @@ class SliderController extends Controller
     public function destroy(Slider $slider)
     {
         $slider->delete();
+        $this->createLog($slider,Auth::user()->id,"D");
     }
 
     public function addImage(Request $request)
@@ -113,6 +118,7 @@ class SliderController extends Controller
         $slider_items->sub_text = $request->sub_text;
         $slider_items->sub_text2 = $request->sub_text2;
         $slider_items->save();
+        $this->createLog($slider_items,Auth::user()->id,"C");
 
         return response()->json(['Message'=>'Ok']);
     }
@@ -120,6 +126,7 @@ class SliderController extends Controller
     public function deleteImage(Request $request)
     {
         SliderItems::where('id',$request->image)->delete();
+        $this->createLog(SliderItems::class,Auth::user()->id,"D");
         return response()->json(['Message' => 'Ok'],200);
     }
 
@@ -171,6 +178,7 @@ class SliderController extends Controller
         $item->sub_text = $request->data["sub_text"];
         $item->sub_text2 = $request->data["sub_text2"];
         $item->save();
+        $this->createLog($item,Auth::user()->id,"U");
 
         return response()->json(['Message'=>'Ok']);
     }

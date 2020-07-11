@@ -8,9 +8,12 @@ use CMS\Models\MenuItem;
 use CMS\Models\PageDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use CMS\Traits\LogAgent;
+use Auth;
 
 class MenuController extends Controller
 {
+    use LogAgent;
     /**
      * Display a listing of the resource.
      *
@@ -47,6 +50,7 @@ class MenuController extends Controller
         $menu->status = 1;
         $menu->slug = Str::slug($request->name,'-');
         $menu->save();
+        $this->createLog($menu,Auth::user()->id,"C");
         return response()->json(['Message'=>'Ok'],200);
     }
 
@@ -104,6 +108,7 @@ class MenuController extends Controller
         }
 
         $menu->delete();
+        $this->createLog($menu,Auth::user()->id,"D");
         return redirect()->route('menu.index');
     }
 
@@ -119,6 +124,7 @@ class MenuController extends Controller
         $item->url = $request->link;
         $item->external = $request->external;
         $item->save();
+        $this->createLog($item,Auth::user()->id,"C");
         return response()->json(['Message' => 'Ok'],200);
     }
 
