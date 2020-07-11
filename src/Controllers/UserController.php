@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use CMS\Traits\LogAgent;
+use Auth;
 
 class UserController extends Controller
 {
