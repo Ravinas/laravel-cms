@@ -7,9 +7,12 @@ use CMS\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Console\Input\Input;
+use CMS\Traits\LogAgent;
+use Auth;
 
 class MessageController extends Controller
 {
+    use LogAgent;
 
     public function __construct()
     {
@@ -94,6 +97,7 @@ class MessageController extends Controller
     public function destroy(Message $message)
     {
         $message->delete();
+        $this->createLog($message,Auth::user()->id,"D");
     }
 }
 

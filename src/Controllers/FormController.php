@@ -7,6 +7,7 @@ use CMS\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use CMS\Traits\LogAgent;
+use Auth;
 
 class FormController extends Controller
 {

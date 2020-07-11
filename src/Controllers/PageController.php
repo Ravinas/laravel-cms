@@ -16,9 +16,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
+use CMS\Traits\LogAgent;
+use Auth;
 
 class PageController extends Controller
 {
+    use LogAgent;
     private $options;
     public function __construct()
     {
@@ -142,6 +145,7 @@ class PageController extends Controller
         }
         $page->status = 0;
         $page->save();
+        $this->createLog($page,Auth::user()->id,"C");
 
         foreach(LanguageFacade::all() as $l){
             $this->createPageDetail($page->id,$l);
@@ -325,6 +329,7 @@ class PageController extends Controller
         $page->view = $request->post('view');
         $page->status = $request->post('status');
         $page->save();
+        $this->createLog($page,Auth::user()->id,"U");
 
 
         $allPageDetails = PageDetail::where('page_id',$page->id)->with(['language' => function($lang){
@@ -357,6 +362,7 @@ class PageController extends Controller
 
                 $pd->status = $request->post('detail_status')[$pd->lang_id] ?? 0;
                 $pd->save();
+                $this->createLog($pd,Auth::user()->id,"C");
             }
 
 
@@ -374,6 +380,7 @@ class PageController extends Controller
     public function destroy(Page $page)
     {
         $page->delete();
+        $this->createLog($page,Auth::user()->id,"D");
         return redirect()->route('pages.index');
     }
 
@@ -395,12 +402,14 @@ class PageController extends Controller
 
         $pd->status = 0;
         $pd->save();
+        $this->createLog($pd,Auth::user()->id,"C");
         $meta = new Meta();
         $meta->page_detail_id = $pd->id;
         $meta->description = "";
         $meta->keywords = "";
         $meta->robots = 1;
         $meta->save();
+        $this->createLog($meta,Auth::user()->id,"C");
     }
 
     public function subPages($id)
@@ -488,6 +497,7 @@ class PageController extends Controller
                         $de->key = $key;
                         $de->value = $d;
                         $de->save();
+                        $this->createLog($de,Auth::user()->id,"U");
                     }
 
                 }
@@ -512,6 +522,7 @@ class PageController extends Controller
                     $ex->key = $key;
                     $ex->value = $value;
                     $ex->save();
+                    $this->createLog($ex,Auth::user()->id,"U");
                 }
 
             }

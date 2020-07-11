@@ -10,9 +10,12 @@ use CMS\Models\PagePermission;
 use CMS\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use CMS\Traits\LogAgent;
+use Auth;
 
 class RoleController extends Controller
 {
+    use LogAgent;
 
     public function __construct()
     {
@@ -216,6 +219,7 @@ class RoleController extends Controller
             $role->name = $request->post('name');
             $role->status = 1;
             if($role->save()) {
+                $this->createLog($role,Auth::user()->id,"C");
 
                 // Tüm yetkileri soft delete olarak sil
                 ModulePermission::where('role_id',$role->id)->delete();
@@ -271,6 +275,7 @@ class RoleController extends Controller
             return abort(403);
         }
         $role->delete();
+        $this->createLog($role,Auth::user()->id,"D");
         // silinen rolün yetkileri neydi diye tutulmalı mı silinmeli mi
         ModulePermission::where('role_id',$role->id)->forceDelete();
         PagePermission::where('role_id',$role->id)->forceDelete();

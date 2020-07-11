@@ -7,10 +7,11 @@ use CMS\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use CMS\Traits\LogAgent;
 
 class UserController extends Controller
 {
-
+    use LogAgent;
     public function __construct()
     {
         $this->authorizeResource(User::class);
@@ -37,6 +38,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::where('id' , '>', 1)->get();
+        $this->createLog($roles,Auth::user()->id,"C");
         return view('cms::panel.user.create',compact('roles'));
     }
 
@@ -66,6 +68,7 @@ class UserController extends Controller
             $user->role_id = $request->post('role');
             $user->password = Hash::make($request->post('password'));
             $user->save();
+            $this->createLog($user,Auth::user()->id,"U");
             return redirect()->route('users.index')->with(['type' => 'success', 'message' => 'form_created']);
         }
     }
@@ -146,6 +149,7 @@ class UserController extends Controller
                 $user->password = Hash::make($request->post('password'));
             }
             $user->save();
+            $this->createLog($user,Auth::user()->id,"U");
             return redirect()->route('users.index')->with(['type' => 'success', 'message' => 'user_edited']);
         }
     }
@@ -159,6 +163,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+        $this->createLog($user,Auth::user()->id,"D");
         return redirect()->route('users.index')
             ->with('message',trans('cms::user.deleted'))
             ->with('type','danger');

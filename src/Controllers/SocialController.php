@@ -5,9 +5,11 @@ namespace CMS\Controllers;
 use CMS\Models\Social;
 use CMS\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use CMS\Traits\LogAgent;
+use Auth;
 class SocialController extends Controller
 {
+    use LogAgent;
     /**
      * Display a listing of the resource.
      *
@@ -56,6 +58,7 @@ class SocialController extends Controller
             'url' => $request->url,
             'order' => $order]
         );
+        $this->createLog(Social::class,Auth::user()->id,"C");
         return response(["Message" => "Ok"]);
     }
 
@@ -102,6 +105,7 @@ class SocialController extends Controller
     public function destroy($id)
     {
         Social::where('id',$id)->delete();
+        $this->createLog(Social::class,Auth::user()->id,"D");
         return redirect()->route('socialmedia.index');
     }
 
@@ -135,6 +139,7 @@ class SocialController extends Controller
         $social->url = $request->url;
         $social->order = $order;
         $social->save();
+        $this->createLog($social,Auth::user()->id,"U");
         return response(["Message" => "Ok"]);
     }
 }
