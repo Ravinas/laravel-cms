@@ -9,6 +9,7 @@ use CMS\Traits\LogAgent;
 use Illuminate\Http\Request;
 use CMS\Models\Messages;
 use Auth;
+use CMS\Models\Message;
 
 class HomeController extends Controller
 {

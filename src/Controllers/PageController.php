@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 use CMS\Traits\LogAgent;
-use Auth;
 
 class PageController extends Controller
 {

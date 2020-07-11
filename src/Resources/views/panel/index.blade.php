@@ -109,7 +109,7 @@
                     </div>
                     <div class="col-lg-12">
 
-                        <div class="card col-6">
+                        <div class="card col-6 float-left">
                             <div class="card-block bg-info">
                                 <h4 class="text-white card-title">{!! trans('cms::panel.received') !!}</h4>
                                 <h6 class="card-subtitle text-white m-b-0 op-5">You have  {!! count($messages) !!} unread notifications</h6>
@@ -120,7 +120,7 @@
                                         @foreach($messages as $message)
                                             <!-- Message -->
                                             <a href="{!! route('messages.show',$message->id) !!}">
-                                                <div class="user-img"> <img src="{!! asset('vendor/cms/assets/images/information.png') !!}" alt="user" class="img-circle"></div>
+                                                <div class="user-img"> <img src="{!! asset('vendor/cms/assets/images/email.png') !!}" alt="user" class="img-circle"></div>
                                                 <div class="mail-contnet">
 
                                                 <h5 @if($message->read == 0) class="font-weight-bold" @endif>{!! $message->form->name !!}</h5></div>
@@ -134,7 +134,7 @@
                         <div class="card col-6">
                             <div class="card-block bg-info">
                                 <h4 class="text-white card-title">Logs</h4>
-                                <h6 class="card-subtitle text-white m-b-0 op-5">Last 5 Logs</h6>
+                                <h6 class="card-subtitle text-white m-b-0 op-5">User Activities</h6>
                             </div>
                             <div class="card-block">
                                 <div class="message-box contact-box">
