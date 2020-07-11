@@ -8,7 +8,7 @@
         <meta name="author" content="">
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="{!! asset("vendor/cms/assets/images/favicon.png") !!}">
-        <title>EKMEK TEKNESİ</title>
+        <title>PRIME ALPHA</title>
         <!-- Bootstrap Core CSS -->
         <link href="{!! asset("vendor/cms/assets/plugins/bootstrap/css/bootstrap.min.css") !!}" rel="stylesheet">
         <!-- chartist CSS -->
