@@ -4,7 +4,12 @@
 @endpush
 
 @push('js')
+<script>
 
+    $(document).ready( function () {
+        $('#tbl').DataTable();
+    } );
+    </script>
 @endpush
 @section('content')
     <div class="page-wrapper">
@@ -19,7 +24,7 @@
                             @can('create',CMS\Models\Form::class)
                             <a class="btn-success btn float-right" href="{!! route('forms.create') !!}">{!! trans('cms::form.create') !!}</a>
                             @endcan
-                            <div class="table-responsive">
+                            <div class="table-responsive" id="tbl">
                                 <table class="table">
                                     <thead>
                                     <tr>

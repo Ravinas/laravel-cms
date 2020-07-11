@@ -4,7 +4,12 @@
 @endpush
 
 @push('js')
+<script>
 
+    $(document).ready( function () {
+        $('#tbl').DataTable();
+    } );
+    </script>
 @endpush
 @section('content')
     <div class="page-wrapper">
@@ -20,7 +25,7 @@
                             <a class="btn-success btn float-right" href="{!! route('redirects.create') !!}">{!! trans('cms::redirect.create') !!}</a>
                             @endcan
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table" id="tbl">
                                     <thead>
                                     <tr>
                                         <th>{!! trans('cms::redirect.id') !!}</th>

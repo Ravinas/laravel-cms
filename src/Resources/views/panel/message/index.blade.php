@@ -4,7 +4,12 @@
 @endpush
 
 @push('js')
+<script>
 
+    $(document).ready( function () {
+        $('#tbl').DataTable();
+    } );
+    </script>
 @endpush
 @section('content')
     <div class="page-wrapper">
@@ -15,7 +20,7 @@
                     <div class="card">
                         <div class="card-block">
                             <h2 class="card-title">"{!! $form->name !!}" {!! trans('cms::form.messages') !!}</h2>
-                            <div class="table-responsive">
+                            <div class="table-responsive" id="tbl">
                                 <table class="table">
                                     <thead>
                                     <tr>

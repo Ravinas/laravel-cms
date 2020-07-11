@@ -4,7 +4,12 @@
 @endpush
 
 @push('js')
+<script>
 
+    $(document).ready( function () {
+        $('#tbl').DataTable();
+    } );
+    </script>
 @endpush
 @section('content')
     <div class="page-wrapper">
@@ -17,7 +22,7 @@
                         <div class="card-block">
                             <h2 class="card-title">{!! trans('cms::ebulletin.ebulletins') !!}</h2>
 {{--                            <a class="btn-success btn" href="{!! route('forms.create') !!}">{!! trans('cms::panel.form_create') !!}</a>--}}
-                            <div class="table-responsive">
+                            <div class="table-responsive" id="tbl">
                                 <table class="table">
                                     <thead>
                                     <tr>
