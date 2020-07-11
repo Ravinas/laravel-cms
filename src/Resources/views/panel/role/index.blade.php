@@ -4,7 +4,12 @@
 @endpush
 
 @push('js')
+<script>
 
+    $(document).ready( function () {
+        $('#tbl').DataTable();
+    } );
+    </script>
 @endpush
 @section('content')
     <div class="page-wrapper">
@@ -18,7 +23,7 @@
                             <h4 class="card-title">{!! trans('cms::role.roles') !!}</h4>
                             <a class="btn-success btn float-right" href="{!! route('roles.create') !!}">{!! trans('cms::role.create') !!}</a>
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table" id="table">
                                     <thead>
                                     <tr>
                                         <th>{!! trans('cms::role.id') !!}</th>

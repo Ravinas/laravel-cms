@@ -4,7 +4,12 @@
 @endpush
 
 @push('js')
+<script>
 
+    $(document).ready( function () {
+        $('#tbl').DataTable();
+    } );
+    </script>
 @endpush
 @section('content')
     <div class="page-wrapper">
@@ -17,7 +22,7 @@
                             <h4 class="card-title">{!! trans('cms::page.subpages',['parent' => $parent->detail->name]) !!}</h4>
                             <a class="btn-success btn float-right" href="{!! route('pages.create',['page' => $parent_id]).'&type=subpage' !!}">{!! trans('cms::panel.create') !!}</a>
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table" id="tbl">
                                     <thead>
                                     <tr>
                                         <th>{!! trans('cms::panel.id') !!}</th>
