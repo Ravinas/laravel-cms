@@ -16,6 +16,8 @@ return [
     'logout' => 'Logout',
     'password' => 'Password',
     'remember_me' => 'Remember Me',
+    'prime_login' => 'Please log in to continue prime.',
+    'lost_password' => 'Forgotten your password?',
     'parent' => 'Parent Page',
     'no_parent' => 'No Parent Page',
     'order' => 'Order',
