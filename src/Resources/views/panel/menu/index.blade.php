@@ -1,8 +1,4 @@
-@extends('cms::panel.inc.app')
-@push('css')
-
-@endpush
-
+@extends('cms::panel.newinc.app')
 @push('js')
     <script type="text/javascript">
 
@@ -21,7 +17,14 @@
                 success:function (response) {
                         if (response.Message == "Ok")
                         {
-                           window.location.reload(true);
+                            Swal.fire({
+                                title: 'Başarılı',
+                                text: 'Menü ekleme işleminiz başarı ile gerçekleşti.',
+                                icon: 'success',
+                                type: 'success'
+                            }).then(function(){
+                                location.reload();
+                            })
                         }
                 }
             });
@@ -29,81 +32,86 @@
     </script>
 @endpush
 @section('content')
-    <div class="page-wrapper">
-        <div class="container-fluid">
-            @include('cms::panel.inc.breadcrumb')
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-block">
-                            <h4 class="card-title">{!! trans('cms::panel.menu') !!}</h4>
-                            <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#exampleModal">
-                                {!! trans('cms::panel.create') !!}
-                            </button>
-                            <div class="table-responsive"></div>
-                            <ul class="list-group">
-                                @foreach($menu as $m)
-                                    <li class="list-group-item mt-2  justify-content-between bg-light">{!! $m->name  !!}
-                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a href="{!! route('menu.edit',['menu' => $m->id ]) !!}" type="button" class="btn-success btn">{!! trans('cms::panel.items') !!}</a>
-                                            @include('cms::panel.inc.delete_modal',['trans_file' => 'panel', 'model' => $m, 'route_group' => 'menu', 'route_parameter' => 'menu'])
+<div class="main-content container-fluid">
+    <div class="page-title">
+        <h3>Menülerinizi Düzenleyin</h3>
+        <p class="text-subtitle text-muted">Menülerinizi eklerken , görmek istediğiniz tüm dillere eklemeyi unutmayın.</p>
+    </div>
+    <section class="section">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class='card-heading p-1 pl-3 float-left'>Diller</h3>
+                        <button type="button" class="btn icon icon-left btn-primary float-right" data-toggle="modal" data-target="#inlineForm"><i data-feather="edit" ></i> Menü Oluşturun</button>
+                        <div class="form-group">
+                            <!-- Modal -->
+                            <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog"
+                                aria-labelledby="myModalLabel33" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel33">{!! trans('cms::panel.create') !!} </h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <i data-feather="x"></i>
+                                    </button>
+                                    </div>
+                                    <form id="menuform">
+                                    <div class="modal-body">
+                                        <label>Menü İsmi Belirleyin </label>
+                                        <div class="form-group">
+                                        <input type="text" placeholder="Menüyü Adlandırın" class="form-control" name="name">
                                         </div>
-                                    </li>
-                                @endforeach
-                            </ul>
+                                        <label>Menü Dilini Seçin </label>
+                                        <div class="form-group">
+                                        <select class="form-select" id="basicSelect" name="lang">
+                                            @foreach($lang as $language)
+                                            <option value="{!! $language->id !!}">{!! $language->name !!}</option>
+                                            @endforeach
+                                        </select>
+                                        </div>
+                                    </div>
+                                    </form>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary float-right" id="post">Oluştur</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                        @foreach ($lang as $lng)
+                                        <a class="nav-link {{ $loop->first ? 'active' : '' }} mt-2" id="v-pills-{!! $lng->id !!}-tab" data-toggle="pill" href="#v-pills-{!! $lng->id !!}" role="tab"
+                                        aria-controls="{!! $lng->id !!}-tab" aria-selected="true">{!! $lng->name !!}</a>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div class="col-7">
+                                    <div class="tab-content" id="v-pills-tabContent">
+                                        @foreach ($lang as $lng)
+                                            <div class="tab-pane fade {{ $loop->first ? 'active show' : '' }}"  id="v-pills-{!! $lng->id !!}" role="tabpanel" aria-labelledby="v-pills-{!! $lng->id !!}-tab">
+                                                <div class="list-group">
+                                                    @foreach ($lng->menu as $menu)
+                                                        <a href="{!! route('menu.edit',['menu' => $menu->id ]) !!}"><button type="button" class="list-group-item list-group-item-action">{{ $menu->name }}</button>
+                                                    @endforeach
+                                                </div>
+                                             </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create Menu</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <form id="menuform">
-                        <label>Name</label>
-                        <div>
-                            <input type="text" class="form-control" autocomplete="off" name="name"/>
-                        </div>
-                        <label>Language</label>
-                        <div>
-                            <select class="custom-select custom-select-lg mb-3" name="lang">
-                                @foreach($lang as $language)
-                                    <option value="{!! $language->id !!}">{!! $language->name !!}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" id="post" class="btn btn-primary">Create</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Toast -->
-    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <img src="..." class="rounded mr-2" alt="...">
-            <strong class="mr-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="toast-body">
-            Hello, world! This is a toast message.
-        </div>
-    </div>
+    </section>
+</div>
 @endsection

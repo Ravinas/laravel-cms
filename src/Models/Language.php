@@ -9,4 +9,10 @@ class Language extends Model
     public $timestamps = false;
     protected $fillable = ['name','code','default','status'];
 
+    public function menu(){
+        
+        return $this->hasMany(Menu::class,'lang_id');
+
+    }
+
 }
