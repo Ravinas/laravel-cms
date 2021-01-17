@@ -95,11 +95,16 @@
                                     <div class="tab-content" id="v-pills-tabContent">
                                         @foreach ($lang as $lng)
                                             <div class="tab-pane fade {{ $loop->first ? 'active show' : '' }}"  id="v-pills-{!! $lng->id !!}" role="tabpanel" aria-labelledby="v-pills-{!! $lng->id !!}-tab">
-                                                <div class="list-group">
+                                                <div class="tab-pane fade {{ $loop->first ? 'active show' : '' }}"  id="v-pills-{!! $lng->id !!}" role="tabpanel" aria-labelledby="v-pills-{!! $lng->id !!}-tab">
                                                     @foreach ($lng->menu as $menu)
-                                                        <a href="{!! route('menu.edit',['menu' => $menu->id ]) !!}"><button type="button" class="list-group-item list-group-item-action">{{ $menu->name }}</button>
+                                                        <li class="list-group-item d-flex justify-content-end align-items-center">
+                                                            <span class="mr-auto p-2">{!! $menu->name !!}</span>
+                                                            <a href="#" class="btn icon btn-primary ml-2"><i data-feather="edit"></i></a>
+                                                            <a href="{!! route('menu.edit',['menu' => $menu->id ]) !!}" class="btn icon btn-info ml-2"><i data-feather="info"></i></a>
+                                                            <a href="#" class="btn icon btn-danger ml-2"><i data-feather="delete"></i></a>
+                                                        </li>
                                                     @endforeach
-                                                </div>
+                                                 </div>
                                              </div>
                                         @endforeach
                                     </div>
