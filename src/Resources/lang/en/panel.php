@@ -64,6 +64,8 @@ return [
     'metas' => 'Metas',
     'redirects' => 'Redirects',
     'add' => 'Add',
+    'interaction' => 'Interaction',
+    'settings' => 'Settings',
 
     // FORMS MEGA THREAD
     'forms' => 'Forms',
