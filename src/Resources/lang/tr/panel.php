@@ -10,6 +10,11 @@
         'parent' => 'Bağlı olduğu sayfa',
         'prime_login' => 'Prime\'a devam edebilmek için lütfen giriş yapın.',
         'lost_password' => 'Şifrenizi mi unuttunuz?',
+        'content' => 'İçerik',
+        'interaction' => 'Etkileşim',
+        'users' => 'Kullanıcılar',
+        'roles' => 'Roller',
+        'settings' => 'Ayarlar',
 
 
     ];
