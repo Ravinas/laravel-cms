@@ -106,10 +106,14 @@ class MenuController extends Controller
                 $item->delete();
             }
         }
-
         $menu->delete();
         $this->createLog($menu,Auth::user()->id,"D");
-        return redirect()->route('menu.index');
+        return response()->json([
+            'status' => 'Ok'
+        ]);
+
+      //  $this->createLog($menu,Auth::user()->id,"D");
+      //  return redirect()->route('menu.index');
     }
 
     public function storeMenuItem(Request $request)

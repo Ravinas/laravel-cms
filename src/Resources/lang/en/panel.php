@@ -105,6 +105,11 @@ return [
     //Menu
     'menu' => 'Menu',
     'items' => 'Items',
+    'edit_your_menus' => 'Edit your menus',
+    'menu_dont_forgot' => 'When adding your menus , don\'t forget to add them to all the languages you want to see.',
+    'create_menu' => 'Create Menu',
+    'menu_name' => 'Menu Name',
+    'select_menu_language' => 'Select Menu Language',
 
     //Slider
     'slider' => 'Slider',
