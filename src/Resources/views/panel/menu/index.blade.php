@@ -1,4 +1,4 @@
-@extends('cms::panel.inc.newinc.app')
+@extends('cms::panel.newinc.app')
 @push('js')
     <script type="text/javascript">
 
