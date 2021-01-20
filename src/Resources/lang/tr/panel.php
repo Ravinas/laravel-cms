@@ -15,8 +15,11 @@
         'users' => 'Kullanıcılar',
         'roles' => 'Roller',
         'settings' => 'Ayarlar',
-
-
+        'edit_your_menus' => 'Menülerinizi Düzenleyin',
+        'menu_dont_forgot' => 'Menülerinizi eklerken , görmek istediğiniz tüm dillere eklemeyi unutmayın.',
+        'create_menu' => 'Menü Oluşturun',
+        'menu_name' => 'Menu İsmi Belirleyin',
+        'select_menu_language' => 'Menü dilini seçin',
     ];
 
 
