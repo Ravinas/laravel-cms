@@ -1,45 +1,140 @@
-@extends('cms::panel.inc.app')
+@extends('cms::panel.newinc.app')
+@section('content')
+<div class="main-content container-fluid">
+    <div class="page-title">
+        <h3>Ana Menü</h3>
+        <p class="text-subtitle text-muted">Bu kısımda Ana Menü'nün elemanlarını ekleyebilir , silebilir ve sıraya sokabilirsiniz</p>
+    </div>
+    <section class="section">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class='card-heading p-1 pl-3 float-left'>{!! trans('cms::panel.items') !!}</h3>
+                        <button type="button" class="btn icon icon-left btn-primary float-right" data-toggle="modal" data-target="#inlineForm"><i data-feather="edit" ></i> Eleman Ekleyin</button>
+                        <div class="form-group">
+                            <!--Modal -->
+                            <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog"
+                                aria-labelledby="myModalLabel33" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel33">Menü Elemanı Oluştur </h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <i data-feather="x"></i>
+                                    </button>
+                                    </div>
+                                    <form id="menuform">
+                                    <input type="hidden" name="menu_id" value="{!! $menu->id !!}">
+                                    <div class="modal-body">
+                                        <label>Metin </label>
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Menüde Görünmesini İstediğiniz Metin (Örn: Hakkımızda)" class="form-control" name="text" required>
+                                        </div>
+                                        <label>Tip</label>
+                                        <div class="form-group">
+                                            <select class="form-select" id="basicSelect" name="type">
+                                                <option value="1">Single</option>
+                                                <option value="2">Dropdown</option>
+                                            </select>
+                                        </div>
+                                        <label>Bağlantı Tipi</label>
+                                        <div class="form-group">
+                                            <select class="form-select" id="basicSelect" name="link_type">
+                                                <option value="0">Internal</option>
+                                                <option value="1">External</option>
+                                            </select>
+                                        </div>
+                                        <label>Tip</label>
+                                        <div class="form-group">
+                                            <select class="form-select" id="basicSelect" name="type">
+                                                @foreach($urls as $url)
+                                                    <option value="{!! $url->url !!}">{!!  $url->url !!}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <label>İkon (İsteğe Bağlı)</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="inputGroupFileAddon01"><i data-feather="upload"></i></span>
+                                                <div class="form-file">
+                                                    <input type="file" class="form-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                                                    <label class="form-file-label" for="inputGroupFile01">
+                                                        <span class="form-file-text">İkon seçin..</span>
+                                                        <span class="form-file-button">Yükle</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary ml-1" data-dismiss="modal">
+                                        <i class="bx bx-check d-block d-sm-none"></i>
+                                        <span class="d-none d-sm-block" id="post">Oluştur</span>
+                                        </button>
+                                    </div>
+                                    </form>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <ol class="sortable" style="list-style: none;">
+                                @foreach ($menu_items as $item)
+                                <li class="mt-1" id="menuItem-{{$item->id}}" style="list-style: none;">
+                                    <div class="list-group-item d-flex justify-content-end align-items-center">
+                                      <span class="mr-auto p-2">{!! $item->text !!}</span>
+                                      <a href="" class="btn icon btn-info ml-2" data-id="{!! $item->id !!}"><i data-feather="plus-circle"></i></a>
+                                      <a href="{!! route('delete-item',['menuitem' => $item->id]) !!}" class="btn icon btn-danger ml-2 del" data-id="{!! $item->id !!}"><i data-feather="delete"></i></a>
+                                    </div>
+                                    @if($item->children)
+                                        @include('cms::panel.menu.new-item-children',['childs' => $item->children])
+                                    @endif
+                                </li>
+                                @endforeach
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+@endsection
 @push('js')
-<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-<script type="text/javascript" src="{!! asset('vendor/cms/js/jquery.mjs.nestedSortable.js') !!} "></script>
-<script type="text/javascript">
-     $('ol.sortable').nestedSortable({
-        handle: 'div.menu-handle',
-        helper: 'clone',
-        items: 'li',
-        opacity: .6,
-        revert: 250,
-        tabSize: 25,
-        maxLevels:3,
-        tolerance: 'pointer',
-        toleranceElement: '> div',
-        isTree: true,
-    });
-            $("#serialize").click(function(e) {
-                 e.preventDefault();
-                var serialized = $('ol.sortable').nestedSortable('serialize');
+  <script src="{!! asset('vendor/cms/js/jquery.mjs.nestedSortable.js') !!}"></script>
+  <script>
+  $(document).ready(function(){
+        $('ol.sortable').nestedSortable({
+            handle: 'div',
+            items: 'li',
+            toleranceElement: '> div',
+            stop:function(){
+                sendList();
+            }
+        });
 
-                $.ajax({
-                url: "{{ route('menuajax') }}",
-                method: "POST",
-                data: {sort: serialized,_token: '{{csrf_token()}}'},
+        function sendList(){
+            var serialized = $('ol.sortable').nestedSortable('serialize');
+            $.ajax({
+            url: "{{ route('menuajax') }}",
+            method: "POST",
+            data: {sort: serialized,_token: '{{csrf_token()}}'},
                 success: function(res) {
-                    $('.alert').show();
-                    $('.alert').hide(3000);
+                    console.log("İşlem Başarılı");
                 }
-                });
             });
+        }
 
-
-     var csrf = "{!! csrf_token() !!}";
-     $.ajaxSetup({
-         headers: {
-             'X-CSRF-TOKEN': csrf
-         }
-     });
-     $('#post').click(function (e) {
+        $('#post').click(function (e) {
          e.preventDefault();
+         var csrf = "{!! csrf_token() !!}";
+         $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': csrf
+            }
+        });
+
          $.ajax({
              url:'{!! route('menuitemajax') !!}',
              method:'post',
@@ -51,155 +146,8 @@
                  }
              }
          });
-     });
-     $(document).ready(function () {
-         $('#external').hide();
-         $('#exlabel').hide();
-
-         $('#link_type').change(function () {
-             var type = $(this).val();
-             switch (type) {
-                 case '0':
-                     $('#external').hide();
-                     $('#exlabel').hide();
-                     $('#internal').show();
-                     $('#intlabel').show();
-                     break;
-                 case '1':
-                     $('#external').show();
-                     $('#exlabel').show();
-                     $('#internal').hide();
-                     $('#intlabel').hide();
-                     break;
-                 default:
-                     alert("Error");
-             }
-         });
-     });
-</script>
-
-
+        });
+    });
+  </script>
 @endpush
-@push('css')
-<style>
-    ol {
-    list-style-type: none;
-    }
 
-    .menu-handle {
-    padding: 15px;
-    border-radius: 3px;
-    border: 2px solid #26c6da;
-    font-size: 15px;
-    margin-bottom: 10px;
-        line-height: 30px;
-    }
-
-    .menu-options {
-        float: right;
-    }
-    </style>
-@endpush
-@section('content')
-
-@php
-
-
-
-@endphp
-
-<div class="page-wrapper">
-    <div class="container-fluid">
-        @include('cms::panel.inc.breadcrumb')
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-block">
-                        <h4 class="card-title">{!! trans('cms::panel.items') !!}</h4>
-                        <ol class="sortable">
-                            @foreach($menu_items as $item)
-                            <li id="menuItem-{{$item->id}}">
-                                <div class="menu-handle">
-                                    <span>
-                                        {!! $item->text !!}
-                                    </span>
-                                <div class="menu-options">
-                                    <a class="btn-danger btn float-right" data-id="{!! $item->id !!}" href="{!! route('delete-item',['menuitem' => $item->id]) !!}">{!! trans('cms::panel.delete') !!}</a>
-                                </div>
-                                </div>
-                            @if($item->children)
-                            @include('cms::panel.menu.item-children',['childs' => $item->children])
-                            @endif
-                            @endforeach
-                            </li>
-                            </ol>
-                            <button type="button" class="btn btn-warning float-right" data-toggle="modal" data-target="#exampleModal">{!! trans('cms::panel.add') !!}</button>
-                            <button type="button" class="btn btn-success float-right mr-3" id="serialize">{!! trans('cms::panel.update') !!}</button>
-                    </div>
-                    <div class="alert alert-success hide" role="alert">
-                        Saved
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Create Menu</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <form id="menuform">
-                                <label>Type</label>
-                                <div>
-                                    <select class="custom-select custom-select-lg mb-3" name="type">
-                                        <option value="1">Single</option>
-                                        <option value="2">Dropdown</option>
-                                    </select>
-                                </div>
-                                <label>Link Type</label>
-                                <div>
-                                    <select class="custom-select custom-select-lg mb-3" id="link_type" name="link_type">
-                                        <option value="0">Internal</option>
-                                        <option value="1">External</option>
-                                    </select>
-                                </div>
-                                <input type="hidden" name="menu_id" value="{!! $menu->id !!}">
-                                <label>Title</label>
-                                <div>
-                                    <input type="text" class="form-control" autocomplete="off" name="text"/>
-                                </div>
-                                <label id="exlabel">External Link</label>
-                                <div id="external">
-                                    <input type="text" class="form-control" autocomplete="off" name="external"/>
-                                </div>
-                                <label id="intlabel">Url</label>
-                                <div id="internal">
-                                    <select class="custom-select custom-select-lg mb-3" name="link">
-                                        @foreach($urls as $url)
-                                            <option value="{!! $url->url !!}">{!!  $url->url !!}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" id="post" class="btn btn-primary">Create</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-@endsection
