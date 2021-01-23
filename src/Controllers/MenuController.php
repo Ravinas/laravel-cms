@@ -77,7 +77,7 @@ class MenuController extends Controller
     {
         $urls = PageDetail::select('url')->get();
         $menu_items = MenuItem::where('parent_id', 0)->where('menu_id',$menu->id)->orderby('order')->get();
-        return view('cms::panel.menu.new-items',compact('menu_items','menu','urls'));
+        return view('cms::panel.menu.items',compact('menu_items','menu','urls'));
 
     }
 
@@ -138,6 +138,7 @@ class MenuController extends Controller
     {
         $item = MenuItem::where('id',$menuitem)->first();
         $item->delete();
+        $this->createLog($item,Auth::user()->id,"D");
         return redirect()->route('menu.index');
     }
 
@@ -150,6 +151,7 @@ class MenuController extends Controller
         $item->link_type = $request->edit_link_type;
         $item->url =  $request->edit_link;
         $item->save();
+        $this->createLog($item,Auth::user()->id,"U");
         return response()->json(['success' => 'Ok']);
     }
 
@@ -187,7 +189,7 @@ class MenuController extends Controller
             $menu_item->save();
             $order++;
         }
-
+        $this->createLog($menu_item,Auth::user()->id,"U");
         return response(['Message' => 'Ok'],200);
     }
 }
