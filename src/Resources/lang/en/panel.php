@@ -110,6 +110,18 @@ return [
     'create_menu' => 'Create Menu',
     'menu_name' => 'Menu Name',
     'select_menu_language' => 'Select Menu Language',
+    'menu_items_info' => 'In this section, you can add, delete and order menu items.',
+    'create_menu_item' => 'Create Menu Item',
+    'text' => 'Text',
+    'url_type' => 'URL Type',
+    'internal' => 'Internal',
+    'external' => 'External',
+    'icon' => 'Icon',
+    'choose_icon' => 'Choose Icon',
+    'upload' => 'Upload',
+    'edit_menu_item' => 'Edit menu item',
+    'dropdown' => 'Dropdown',
+    'single' => 'Single',
 
     //Slider
     'slider' => 'Slider',

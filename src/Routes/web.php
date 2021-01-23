@@ -51,6 +51,8 @@ Route::prefix('/panel')->middleware('auth')->group( function () {
     Route::post('menu/ajax','MenuController@ajax')->name('menuajax');
     Route::get('menu/item/{menuitem}/delete','MenuController@destroyMenuItem')->name('delete-item');
     Route::post('menuitem/ajax/','MenuController@storeMenuItem')->name('menuitemajax');
+    Route::post('menuitem/edit/ajax/','MenuController@editMenuItem')->name('edit-menuitem-ajax');
+    Route::post('menu/item','MenuController@getMenuItem')->name('get-menuitem');
 
 });
 

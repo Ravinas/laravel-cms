@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use CMS\Traits\LogAgent;
 use Auth;
+use Illuminate\Http\Client\Request as ClientRequest;
 
 class MenuController extends Controller
 {
@@ -21,9 +22,10 @@ class MenuController extends Controller
      */
     public function index()
     {
+
         $menu = Menu::all();
-        $lang = Language::where('status',1)->get();
-        return view('cms::panel.menu.index',compact('menu','lang'));
+        $lang = Language::where('status',1)->with('menu')->get();
+        return view('cms::panel.menu.newindex',compact('menu','lang'));
     }
 
     /**
@@ -75,7 +77,7 @@ class MenuController extends Controller
     {
         $urls = PageDetail::select('url')->get();
         $menu_items = MenuItem::where('parent_id', 0)->where('menu_id',$menu->id)->orderby('order')->get();
-        return view('cms::panel.menu.items',compact('menu_items','menu','urls'));
+        return view('cms::panel.menu.new-items',compact('menu_items','menu','urls'));
 
     }
 
@@ -109,7 +111,7 @@ class MenuController extends Controller
         $menu->delete();
         $this->createLog($menu,Auth::user()->id,"D");
         return response()->json([
-            'status' => 'Ok'
+            'response' => 'Ok'
         ]);
 
       //  $this->createLog($menu,Auth::user()->id,"D");
@@ -137,6 +139,32 @@ class MenuController extends Controller
         $item = MenuItem::where('id',$menuitem)->first();
         $item->delete();
         return redirect()->route('menu.index');
+    }
+
+    public function editMenuitem(Request $request)
+    {
+
+        $item = MenuItem::find($request->item_id);
+        $item->text = $request->edit_text;
+        $item->type = $request->edit_type;
+        $item->link_type = $request->edit_link_type;
+        $item->url =  $request->edit_link;
+        $item->save();
+        return response()->json(['success' => 'Ok']);
+    }
+
+    public function getMenuItem(Request $request)
+    {
+
+        $item = MenuItem::find($request->id);
+        return response()->json([
+            'item_id' => $item->id,
+            'type' => $item->type,
+            'link_type' => $item->link_type,
+            'text' => $item->text,
+            'url' => $item->url
+        ]);
+
     }
 
     public function ajax(Request $request)
