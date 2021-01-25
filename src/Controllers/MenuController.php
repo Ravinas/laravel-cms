@@ -25,7 +25,7 @@ class MenuController extends Controller
 
         $menu = Menu::all();
         $lang = Language::where('status',1)->with('menu')->get();
-        return view('cms::panel.menu.newindex',compact('menu','lang'));
+        return view('cms::panel.menu.index',compact('menu','lang'));
     }
 
     /**

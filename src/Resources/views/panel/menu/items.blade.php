@@ -151,7 +151,7 @@
                                       <a href="{!! route('delete-item',['menuitem' => $item->id]) !!}" class="btn icon btn-danger ml-2 del" data-id="{!! $item->id !!}" ><i data-feather="delete"></i></a>
                                     </div>
                                     @if($item->children)
-                                        @include('cms::panel.menu.new-item-children',['childs' => $item->children])
+                                        @include('cms::panel.menu.item-children',['childs' => $item->children])
                                     @endif
                                 </li>
                                 @endforeach
