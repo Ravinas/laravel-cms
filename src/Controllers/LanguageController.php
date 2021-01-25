@@ -15,7 +15,7 @@ use CMS\Traits\LogAgent;
 class LanguageController extends Controller
 {
     use LogAgent;
-    
+
     public function __construct()
     {
         $this->authorizeResource(Language::class);
@@ -28,10 +28,13 @@ class LanguageController extends Controller
      */
     public function index()
     {
-        $default_language = Language::where('status',1)->where('default',1)->first();
-        $active_languages = Language::where('status',1)->where('default','!=',1)->get();
-        $passive_languages = Language::where('status','!=',1)->get();
-        return view('cms::panel.language.index',compact('default_language','active_languages','passive_languages'));
+
+        $langs = Language::orderBy('default','desc')->orderBy('status','desc')->orderBy('name')->get();
+        $default_language = $langs->where('default',1)->first();
+       // $default_language = Language::where('status',1)->where('default',1)->first();
+       // $active_languages = Language::where('status',1)->where('default','!=',1)->get();
+       // $passive_languages = Language::where('status','!=',1)->get();
+        return view('cms::panel.language.n-index',compact('langs','default_language'));
     }
 
     /**
@@ -42,7 +45,6 @@ class LanguageController extends Controller
      */
     public function update(Request $request,Language $language)
     {
-        $old_default = Language::where("default",1)->first();
         $langs = Language::where("id" ,"!=",0);
         $langs->update(["status" => 0, "default" => 0]);
 
@@ -72,46 +74,32 @@ class LanguageController extends Controller
         }
 
         $this->createLog($language,Auth::user()->id,"U");
-
-
-//        dd($request->def_lang_id,$request->langs);
-//        $active_languages = Language::where('status',1)->get();
-//        foreach ($active_languages as $al)
-//        {
-//            if (!in_array($al->id,$request->act_langs))
-//            {
-//                $al->status = 0;
-//                $al->save();
-//            }
-//
-//        }
-//        $new_active_langs = Language::whereIn('id',$request->act_langs)->get();
-//        foreach ($new_active_langs as $nal)
-//        {
-//            $nal->status = 1;
-//            $nal->save();
-//        }
-//
-//        $default_language = Language::where('default',1)->first();
-//        if(!$default_language){
-//            $default_language = Language::find($request->def_lang_id);
-//            if($default_language){
-//                $default_language->default = 1;
-//                $default_language->save();
-//            }
-//
-//        }
-//
-//        if ($request->def_lang_id != $default_language->id)
-//        {
-//            $default_language->default = 0;
-//            $default_language->save();
-//            $new_default = Language::find($request->def_lang_id);
-//            $new_default->default = 1;
-//            $new_default->save();
-//        }
-
-
         return redirect()->route('languages.index');
+    }
+
+    public function updateList(Request $request)
+    {
+
+      $language = Language::find($request->id);
+      if($language->default)
+      {
+        return response()->json([
+            'Message' => 'Varsayılan dili kapatmaya çalıştınız',
+            'Status' => $language->status
+          ],403);
+      }
+      if($language->status)
+      {
+        $language->status = 0;
+      }else{
+        $language->status = 1;
+      }
+      $language->save();
+
+      return response()->json([
+          'Message' => 'Ok',
+          'Status' => $language->status
+        ],200);
+
     }
 }
