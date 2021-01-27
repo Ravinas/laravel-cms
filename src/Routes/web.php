@@ -11,6 +11,7 @@ Route::prefix('/panel')->middleware('auth')->group( function () {
     Route::resource('files' , 'FileController');
     Route::post('files/ajax','FileController@ajax')->name('file.ajax');
     Route::resource('languages' , 'LanguageController');
+    Route::post('languages/update/extensions' , 'LanguageController@extensions')->name('update.Extensions');
     Route::resource('categories','CategoryController');
     Route::post('category/order','CategoryController@order')->name('categories.order');
 

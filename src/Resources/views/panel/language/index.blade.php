@@ -6,20 +6,24 @@
 @section('content')
 <div class="main-content container-fluid">
     <div class="page-title">
-        <h3>Dil Seçimi</h3>
-        <p class="text-subtitle text-muted">Sitenizin varsayılan dilini ve diğer aktif dillerini düzenleyin.</p>
+        <h3>{{ trans('cms::panel.languages') }}</h3>
+        <p class="text-subtitle text-muted">{{ trans('cms::panel.lang_info') }}</p>
     </div>
     <section id="list-group-icons">
         <div class="row match-height">
             <div class="col-lg-12 col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Varsayılan Dil</h4>
+                        <h4 class="card-title">{{ trans('cms::panel.default_language') }}</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
+                            <p >
+                                {{ trans('cms::panel.def_lang_info') }} <span  style="color: #41B1F9;font-wariant:bold;">{!! $langs->default_language->name !!}</span>.
+                            </p>
                             <p>
-                                Sitenizde varsayılan olarak kullanılan dil <u style="color: #41B1F9;font-wariant:bold;">{!! $default_language->name !!}</u>.
+                                {{ trans('cms::panel.lagn_extensions') }}  <u class="extension_submit" style="color: #41B1F9;font-wariant:bold;cursor:pointer">{!! $langs->extensions["text"] !!}</u>.
+                                <input type="hidden" value="{!! $langs->extensions["key"] !!}" name="ext" class="ext">
                             </p>
                         </div>
                     </div>
@@ -28,19 +32,21 @@
             <div class="col-lg-12 col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Aktif Diller</h4>
+                        <h4 class="card-title">{{ trans('cms::panel.active_languages') }}</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
+                            <div class="table-responsive">
                             <p>
-                               Sitenizde aktif olmasını istediğini dilleri işaretleyiniz.
+                                {{ trans('cms::panel.mark_language') }}
                             </p>
-                            <table class='table table-striped display !important' id="myTable">
-                                <thead>
+                            <table class='table table-hover' id="myTable">
+                                <thead >
                                     <tr>
                                         <th>{!! trans('cms::panel.name') !!}</th>
                                         <th>{!! trans('cms::panel.slug') !!}</th>
                                         <th>{!! trans('cms::panel.status') !!}</th>
+                                        <th >{!! trans('cms::panel.default') !!}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -51,18 +57,23 @@
                                         @if ($loop->first)
                                         <td>
                                             <input type="hidden" value="false" name="hidden_id">
-                                            <span style="cursor: not-allowed;" id="{!! $lang->id !!}" class="{{ $lang->status ? 'badge bg-info' : 'badge bg-danger' }} default_language">{!! $lang->status ? 'Active' : 'Passive' !!}</span>
+                                            <span style="cursor: not-allowed;" id="{!! $lang->id !!}" class="{{ $lang->status ? 'btn icon btn-warning' : 'btn icon btn-danger' }} default_language"><i data-feather="globe"></i></span>
                                         </td>
                                         @else
                                         <td>
                                             <input type="hidden" value="{!! $lang->id !!}" name="hidden_id">
-                                            <span id="{!! $lang->id !!}" class="{{ $lang->status ? 'badge bg-success' : 'badge bg-danger' }} ajax_request" style="cursor: grab;">{!! $lang->status ? 'Active' : 'Passive' !!}</span>
+                                            <span id="{!! $lang->id !!}" class="{{ $lang->status ? 'btn icon btn-success' : 'btn icon btn-danger' }} ajax_request" style="cursor: pointer;">{!! $lang->status ? '<i data-feather="check-circle"></i>' : '<i data-feather="lock"></i>' !!}</span>
                                         </td>
                                         @endif
+                                        <td style="width: 1%;">
+                                            <input type="hidden" value="{!! $lang->id !!}" name="default_id">
+                                            <span  {!! $loop->first ? 'style="cursor: not-allowed;"' : '' !!} id="{!! $lang->id !!}"  class="btn icon {!! $loop->first ? 'btn-warning' : 'btn-info' !!} float-right">{!! $loop->first ? 'Varsayılan Dil' : '<i data-feather="globe"></i>' !!}</span>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -85,6 +96,7 @@
     <script type="text/javascript">
 
         $(document).ready( function () {
+            feather.replace();
 
         $('#myTable').DataTable( {
             "language": {
@@ -123,11 +135,13 @@
                     {
                         if(response.Status == 1)
                         {
-                            $('#'+id).removeClass().addClass( "badge bg-success" );
-                            $('#'+id).html("Active");
+                            $('#'+id).removeClass().addClass( "btn icon btn-success" );
+                            $('#'+id).html("<i data-feather='check-circle'></i>");
+                            feather.replace();
                         }else{
-                            $('#'+id).removeClass().addClass( "badge bg-danger" );
-                            $('#'+id).html("Passive");
+                            $('#'+id).removeClass().addClass( "btn icon btn-danger" );
+                            $('#'+id).html("<i data-feather='lock'></i>");
+                            feather.replace();
                         }
                     }else{
                         console.log(response.Message);
@@ -135,6 +149,30 @@
                 }
             });
         });
-    } );
+
+        $('.extension_submit').click(function(){
+                var choosen = $(this).next().val();
+                $.ajax({
+                    url:'{!! route('update.Extensions') !!}',
+                    method:'POST',
+                    type:'JSON',
+                    data:{choosen:choosen},
+                    success:function(response){
+                        if(response.Message == "Ok")
+                        {
+                            $('.extension_submit').html(response.Text);;
+                            if(response.Code == 1)
+                            {
+                                console.log("Girdi");
+                                $('.ext').val(0);
+                            }else{
+                                $('.ext').val(1);
+                            }
+                        }
+                    }
+                });
+        });
+
+    });
         </script>
 @endpush
