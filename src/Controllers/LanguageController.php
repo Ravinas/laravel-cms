@@ -16,9 +16,12 @@ class LanguageController extends Controller
 {
     use LogAgent;
 
+    protected $lang_extensions_visibility = [ 1 => "Open",  0 => "Close"];
+
     public function __construct()
     {
         $this->authorizeResource(Language::class);
+
     }
 
     /**
@@ -28,13 +31,18 @@ class LanguageController extends Controller
      */
     public function index()
     {
-
         $langs = Language::orderBy('default','desc')->orderBy('status','desc')->orderBy('name')->get();
-        $default_language = $langs->where('default',1)->first();
-       // $default_language = Language::where('status',1)->where('default',1)->first();
-       // $active_languages = Language::where('status',1)->where('default','!=',1)->get();
-       // $passive_languages = Language::where('status','!=',1)->get();
-        return view('cms::panel.language.n-index',compact('langs','default_language'));
+        $langs->default_language = $langs->where('default',1)->first();
+        $reverse_key = "1";
+        if(app()->showDefaultLanguageCode == "1")
+        {
+            $reverse_key = 0;
+        }
+        $langs->extensions = [
+            "key" => $reverse_key,
+            "text" => $this->lang_extensions_visibility[app()->showDefaultLanguageCode]
+        ];
+        return view('cms::panel.language.n-index',compact('langs'));
     }
 
     /**
@@ -45,36 +53,7 @@ class LanguageController extends Controller
      */
     public function update(Request $request,Language $language)
     {
-        $langs = Language::where("id" ,"!=",0);
-        $langs->update(["status" => 0, "default" => 0]);
 
-        if($request->def_lang_id){
-            $default = $langs->find($request->def_lang_id);
-            $default->status = 1;
-            $default->default = 1;
-            $default->save();
-        }
-        $langs = Language::where("id" ,"!=",0);
-        $actives = $langs->whereIn("id",$request->langs);
-        $active_langs = $actives;
-        $actives->update(["status" => 1]);
-
-        foreach($active_langs->get() as $lang){
-            // DİL KODU OLMAYAN TÜM URLLERE DİL KODU EKLE
-            PageDetail::where('lang_id',$lang->id)->where('url','NOT LIKE',$lang->code.'/%')->where('url','!=',$lang->code)->where('url','!=','/')->update(['url'=> DB::raw("CONCAT('".$lang->code."/', `url`)")]);
-            // dil kodu gözükmeyen dilin anasayfasını tr en şeklinde kaydet
-            PageDetail::where('lang_id',$lang->id)->where('url','/')->update(['url'=> $lang->code]);
-
-        }
-        if(!app()->showDefaultLanguageCode){
-            // DEFAULT DİLİN DİL KODU GÖZÜKMEYECEKSE DİL KODU OLAN TÜM URLLERİN İLK 3 KARAKTERİNİ TRAŞLA
-            PageDetail::where('lang_id',$default->id)->where('url','LIKE',$default->code.'/%')->update(['url'=> DB::raw("SUBSTRING(`url`, 4)")]);
-            // tr en şeklinde olan sayfaları / olarak kaydet
-            PageDetail::where('lang_id',$default->id)->where('url',$default->code)->update(['url'=> '/']);
-        }
-
-        $this->createLog($language,Auth::user()->id,"U");
-        return redirect()->route('languages.index');
     }
 
     public function updateList(Request $request)
@@ -100,6 +79,47 @@ class LanguageController extends Controller
           'Message' => 'Ok',
           'Status' => $language->status
         ],200);
+
+    }
+
+
+    public function changeDefaultLanguage(Request $request)
+    {
+        $default_language = Language::where('default',1)->get();
+
+    }
+
+    public function extensions(Request $request)
+    {
+
+        app()->showDefaultLanguageCode = $request->choosen;
+        $this->lang_extensions_visibility = [
+            "key" =>app()->showDefaultLanguageCode,
+            "text" => $this->lang_extensions_visibility[app()->showDefaultLanguageCode]
+        ];
+
+        if(app()->showDefaultLanguageCode)
+        {
+
+            PageDetail::where('lang_id',app()->defaultLanguage->id)->where('url','NOT LIKE',app()->defaultLanguage->code.'/%')->where('url','!=',app()->defaultLanguage->code)->where('url','!=','/')->update(['url'=> DB::raw("CONCAT('".app()->defaultLanguage->code."/', `url`)")]);
+            // dil kodu gözükmeyen dilin anasayfasını tr en şeklinde kaydet
+            PageDetail::where('lang_id',app()->defaultLanguage->id)->where('url','/')->update(['url'=> app()->defaultLanguage->code]);
+
+        }
+
+        if(!app()->showDefaultLanguageCode){
+
+            // DEFAULT DİLİN DİL KODU GÖZÜKMEYECEKSE DİL KODU OLAN TÜM URLLERİN İLK 3 KARAKTERİNİ TRAŞLA
+            PageDetail::where('lang_id',app()->defaultLanguage->id)->where('url','LIKE',app()->defaultLanguage->code.'/%')->update(['url'=> DB::raw("SUBSTRING(`url`, 4)")]);
+            // tr en şeklinde olan sayfaları / olarak kaydet
+            PageDetail::where('lang_id',app()->defaultLanguage->id)->where('url',app()->defaultLanguage->code)->update(['url'=> '/']);
+        }
+
+        return response()->json([
+            'Message' => 'Ok',
+            'Code' => $this->lang_extensions_visibility["key"],
+            'Text' => $this->lang_extensions_visibility["text"]
+          ],200);
 
     }
 }
