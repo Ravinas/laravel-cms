@@ -113,9 +113,6 @@ class MenuController extends Controller
         return response()->json([
             'response' => 'Ok'
         ]);
-
-      //  $this->createLog($menu,Auth::user()->id,"D");
-      //  return redirect()->route('menu.index');
     }
 
     public function storeMenuItem(Request $request)
@@ -134,12 +131,17 @@ class MenuController extends Controller
         return response()->json(['Message' => 'Ok'],200);
     }
 
-    public function destroyMenuItem($menuitem)
+    public function destroyMenuItem(Request $request)
     {
-        $item = MenuItem::where('id',$menuitem)->first();
+
+        $item = MenuItem::where('id',$request->menu)->with('children')->first();
+        if(!empty($item->children))
+        {
+            $this->allItemDelete($item->children);
+        }
         $item->delete();
         $this->createLog($item,Auth::user()->id,"D");
-        return redirect()->route('menu.index');
+        return response()->json(['Message'=>'Ok'],200);
     }
 
     public function editMenuitem(Request $request)
@@ -192,5 +194,19 @@ class MenuController extends Controller
         }
         $this->createLog($menu_item,Auth::user()->id,"U");
         return response(['Message' => 'Ok'],200);
+    }
+
+    public function allItemDelete($childs)
+    {
+        foreach($childs as $child)
+        {
+            if($child->children)
+            {
+                $child->delete();
+                return $this->allItemDelete($child->children);
+            }
+
+        }
+
     }
 }

@@ -1,9 +1,11 @@
 @extends('cms::panel.newinc.app')
 @section('content')
 <div class="main-content container-fluid">
-    <div class="page-title">
-        <h3>{!! Str::ucfirst($menu->text)  !!}</h3>
-        <p class="text-subtitle text-muted">{{ trans('cms::panel.menu_items_info') }}</p>
+    <div class="divider">
+        <div class="divider-text">{!! Str::ucfirst($menu->name)  !!}</div>
+    </div>
+    <div class="alert alert-secondary">
+        <i data-feather="info"></i>{{ trans('cms::panel.menu_items_info') }}
     </div>
     <section class="section">
         <div class="row mb-4">
@@ -11,8 +13,8 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class='card-heading p-1 pl-3 float-left'>{!! trans('cms::panel.items') !!}</h3>
-                        <button type="button" class="btn icon icon-left btn-primary float-right" data-toggle="modal" data-target="#inlineForm"><i data-feather="edit" ></i>{{ trans('cms::panel.add') }}</button>
-                        <button type="button" onclick="sendList()" class="btn icon icon-left btn-success float-right mr-2"><i data-feather="check-circle" ></i>{!! trans('cms::panel.save_changes') !!}</button>
+                        <button type="button" class="btn icon icon-left btn-primary float-right" data-toggle="modal" data-target="#inlineForm"><i data-feather="plus-circle" ></i>{{ trans('cms::panel.add') }}</button>
+                        <button type="button" id="send_list" class="btn icon icon-left btn-warning float-right mr-2" style="display: none"><i data-feather="check-circle" ></i>{!! trans('cms::panel.save_changes') !!}</button>
                         <div class="form-group">
                             <!--Modal -->
                             <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog"
@@ -30,7 +32,7 @@
                                     <div class="modal-body">
                                         <label>{{ trans('cms::panel.text') }}</label>
                                         <div class="form-group">
-                                            <input type="text" placeholder="{{ trans('panel.text') }}" autocomplete="none" class="form-control" name="text" required>
+                                            <input type="text" placeholder="{{ trans('cms::panel.text') }}" autocomplete="off" class="form-control" name="text" required>
                                         </div>
                                         <label>{{ trans('cms::panel.type') }}</label>
                                         <div class="form-group">
@@ -46,8 +48,12 @@
                                                 <option value="1">{{ trans('cms::panel.external') }}</option>
                                             </select>
                                         </div>
-                                        <label>Tip</label>
-                                        <div class="form-group">
+                                        <label class="external_div" style="display: none;">{!! trans('cms::panel.external_url') !!}</label>
+                                        <div class="form-group external_div" style="display: none;">
+                                            <input type="text" placeholder="" class="form-control" name="external" autocomplete="off"  id="external">
+                                        </div>
+                                        <label class="internal_div">{!! trans('cms::panel.url') !!}</label>
+                                        <div class="form-group internal_div">
                                             <select class="form-select" id="basicSelect" name="link">
                                                 @foreach($urls as $url)
                                                     <option value="{!! $url->url !!}">{!!  $url->url !!}</option>
@@ -90,26 +96,30 @@
                                     <form id="editform">
                                     <input type="hidden" id="edit_item_id" name="item_id" value="{!! $menu->id !!}">
                                     <div class="modal-body">
-                                        <label>Metin </label>
+                                        <label>{!! trans('cms::panel.text') !!}</label>
                                         <div class="form-group">
-                                            <input type="text" placeholder="Menüde Görünmesini İstediğiniz Metin (Örn: Hakkımızda)" class="form-control" name="edit_text" autocomplete="none" required id="edit_text">
+                                            <input type="text" placeholder="Menüde Görünmesini İstediğiniz Metin (Örn: Hakkımızda)" class="form-control" name="edit_text" autocomplete="off" required id="edit_text">
                                         </div>
-                                        <label>Tip</label>
+                                        <label>{!! trans('cms::panel.type') !!}</label>
                                         <div class="form-group">
                                             <select class="form-select" id="edit_type" name="edit_type">
                                                 <option value="1">{{ trans('cms::panel.single') }}</option>
                                                 <option value="2">{{ trans('cms::panel.dropdwon') }}</option>
                                             </select>
                                         </div>
-                                        <label>Bağlantı Tipi</label>
+                                        <label>{!! trans('cms::panel.link_type') !!}</label>
                                         <div class="form-group">
                                             <select class="form-select" id="edit_link_type" name="edit_link_type">
                                                 <option value="0">{{ trans('cms::panel.internal') }}</option>
                                                 <option value="1">{{ trans('cms::panel.external') }}</option>
                                             </select>
                                         </div>
-                                        <label>Bağlantı</label>
-                                        <div class="form-group">
+                                        <label class="external_div" style="display: none;">{!! trans('cms::panel.external_url') !!}</label>
+                                        <div class="form-group external_div" style="display: none;">
+                                            <input type="text" placeholder="" class="form-control" name="edit_external" autocomplete="off"  id="edit_external">
+                                        </div>
+                                        <label class="internal_div">{!! trans('cms::panel.url') !!}</label>
+                                        <div class="form-group internal_div">
                                             <select class="form-select" id="edit_link" name="edit_link">
                                                 @foreach($urls as $url)
                                                     <option value="{!! $url->url !!}">{!!  $url->url !!}</option>
@@ -149,7 +159,7 @@
                                     <div class="list-group-item d-flex justify-content-end align-items-center" style="{{ $item->parent_id == 0 ? 'border-color:#26c6da;color:black;' : 'background-color:#D1F8F8;' }}">
                                       <span class="mr-auto p-2">{!! Str::ucfirst($item->text)  !!}</span>
                                       <a href="#" class="btn icon btn-info ml-2 edit_item" data-id="{!! $item->id !!}"><i data-feather="plus-circle"></i></a>
-                                      <a href="{!! route('delete-item',['menuitem' => $item->id]) !!}" class="btn icon btn-danger ml-2 del" data-id="{!! $item->id !!}" ><i data-feather="delete"></i></a>
+                                      <a href="#" class="btn icon btn-danger ml-2 del" data-url="{!! route('delete-item') !!}" data-id="{!! $item->id !!}" ><i data-feather="delete"></i></a>
                                     </div>
                                     @if($item->children)
                                         @include('cms::panel.menu.item-children',['childs' => $item->children])
@@ -173,20 +183,35 @@
             handle: 'div',
             items: 'li',
             toleranceElement: '> div',
+            stop:function(){
+                $('#send_list').removeClass().addClass("btn icon icon-left btn-warning float-right mr-2");
+                $('#send_list').show();
+            }
         });
-        
-        function sendList(){
+        $('#send_list').click(function(){
             var serialized = $('ol.sortable').nestedSortable('serialize');
             $.ajax({
             url: "{{ route('menuajax') }}",
             method: "POST",
             data: {sort: serialized,_token: '{{csrf_token()}}'},
                 success: function(res) {
+                    $('#send_list').removeClass().addClass("btn icon icon-left btn-success float-right mr-2").html("Changes Saved").fadeOut(3000);
                     console.log("İşlem Başarılı");
                 }
             });
-        }
+        });
 
+        $('#edit_link_type').on('change',function(){
+            if($(this).val() == 0)
+            {
+                $('.external_div').hide();
+                $('.internal_div').show();
+            }else{
+                $('.external_div').show();
+                $('.internal_div').hide();
+            }
+
+        });
 
 
         $('#edit_post').click(function (e) {
@@ -253,13 +278,58 @@
              success:function (response) {
                 $('#edit_text').val(response.text);
                 $('#edit_link_type option[value='+response.link_type+']').attr('selected','selected');
+                if(response.link_type == 1)
+                {
+                    $('.external_div').html(response.external);
+                    $('.internal_div').hide();
+                }
                 $('#edit_type option[value='+response.type+']').attr('selected','selected');
-                $('#edit_link option[value='+response.url+']').attr('selected','selected');
+              //  $('#edit_link option[value='+response.url+']').attr('selected','selected');
                 $('#edit_item_id').val(item);
                 $('#editinlineForm').modal('toggle');
              }
          });
         });
+
+        $('.del').click(function(){
+            var csrf = "{!! csrf_token() !!}";
+            var id = $(this).attr("data");
+            var url =$(this).attr("data-url");
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': csrf
+                }
+            });
+            Swal.fire({
+                title: 'Bunu yapmak istediğinize emin misiniz?',
+                text: "Tüm alt elemanlarda silinecek!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Evet, silmek istiyorum!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url:url,
+                        method:'POST',
+                        dataType: "JSON",
+                        data: {
+                        "menu": id
+                        },
+                        success:function (response) {
+                            Swal.fire(
+                            'Silindi!',
+                            'Menü elemanı tamamen silindi.',
+                            'success'
+                            ).then(function(){
+                                location.reload();
+                            })
+                        }
+                    });
+                }
+                })
+        })
     });
   </script>
 @endpush
