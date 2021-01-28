@@ -148,6 +148,7 @@ class MenuController extends Controller
         $item = MenuItem::find($request->item_id);
         $item->text = $request->edit_text;
         $item->type = $request->edit_type;
+        $item->external =$request->edit_external ?? null;
         $item->link_type = $request->edit_link_type;
         $item->url =  $request->edit_link;
         $item->save();

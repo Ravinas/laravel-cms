@@ -5,34 +5,38 @@
 @endpush
 @section('content')
 <div class="main-content container-fluid">
-    <div class="page-title">
-        <h3>{{ trans('cms::panel.languages') }}</h3>
-        <p class="text-subtitle text-muted">{{ trans('cms::panel.lang_info') }}</p>
+
+    <div class="card">
+        <div class="card-header">
+            <div class="card-content">
+                <div class="card-body">
+                    <div class="divider">
+                        <div class="divider-text">{{ trans('cms::panel.languages') }}</div>
+                    </div>
+                    <div class="alert alert-secondary">
+                        <i data-feather="info"></i>{{ trans('cms::panel.lang_info') }}
+                    </div>
+                    <div class="alert alert-secondary">
+                        <i data-feather="globe"></i>{{ trans('cms::panel.default_language') }} {!! $langs->default_language->name !!}
+                    </div>
+                    <div class="alert alert-secondary">
+                        <i data-feather="eye"></i>{{ trans('cms::panel.lang_extensions') }}  <u class="extension_submit" style="font-wariant:bold;cursor:pointer">{!! $langs->extensions["text"] !!}</u>.
+                        <input type="hidden" value="{!! $langs->extensions["key"] !!}" name="ext" class="ext">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+
     <section id="list-group-icons">
         <div class="row match-height">
             <div class="col-lg-12 col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">{{ trans('cms::panel.default_language') }}</h4>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-body">
-                            <p >
-                                {{ trans('cms::panel.def_lang_info') }} <span  style="color: #41B1F9;font-wariant:bold;">{!! $langs->default_language->name !!}</span>.
-                            </p>
-                            <p>
-                                {{ trans('cms::panel.lagn_extensions') }}  <u class="extension_submit" style="color: #41B1F9;font-wariant:bold;cursor:pointer">{!! $langs->extensions["text"] !!}</u>.
-                                <input type="hidden" value="{!! $langs->extensions["key"] !!}" name="ext" class="ext">
-                            </p>
+                        <div class="divider">
+                            <div class="divider-text">{{ trans('cms::panel.lang_list') }}</div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-12 col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">{{ trans('cms::panel.active_languages') }}</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
@@ -67,7 +71,7 @@
                                         @endif
                                         <td style="width: 1%;">
                                             <input type="hidden" value="{!! $lang->id !!}" name="default_id">
-                                            <span  {!! $loop->first ? 'style="cursor: not-allowed;"' : '' !!} id="{!! $lang->id !!}"  class="btn icon {!! $loop->first ? 'btn-warning' : 'btn-info' !!} float-right">{!! $loop->first ? 'Varsayılan Dil' : '<i data-feather="globe"></i>' !!}</span>
+                                            <span  {!! $loop->first ? 'style="cursor: not-allowed;"' : '' !!} id="{!! $lang->id !!}"  class="btn icon {!! $loop->first ? 'btn-warning' : 'btn-primary' !!} float-right">{!! $loop->first ? 'Varsayılan Dil' : '<i data-feather="globe"></i>' !!}</span>
                                         </td>
                                     </tr>
                                     @endforeach
