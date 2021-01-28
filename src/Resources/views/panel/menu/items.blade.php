@@ -12,6 +12,7 @@
                     <div class="card-header">
                         <h3 class='card-heading p-1 pl-3 float-left'>{!! trans('cms::panel.items') !!}</h3>
                         <button type="button" class="btn icon icon-left btn-primary float-right" data-toggle="modal" data-target="#inlineForm"><i data-feather="edit" ></i>{{ trans('cms::panel.add') }}</button>
+                        <button type="button" onclick="sendList()" class="btn icon icon-left btn-success float-right mr-2"><i data-feather="check-circle" ></i>{!! trans('cms::panel.save_changes') !!}</button>
                         <div class="form-group">
                             <!--Modal -->
                             <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog"
@@ -172,11 +173,8 @@
             handle: 'div',
             items: 'li',
             toleranceElement: '> div',
-            stop:function(){
-                sendList();
-            }
         });
-
+        
         function sendList(){
             var serialized = $('ol.sortable').nestedSortable('serialize');
             $.ajax({

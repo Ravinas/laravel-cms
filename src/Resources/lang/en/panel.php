@@ -66,6 +66,7 @@ return [
     'add' => 'Add',
     'interaction' => 'Interaction',
     'settings' => 'Settings',
+    'save_changes' => 'Save Changes',
 
     // FORMS MEGA THREAD
     'forms' => 'Forms',
@@ -122,13 +123,15 @@ return [
     'edit_menu_item' => 'Edit menu item',
     'dropdown' => 'Dropdown',
     'single' => 'Single',
-    
+
 
     //Language
     'lang_info' => 'Edit your system default language and other active languages.',
     'def_lang_info' => 'Language used by default on your site',
     'mark_language' => 'Mark the languages you want to be active on your system.',
-    'lang_extensions' => 'Language extensions',
+    'lang_extensions' => 'Default Language Extensions',
+    'lang_list' => 'Language List',
+
 
     //Slider
     'slider' => 'Slider',
