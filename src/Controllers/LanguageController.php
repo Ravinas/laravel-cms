@@ -21,7 +21,6 @@ class LanguageController extends Controller
     public function __construct()
     {
         $this->authorizeResource(Language::class);
-
     }
 
     /**
@@ -83,9 +82,22 @@ class LanguageController extends Controller
     }
 
 
-    public function changeDefaultLanguage(Request $request)
+    public function changeDefault(Request $request)
     {
-        $default_language = Language::where('default',1)->get();
+
+        $old_default_language = Language::where('default',1)->first();
+        $old_default_language->default = 0;
+        $old_default_language->save();
+        $this->refactorUrl($old_default_language);
+        $default_language = Language::find($request->choosen);
+        $default_language->default = 1;
+        $default_language->status = 1;
+        $default_language->save();
+        $this->refactorUrl($default_language);
+
+        return response()->json([
+            'Message' => 'Ok'
+          ],200);
 
     }
 
@@ -93,33 +105,42 @@ class LanguageController extends Controller
     {
 
         app()->showDefaultLanguageCode = $request->choosen;
+        $this->refactorUrl(app()->defaultLanguage);
         $this->lang_extensions_visibility = [
             "key" =>app()->showDefaultLanguageCode,
             "text" => $this->lang_extensions_visibility[app()->showDefaultLanguageCode]
         ];
 
-        if(app()->showDefaultLanguageCode)
-        {
 
-            PageDetail::where('lang_id',app()->defaultLanguage->id)->where('url','NOT LIKE',app()->defaultLanguage->code.'/%')->where('url','!=',app()->defaultLanguage->code)->where('url','!=','/')->update(['url'=> DB::raw("CONCAT('".app()->defaultLanguage->code."/', `url`)")]);
-            // dil kodu gözükmeyen dilin anasayfasını tr en şeklinde kaydet
-            PageDetail::where('lang_id',app()->defaultLanguage->id)->where('url','/')->update(['url'=> app()->defaultLanguage->code]);
-
-        }
-
-        if(!app()->showDefaultLanguageCode){
-
-            // DEFAULT DİLİN DİL KODU GÖZÜKMEYECEKSE DİL KODU OLAN TÜM URLLERİN İLK 3 KARAKTERİNİ TRAŞLA
-            PageDetail::where('lang_id',app()->defaultLanguage->id)->where('url','LIKE',app()->defaultLanguage->code.'/%')->update(['url'=> DB::raw("SUBSTRING(`url`, 4)")]);
-            // tr en şeklinde olan sayfaları / olarak kaydet
-            PageDetail::where('lang_id',app()->defaultLanguage->id)->where('url',app()->defaultLanguage->code)->update(['url'=> '/']);
-        }
 
         return response()->json([
             'Message' => 'Ok',
             'Code' => $this->lang_extensions_visibility["key"],
             'Text' => $this->lang_extensions_visibility["text"]
           ],200);
+
+    }
+
+    public function refactorUrl($language)
+    {
+        if($language->default)
+        {
+            if(app()->showDefaultLanguageCode)
+            {
+
+                PageDetail::where('lang_id',$language->id)->where('url','NOT LIKE',$language->code.'/%')->where('url','!=',$language->code)->where('url','!=','/')->update(['url'=> DB::raw("CONCAT('".$language->code."/', `url`)")]);
+                PageDetail::where('lang_id',$language->id)->where('url','/')->update(['url'=> $language->code]);
+
+            }else{
+
+                PageDetail::where('lang_id',$language->id)->where('url','LIKE',$language->code.'/%')->update(['url'=> DB::raw("SUBSTRING(`url`, 4)")]);
+                PageDetail::where('lang_id',$language->id)->where('url',$language->code)->update(['url'=> '/']);
+            }
+        }else{
+                PageDetail::where('lang_id',$language->id)->where('url','NOT LIKE',$language->code.'/%')->where('url','!=',$language->code)->where('url','!=','/')->update(['url'=> DB::raw("CONCAT('".$language->code."/', `url`)")]);
+                PageDetail::where('lang_id',$language->id)->where('url','/')->update(['url'=> $language->code]);
+        }
+
 
     }
 }

@@ -71,7 +71,7 @@
                                         @endif
                                         <td style="width: 1%;">
                                             <input type="hidden" value="{!! $lang->id !!}" name="default_id">
-                                            <span  {!! $loop->first ? 'style="cursor: not-allowed;"' : '' !!} id="{!! $lang->id !!}"  class="btn icon {!! $loop->first ? 'btn-warning' : 'btn-primary' !!} float-right">{!! $loop->first ? 'Varsayılan Dil' : '<i data-feather="globe"></i>' !!}</span>
+                                            <span  {!! $loop->first ? 'style="cursor: not-allowed;"' : '' !!} id="{!! $lang->id !!}"  class="btn icon change_default {!! $loop->first ? 'btn-warning' : 'btn-primary' !!} float-right">{!! $loop->first ? 'Varsayılan Dil' : '<i data-feather="globe"></i>' !!}</span>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -81,6 +81,9 @@
                         </div>
                     </div>
                 </div>
+
+
+
             </div>
 
         </div>
@@ -100,6 +103,8 @@
     <script type="text/javascript">
 
         $(document).ready( function () {
+
+
             feather.replace();
 
         $('#myTable').DataTable( {
@@ -126,7 +131,7 @@
             }
         });
 
-        $('.ajax_request').click(function(e){
+        $('#myTable').on('click','.ajax_request',function(e){
             var id = $(this).prev().val();
             console.log(id);
             $.ajax({
@@ -167,12 +172,37 @@
                             $('.extension_submit').html(response.Text);;
                             if(response.Code == 1)
                             {
-                                console.log("Girdi");
                                 $('.ext').val(0);
+                                $('.toast-body').html('Uzantılar Açıldı');
+                                $('#myToast').toast('show');
                             }else{
                                 $('.ext').val(1);
+                                $('.toast-body').html('Uzantılar Kapatıldı');
+                                $('#myToast').toast('show');
                             }
                         }
+                    }
+                });
+        });
+
+        $('.change_default').click(function(){
+                var choosen = $(this).prev().val();
+                $.ajax({
+                    url:'{!! route('change.default') !!}',
+                    method:'POST',
+                    type:'JSON',
+                    data:{choosen:choosen},
+                    success:function(response){
+                        if(response.Message == "Ok")
+                        {
+                            $('.toast-body').html('Varsayılan dil başarıyla değiştirildi..');
+                            $('#myToast').toast('show');
+                            window.location.reload();
+                        }else{
+                            $('.toast-body').html('İşlem Başarısız');
+                            $('#myToast').toast('show');
+
+                            }
                     }
                 });
         });

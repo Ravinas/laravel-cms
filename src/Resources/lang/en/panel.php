@@ -67,6 +67,7 @@ return [
     'interaction' => 'Interaction',
     'settings' => 'Settings',
     'save_changes' => 'Save Changes',
+    'default' => 'Default',
 
     // FORMS MEGA THREAD
     'forms' => 'Forms',
