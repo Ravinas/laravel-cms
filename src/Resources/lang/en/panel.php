@@ -134,6 +134,12 @@ return [
     'lang_list' => 'Language List',
 
 
+
     //Slider
     'slider' => 'Slider',
+    'create_slider' => 'Create Slider',
+    'slider_name' => 'Slider Name',
+    'select_slider_language' => 'Select Slider Language',
+    'slider_dont_forgot' => 'When adding your sliders , don\'t forget to add them to all the languages you want to see.',
+    'edit_your_sliders' => 'Edit Your Sliders'
 ];
