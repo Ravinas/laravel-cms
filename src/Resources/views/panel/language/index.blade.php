@@ -71,7 +71,7 @@
                                         @endif
                                         <td style="width: 1%;">
                                             <input type="hidden" value="{!! $lang->id !!}" name="default_id">
-                                            <span  {!! $loop->first ? 'style="cursor: not-allowed;"' : '' !!} id="{!! $lang->id !!}"  class="btn icon change_default {!! $loop->first ? 'btn-warning' : 'btn-primary' !!} float-right">{!! $loop->first ? 'Varsayılan Dil' : '<i data-feather="globe"></i>' !!}</span>
+                                            <span  {!! $loop->first ? 'style="cursor: not-allowed;"' : '' !!} id="{!! $lang->id !!}"  class="btn icon change_default {!! $loop->first ? 'btn-warning' : 'btn-primary' !!} float-right">{!! $loop->first ? 'Varsayılan' : '<i data-feather="globe"></i>' !!}</span>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -80,12 +80,9 @@
                         </div>
                         </div>
                     </div>
+
                 </div>
-
-
-
             </div>
-
         </div>
     </section>
 </div>
@@ -146,11 +143,15 @@
                         {
                             $('#'+id).removeClass().addClass( "btn icon btn-success" );
                             $('#'+id).html("<i data-feather='check-circle'></i>");
+                            $('.toast-body').html('Dil aktif/pasif işlemi başarılı.');
+                            $('#myToast').toast('show');
                             feather.replace();
                         }else{
                             $('#'+id).removeClass().addClass( "btn icon btn-danger" );
                             $('#'+id).html("<i data-feather='lock'></i>");
                             feather.replace();
+                            $('.toast-body').html('Bir sorun oluştu.');
+                            $('#myToast').toast('show');
                         }
                     }else{
                         console.log(response.Message);
