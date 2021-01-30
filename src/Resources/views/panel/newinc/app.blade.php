@@ -19,6 +19,7 @@
         <div id="main">
             @include('cms::panel.newinc.header')
             @yield('content')
+            @include('cms::panel.newinc.notification')
             @include('cms::panel.newinc.footer')
         </div>
     </div>
