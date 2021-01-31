@@ -22,7 +22,7 @@ class SliderController extends Controller
     {
         $lang = Language::where('status',1)->get();
         $slider = Slider::all();
-        return view('cms::panel.slider.new-index',compact('slider','lang'));
+        return view('cms::panel.slider.index',compact('slider','lang'));
     }
 
     /**
