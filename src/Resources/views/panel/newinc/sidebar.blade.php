@@ -5,7 +5,7 @@
     <div class="sidebar-menu">
         <ul class="menu">
                 @if(Auth::user()->hasModulePermission(CONTENT,'R'))
-                <li class='sidebar-title'>{{ trans('panel.content') }}</li>
+                <li class='sidebar-title'>{{ trans('cms::panel.content') }}</li>
                 <li class="sidebar-item {{ request()->routeIs('menu*') ? 'active' : '' }}">
                     <a href="{!! route('menu.index') !!}" class='sidebar-link'>
                         <i data-feather="menu" width="20"></i>
@@ -31,7 +31,7 @@
                     </a>
                 </li>
                 @endif
-                <li class='sidebar-title'>{{ trans('panel.interaction') }}</li>
+                <li class='sidebar-title'>{{ trans('cms::panel.interaction') }}</li>
                 @if(Auth::user()->hasModulePermission(FORM,'R'))
                 <li class="sidebar-item {{ request()->routeIs('forms*') ? 'active' : '' }}">
                     <a href="{!! route('forms.index') !!}" class='sidebar-link'>
@@ -48,7 +48,7 @@
                     </a>
                 </li>
                 @endif
-                <li class='sidebar-title'>{{ trans('roles.index') }} & {{ trans('panel.roles') }}</li>
+                <li class='sidebar-title'>{{ trans('cms::panel.roles') }} & {{ trans('panel.roles') }}</li>
                 @if(Auth::user()->hasModulePermission(USER,'R'))
                 <li class="sidebar-item {{ request()->routeIs('pages*') ? 'active' : '' }}">
                     <a href="{!! route('roles.index') !!}" class='sidebar-link'>
@@ -66,7 +66,7 @@
                 </li>
                 @endif
 
-                <li class='sidebar-title'>{{ trans('languages.index') }}</li>
+                <li class='sidebar-title'>{{ trans('cms::panel.settings') }}</li>
                 @if(Auth::user()->hasModulePermission(LANGUAGE,'R'))
                 <li class="sidebar-item {{ request()->routeIs('languages*') ? 'active' : '' }}">
                     <a href="{!! route('languages.index') !!}" class='sidebar-link'>

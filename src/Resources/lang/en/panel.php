@@ -141,5 +141,6 @@ return [
     'slider_name' => 'Slider Name',
     'select_slider_language' => 'Select Slider Language',
     'slider_dont_forgot' => 'When adding your sliders , don\'t forget to add them to all the languages you want to see.',
-    'edit_your_sliders' => 'Edit Your Sliders'
+    'edit_your_sliders' => 'Edit Your Sliders',
+    'slider_items_info' => 'In this section, you can add, delete and order slider images.'
 ];

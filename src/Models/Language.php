@@ -15,4 +15,10 @@ class Language extends Model
 
     }
 
+    public function slider(){
+        
+        return $this->hasMany(Slider::class,'lang_id');
+
+    }
+
 }
