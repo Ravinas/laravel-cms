@@ -46,9 +46,9 @@
             <li class="dropdown">
                 <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                     <div class="avatar mr-1">
-                        <img src="{!! asset('vendor/cms/yeni/images/avatar/avatar-s-1.png') !!}" alt="" srcset="">
+                        <img src="{!! asset('vendor/cms/images/turkey_flag.png') !!}" alt="" srcset="">
                     </div>
-                    <div class="d-none d-md-block d-lg-inline-block">Hi, Saugi</div>
+                    <div class="d-none d-md-block d-lg-inline-block">{!! Auth::user()->email !!}</div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>

@@ -82,7 +82,7 @@ class SliderController extends Controller
     public function edit(Slider $slider)
     {
         $images = SliderItems::where('slider_id',$slider->id)->get();
-        return view('cms::panel.slider.new-images',compact('images','slider'));
+        return view('cms::panel.slider.images',compact('images','slider'));
     }
 
     /**
