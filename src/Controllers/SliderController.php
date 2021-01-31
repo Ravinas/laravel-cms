@@ -22,7 +22,7 @@ class SliderController extends Controller
     {
         $lang = Language::where('status',1)->get();
         $slider = Slider::all();
-        return view('cms::panel.slider.index',compact('slider','lang'));
+        return view('cms::panel.slider.new-index',compact('slider','lang'));
     }
 
     /**
@@ -43,14 +43,22 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
-        $slider = Slider::firstOrCreate(
-            ['name' => $request->name,
-              'lang_id' => $request->lang,
-                'status' => 1,
-                'slug' => Str::slug($request->name,'-')
-                ]
-        );
-        $this->createLog(Slider::class,Auth::user()->id,"C");
+        $check_name = Slider::where('name',$request->name)->first();
+        if($check_name)
+        {
+            return response()->json([
+                'Message'=>'Error',
+                'Error' => 'Bu isimde bir slider zaten var!'
+            ],200);
+        }
+
+        $slider = new Slider();
+        $slider->name = $request->name;
+        $slider->lang_id = $request->lang;
+        $slider->status = 1;
+        $slider->slug = Str::slug($request->name,'-');
+        $slider->save();
+        $this->createLog($slider,Auth::user()->id,"C");
         return response()->json(['Message'=>'Ok'],200);
     }
 
@@ -74,7 +82,7 @@ class SliderController extends Controller
     public function edit(Slider $slider)
     {
         $images = SliderItems::where('slider_id',$slider->id)->get();
-        return view('cms::panel.slider.images',compact('images','slider'));
+        return view('cms::panel.slider.new-images',compact('images','slider'));
     }
 
     /**
@@ -99,26 +107,22 @@ class SliderController extends Controller
     {
         $slider->delete();
         $this->createLog($slider,Auth::user()->id,"D");
+        return response()->json(['Message'=>'Ok'],200);
     }
 
     public function addImage(Request $request)
     {
-        $slider_items = new SliderItems();
-        $order = SliderItems::max('order');
-        if ($order)
-        {
-            $slider_items->order = $order+1;
-        }else{
-            $slider_items->order = 1;
-        }
-        $slider_items->slider_id = $request->slider;
-        $slider_items->status = 1;
-        $slider_items->filepath = $request->filepath;
-        $slider_items->general_text = $request->general_text;
-        $slider_items->sub_text = $request->sub_text;
-        $slider_items->sub_text2 = $request->sub_text2;
-        $slider_items->save();
-        $this->createLog($slider_items,Auth::user()->id,"C");
+        $item = new SliderItems();
+        $item->slider_id = $request->slider;
+        $item->status = 1;
+        $item->order = 0;
+        $item->filepath = $request->filepath ?? 0;
+        $item->general_text = $request->general_text;
+        $item->sub_text = $request->sub_text;
+        $item->sub_text2  = $request->sub_text2;
+        $item->save();
+
+        $this->createLog($item,Auth::user()->id,"C");
 
         return response()->json(['Message'=>'Ok']);
     }
@@ -137,43 +141,13 @@ class SliderController extends Controller
         {
             return response()->json(['Message' => 'Ok','Slider' => $slider_item],200);
         }
-
     }
 
     public function editImage(Request $request)
     {
-
         $item = SliderItems::find($request->data["id"]);
-        $order = SliderItems::max('order');
-        if ($request->data["order"] > $order)
-        {
-            $item->order = $order+1;
-        }else{
-            if ($request->data["order"] < 1)
-            {
-                $others = SliderItems::all();
-                $item->order = 1;
-                if ($others)
-                {
-                    foreach ($others as $other)
-                    {
-                        $other->order = $other->order + 1;
-                        $other->save();
-                    }
-                }
-            }else
-            {
-                $item->order = $request->data["order"];
-                $others_order = SliderItems::where('order','>=',$request->data["order"])->get();
-                foreach($others_order as $o)
-                {
-                    $o->order = $o->order + 1;
-                    $o->save();
-                }
-            }
-        }
         $item->status = 1;
-        $item->filepath = $request->data["filepath"];
+        $item->filepath = $request->data["filepath"] ?? 0;
         $item->general_text = $request->data["general_text"];
         $item->sub_text = $request->data["sub_text"];
         $item->sub_text2 = $request->data["sub_text2"];
@@ -181,6 +155,22 @@ class SliderController extends Controller
         $this->createLog($item,Auth::user()->id,"U");
 
         return response()->json(['Message'=>'Ok']);
+    }
+
+    public function sortImage(Request $request)
+    {
+        $sort = $request->sort;
+        parse_str($sort,$arr);
+        $order = 1;
+        foreach($arr['sliderItem'] as $id => $parent_id)
+        {
+            $slider_item = SliderItems::where('id',$id)->first();
+            $slider_item->order = $order;
+            $slider_item->save();
+            $order++;
+        }
+        $this->createLog($slider_item,Auth::user()->id,"U");
+        return response(['Message' => 'Ok'],200);
     }
 
 }

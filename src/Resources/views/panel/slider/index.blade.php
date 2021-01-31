@@ -62,7 +62,7 @@
                 <div class="modal-body">
                     <label>{{ trans('cms::panel.slider_name') }} </label>
                     <div class="form-group">
-                    <input type="text" placeholder="" class="form-control" name="name">
+                    <input type="text" placeholder="" class="form-control" name="name" autocomplete="none">
                     </div>
                     <label>{{ trans('cms::panel.select_slider_language') }} </label>
                     <div class="form-group">

@@ -48,6 +48,7 @@ Route::prefix('/panel')->middleware('auth')->group( function () {
     Route::post('slider/delete-image','SliderController@deleteImage')->name('delimage');
     Route::post('slider/get-slider-image','SliderController@getSliderImage')->name('getSliderImage');
     Route::post('slider/edit-image','SliderController@editImage')->name('editImage');
+    Route::post('slider/sort-image','SliderController@sortImage')->name('sortImage');
     //Menu
     Route::resource('menu', 'MenuController');
     Route::post('menu/ajax','MenuController@ajax')->name('menuajax');
