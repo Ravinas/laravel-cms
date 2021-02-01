@@ -99,8 +99,8 @@ return [
     'message_message' => 'İletiler',
 
     //Categories
-    'categories' => 'Katagoriler',
-    'category_name' => 'Katagori Adı',
+    'categories' => 'Kategoriler',
+    'category_name' => 'Kategori Adı',
     'select_file' => "Dosya seçin",
     'confirm_text' => 'Emin misiniz?',
 

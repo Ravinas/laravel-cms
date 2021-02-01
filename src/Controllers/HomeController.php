@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use CMS\Models\Messages;
 use Auth;
 use CMS\Models\Message;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session
 
 class HomeController extends Controller
 {
@@ -31,7 +33,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if($request->get('language'))
+        {
+            Session::put('locale',$request->get('language'));
 
+        }
         $logs = $this->getLogs();
         $messages = Message::where('read',0)->paginate(5);
         return view('cms::panel.index',compact('messages','logs'));
