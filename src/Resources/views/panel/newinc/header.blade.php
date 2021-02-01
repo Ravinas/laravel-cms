@@ -44,18 +44,29 @@
                 </div>
             </li>
             <li class="dropdown">
-                <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                <a href="" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                     <div class="avatar mr-1">
-                        <img src="{!! asset('vendor/cms/images/turkey_flag.png') !!}" alt="" srcset="">
+                        @if (app()->currentLocale() == "tr")
+                            <img src="{!! asset('vendor/cms/images/turkey_flag.png') !!}" alt="" srcset="">
+                        @else
+                             <img src="{!! asset('vendor/cms/images/united-kingdom-flag.png') !!}" alt="" srcset="">
+                        @endif
                     </div>
                     <div class="d-none d-md-block d-lg-inline-block">{!! Auth::user()->email !!}</div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>
-                    <a class="dropdown-item active" href="#"><i data-feather="mail"></i> Messages</a>
-                    <a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
+                    <a class="dropdown-item language" href=" {!! route('panel',['language' => 'tr']) !!}">
+                        <div class="avatar mr-1 ">
+                            <img src="{!! asset('vendor/cms/images/turkey_flag.png') !!}" alt="" srcset="">
+                        </div>
+                        Türkçe
+                    </a>
+                    <a class="dropdown-item language" href="{!! route('panel',['language' => 'en']) !!}">
+                        <div class="avatar mr-1">
+                            <img src="{!! asset('vendor/cms/images/united-kingdom-flag.png') !!}" alt="" srcset="">
+                        </div>
+                        English
+                    </a>
                 </div>
             </li>
         </ul>

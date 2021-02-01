@@ -2,6 +2,8 @@
 
 namespace CMS\Providers;
 
+use Illuminate\Routing\Router;
+use CMS\Http\Middleware\Localization;
 use CMS\Commands\Install;
 use CMS\Commands\Seed;
 use CMS\Models\Language;
@@ -50,6 +52,9 @@ class CMS extends ServiceProvider
                 });
         }
 
+        $router = $this->app->make(Router::class);
+        $router->pushMiddlewareToGroup('web',Localization::class);
+        
         app()->setLocale('tr');
         if ($this->app->runningInConsole()) {
             $this->commands([
