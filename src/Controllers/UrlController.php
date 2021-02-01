@@ -69,8 +69,7 @@ class UrlController extends Controller
             if($homepage){
                 return redirect($homepage->url);
             } else {
-                $anypage = PageDetail::where('lang_id',app()->currentLanguage->id)->where('status',1)->first();
-                return redirect($anypage->url);
+                return view('cms::errors.illustrated-layout');
             }
 
         }
