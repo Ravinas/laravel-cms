@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="robots" content="noindex">
 
         <title>@yield('title')</title>
 
@@ -461,7 +462,7 @@
             <div class="w-full md:w-1/2 bg-white flex items-center justify-center">
                 <div class="max-w-sm m-8">
                     <div class="text-black text-5xl md:text-15xl font-black">
-                        @yield('code', __('Oh no'))
+                        @yield('code', __('PRIME Kurulum Başarılı'))
                     </div>
 
                     <div class="w-16 h-1 bg-purple-light my-3 md:my-6"></div>
@@ -470,9 +471,9 @@
                         @yield('message')
                     </p>
 
-                    <a href="{{ app('router')->has('home') ? route('home') : url('/') }}">
+                    <a href="#">
                         <button class="bg-transparent text-grey-darkest font-bold uppercase tracking-wide py-3 px-6 border-2 border-grey-light hover:border-grey rounded-lg">
-                            {{ __('Go Home') }}
+                            {{ __('Anasayfa ayarı yapıldığında kurulum tamamlanacak.') }}
                         </button>
                     </a>
                 </div>

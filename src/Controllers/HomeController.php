@@ -10,8 +10,7 @@ use Illuminate\Http\Request;
 use CMS\Models\Messages;
 use Auth;
 use CMS\Models\Message;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Session
+
 
 class HomeController extends Controller
 {
