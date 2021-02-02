@@ -105,9 +105,10 @@ class SliderController extends Controller
      */
     public function destroy(Slider $slider)
     {
-        $slider->delete();
-        $this->createLog($slider,Auth::user()->id,"D");
-        return response()->json(['Message'=>'Ok'],200);
+        SliderItems::where('id',$request->image)->delete();
+        $deleted_item = SliderItems::withTrashed()->where('id',$request->image)->first();
+        $this->createLog($deleted_item,Auth::user()->id,"D");
+        return response()->json(['Message' => 'Ok'],200);
     }
 
     public function addImage(Request $request)

@@ -31,7 +31,7 @@
                                         </span>
                                         <span class="mr-auto">{{ Str::ucfirst($image->general_text)  }}</span>
                                       <button class="btn icon btn-info ml-2 edit_image" data-id="{!! $image->id !!}" data-toggle="modal" data-target="#edit_modal"><i data-feather="edit" ></i></button>
-                                      <a href="#" class="btn icon btn-danger ml-2 del" data-url="{!! route('delete-item') !!}" data-id="{!! $image->id !!}" ><i data-feather="delete"></i></a>
+                                      <a href="#" class="btn icon btn-danger ml-2 del" data-url="{!! route('delimage') !!}" data-id="{!! $image->id !!}" ><i data-feather="delete"></i></a>
                                     </div>
                                 </li>
                                 @endforeach
@@ -72,7 +72,7 @@
                 <div class="form-group">
                     <input type="text" class="form-control" autocomplete="off" name="sub_text2"/>
                 </div>
-                {{-- <label>Image</label>
+                <label>Image</label>
                 <div class="form-group">
                 <div class="input-group">
                 <span class="input-group-btn">
@@ -83,7 +83,7 @@
                     <input id="thumbnail" class="form-control" type="text" name="filepath">
                 </div>
                 <img id="holder" style="margin-top:15px;max-height:100px;">
-                </div> --}}
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary ml-1" data-dismiss="modal">
@@ -123,18 +123,18 @@
                 <div class="form-group">
                     <input type="text" class="form-control edit_sub_text2" autocomplete="off" name="edit_sub_text2"/>
                 </div>
-                {{-- <label>Image</label>
+                <label>Image</label>
                 <div class="form-group">
                 <div class="input-group">
                 <span class="input-group-btn">
-                    <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-success">
+                    <a id="lfm2" data-input="thumbnail2" data-preview="holder2" class="btn btn-success">
                     <i class="fa fa-picture-o"></i> Choose
                     </a>
                 </span>
-                    <input id="thumbnail" class="form-control" type="text" name="filepath">
+                    <input id="thumbnail2" class="form-control edit_filepath" type="text" name="filepath">
                 </div>
-                <img id="holder" style="margin-top:15px;max-height:100px;">
-                </div> --}}
+                <img id="holder2" style="margin-top:15px;max-height:100px;">
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary ml-1" data-dismiss="modal">
@@ -152,6 +152,9 @@
   <script src="{!! asset('vendor/cms/js/jquery.mjs.nestedSortable.js') !!}"></script>
   <script>
   $(document).ready(function(){
+
+    $('#lfm').filemanager('image');
+    $('#lfm2').filemanager('image');
 
             var csrf = "{!! csrf_token() !!}";
             $.ajaxSetup({
@@ -206,8 +209,11 @@
                             title: 'Done!',
                             text: 'Değişiklikler başarıyla kaydedildi!',
                             icon: 'success',
-                            confirmButtonText: 'Teşekkürler'
+                            confirmButtonText: 'Teşekkürler',
+                        }).then((result)  => {
+                            window.location.reload(true);
                         });
+
                     }
                 }
             });
@@ -244,18 +250,18 @@
                    $('.edit_general_text').val(response.Slider.general_text);
                    $('.edit_sub_text').val(response.Slider.sub_text);
                    $('.edit_sub_text2').val(response.Slider.sub_text2);
-                   $('.edit_filepath').val(response.Slider.filepath);
+                   $('#thumbnail2').val(response.Slider.filepath);
                }
             });
         });
 
         $('.del').click(function(){
-            var id = $(this).attr("data");
+            var id = $(this).attr("data-id");
             var url =$(this).attr("data-url");
 
             Swal.fire({
                 title: 'Bunu yapmak istediğinize emin misiniz?',
-                text: "Tüm alt elemanlarda silinecek!",
+                text: "Resim sliderdan silinecek!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -268,12 +274,12 @@
                         method:'POST',
                         dataType: "JSON",
                         data: {
-                        "menu": id
+                        "image": id
                         },
                         success:function (response) {
                             Swal.fire(
-                            'Silindi!',
-                            'Menü elemanı tamamen silindi.',
+                            'Başarıyla Silindi!',
+                            'Slider silindi.',
                             'success'
                             ).then(function(){
                                 location.reload();

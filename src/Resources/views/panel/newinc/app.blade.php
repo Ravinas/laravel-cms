@@ -19,7 +19,7 @@
         <div id="main">
             @include('cms::panel.newinc.header')
             @yield('content')
-            @include('cms::panel.newinc.notification')
+        
             @include('cms::panel.newinc.footer')
         </div>
     </div>
@@ -31,6 +31,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="{!! asset('/vendor/laravel-filemanager/js/stand-alone-button.js') !!}"></script>
     @stack('js')
 </body>
 </html>
