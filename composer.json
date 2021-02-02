@@ -1,11 +1,16 @@
 {
     "name": "revise/prime-cms",
-    "type": "project",
+    "type": "package",
     "description": "Laravel Based CMS",
-    "authors": [
+    "authors": [{
+            "name": "Aras Şanıvar",
+            "email": "dev.arassanivar@gmail.com",
+            "role": "Developer"
+        },
         {
-            "name": "Aras Şanıvar , Tevfik Mert Çağıran",
-            "email": "dev.arassanivar@gmail.com"
+            "name": "Tevfik Mert Çağıran",
+            "email": "tmertc@gmail.com",
+            "role": "Developer"
         }
     ],
     "keywords": [
@@ -16,10 +21,11 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5|^8.0",
+        "unisharp/laravel-filemanager": "2.2.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": ">=1.0",
         "google/apiclient": "^2.0",
-        "guzzlehttp/guzzle": ">=6.3",
+        "guzzlehttp/guzzle": "6.3",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0"
