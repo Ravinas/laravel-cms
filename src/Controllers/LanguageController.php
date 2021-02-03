@@ -41,7 +41,7 @@ class LanguageController extends Controller
             "key" => $reverse_key,
             "text" => $this->lang_extensions_visibility[app()->showDefaultLanguageCode]
         ];
-        return view('cms::panel.language.n-index',compact('langs'));
+        return view('cms::panel.language.index',compact('langs'));
     }
 
     /**
