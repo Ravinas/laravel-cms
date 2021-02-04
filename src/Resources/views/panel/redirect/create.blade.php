@@ -26,31 +26,32 @@
                                     @csrf
                                     <div class="form-group">
                                         <label>{!! trans('cms::panel.redirects_from') !!}</label>
-                                        <input type="text" class="form-control" id="from" name="from"  value="{!! old('from') !!}">
+                                        <input type="text" class="form-control shadow-sm" id="from" name="from"  value="{!! old('from') !!}">
                                         @include('cms::panel.inc.form_error',['input_name' => 'from'])
                                     </div>
                                     <div class="form-group">
                                         <label>{!! trans('cms::panel.redirects_to') !!}</label>
-                                        <input type="text" class="form-control" id="to" name="to"  value="{!! old('to') !!}">
+                                        <input type="text" class="form-control shadow-sm" id="to" name="to"  value="{!! old('to') !!}">
                                         @include('cms::panel.inc.form_error',['input_name' => 'to'])
                                     </div>
                                     <div class="form-group">
                                         <label>{!! trans('cms::panel.redirects_code') !!}</label>
-                                        <input type="text" class="form-control" id="code" name="code"  value="{!! old('code') !!}">
+                                        <input type="text" class="form-control shadow-sm" id="code" name="code"  value="{!! old('code') !!}">
                                         @include('cms::panel.inc.form_error',['input_name' => 'code'])
                                     </div>
                                     <div class="form-group">
                                         <label>{!! trans('cms::panel.redirects_status') !!}</label>
                                         <div>
-                                            <select class="custom-select custom-select-lg form-control" name="status">
+                                            <select class="custom-select custom-select-lg form-control shadow-sm" name="status">
                                                 <option value="1" >{!! trans('cms::panel.active') !!}</option>
                                                 <option value="0" >{!! trans('cms::panel.passive') !!}</option>
                                             </select>
                                         </div>
                                         @include('cms::panel.inc.form_error',['input_name' => 'status'])
                                     </div>
+                                    <hr>
                                     <div class="form-group page-date">
-                                        <input type="submit" class="form-control btn-primary col-3" id="submit" value="{!! trans('cms::panel.redirects_save') !!}">
+                                        <input type="submit" class="form-control btn-primary shadow-sm" id="submit" value="{!! trans('cms::panel.redirects_save') !!}">
                                     </div>
                                 </form>
                             </div>
