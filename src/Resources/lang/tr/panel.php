@@ -173,12 +173,32 @@ return [
 
     //Metas
 
-    'metas_title' => 'Meta Values',
-    'metas_info' => 'Meta descriptions and keywords for all pages on the website can be edited through this one page to achieve better SEO. Change the text and click on an empty place to save it automatically.',
-    'metas_list' => 'Meta values list',
-    'metas_url' => 'URL of the page',
-    'metas_name' => 'Page Title',
-    'metas_description' => 'Page Description',
-    'metas_keywords' => 'Page Keywords',
-    'metas_robots' => 'Robots allowed?',
+    'metas_title' => 'Meta değerleri',
+    'metas_info' => 'Websitenizdeki tüm sayfalara ait Açıklama ve Anahtar Kelimeler alanları buradan düzenlenebilir, daha iyi SEO sonuçları ve sayfa görünürlüğü için önemlidir. İstediğiniz alanı değiştirip sayfada boş bir yere tıkladığınızda otomatik olarak kaydedilecektir.',
+    'metas_list' => 'Meta değerleri listesi',
+    'metas_url' => 'Sayfa bağlantısı',
+    'metas_name' => 'Sayfanın başlığı',
+    'metas_description' => 'Açıklama',
+    'metas_keywords' => 'Anahtar kelimeler',
+    'metas_robots' => 'Sayfa indekslensin mi?',
+
+
+    // Users
+
+    'users_id' => 'ID',
+    'users_info' => 'Websitenizin paneline erişebilecek kullanıcılar oluşturabilir, farklı roller atayarak görebileceği/düzenleyebileceği sayfa ve modülleri belirleyebilirsiniz.',
+    'users_list' => 'Kullanıcı Listesi',
+    'users_create' => 'Kullanıcı oluştur',
+    'users_role' => 'Kullanıcı rolü',
+    'users_selectrole' => 'Kullanıcı rolü seçiniz',
+    'users_name' => 'Adı',
+    'users_email' => 'Email hesabı',
+    'users_password' => 'Şifre',
+    'users_password_confirmation' => 'Şifre onaylaması (tekrar)',
+    'users_action' => 'Aksiyon',
+    'users_edit' => 'Kullanıcı Düzenle',
+    'users_save' => 'Kullanıcıyı Kaydet',
+    'users_editinfo' => 'Düzenleme yaparken kullanıcı şifresini değiştirmek istemiyorsanız boş bırakmanız yeterlidir. Eğer şifreyi değiştirmek isterseniz şifre ve şifre onaylaması olmak üzere iki defa girmeniz ve kayıt etmeniz gerekmektedir.',
+    'users_createinfo' => 'Kullanıcının paneldeki yetkisi, görebileceği, düzenleyeceği sayfalar ve modülleri kullanıcı rolü seçerek belirleyebilirseniz. Yetkilendirme kişilere özel değil rollere özel olarak belirlenir.',
+
 ];

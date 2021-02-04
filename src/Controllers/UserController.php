@@ -39,7 +39,6 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::where('id' , '>', 1)->get();
-        $this->createLog($roles,Auth::user()->id,"C");
         return view('cms::panel.user.create',compact('roles'));
     }
 
@@ -69,7 +68,7 @@ class UserController extends Controller
             $user->role_id = $request->post('role');
             $user->password = Hash::make($request->post('password'));
             $user->save();
-            $this->createLog($user,Auth::user()->id,"U");
+            $this->createLog($user,Auth::user()->id,"C");
             return redirect()->route('users.index')->with(['type' => 'success', 'message' => 'form_created']);
         }
     }

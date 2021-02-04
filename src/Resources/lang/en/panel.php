@@ -174,4 +174,16 @@ return [
     'sub_page_icon' => 'Click on this icon to see sub-pages.',
 
 
+    //Metas
+
+    'metas_title' => 'Meta Values',
+    'metas_info' => 'Meta descriptions and keywords for all pages on the website can be edited through this one page to achieve better SEO. Change the text and click on an empty place to save it automatically.',
+    'metas_list' => 'Meta values list',
+    'metas_url' => 'URL of the page',
+    'metas_name' => 'Page Title',
+    'metas_description' => 'Page Description',
+    'metas_keywords' => 'Page Keywords',
+    'metas_robots' => 'Robots allowed?',
+
+
 ];
