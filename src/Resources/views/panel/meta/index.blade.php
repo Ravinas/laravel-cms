@@ -1,16 +1,19 @@
-@extends('cms::panel.inc.app')
+@extends('cms::panel.newinc.app')
 @push('css')
-    <style>
-        tbody{
-            font-size:14px;
-        }
-        input{
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
 
-        }
-    </style>
 @endpush
 
 @push('js')
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+    <script>
+
+        $(document).ready( function () {
+            $('#myTable').DataTable();
+        } );
+    </script>
+
     <script>
         $('.description, .keywords, .robots').on('change',function () {
             var description = $('#description'+$(this).data('id')).val();
@@ -44,47 +47,64 @@
         })
     </script>
 @endpush
+
 @section('content')
-    <div class="page-wrapper">
-        <div class="container-fluid">
-            @include('cms::panel.inc.breadcrumb')
-            <div class="row">
-                <div class="col-lg-12">
-                    @include('cms::panel.inc.alert')
-                    <div class="card">
-                        <div class="card-block">
-                            <h4 class="card-title">{!! trans('cms::meta.metas') !!}</h4>
-{{--                            <a class="btn-success btn float-right" href="{!! route('roles.create') !!}">{!! trans('cms::meta.create') !!}</a>--}}
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th>{!! trans('cms::meta.url') !!}</th>
-                                        <th>{!! trans('cms::meta.name') !!}</th>
-                                        <th>{!! trans('cms::meta.description') !!}</th>
-                                        <th>{!! trans('cms::meta.keywords') !!}</th>
-                                        <th>{!! trans('cms::meta.robots') !!}</th>
-                                    </tr>
-                                    </thead>
 
-                                    <tbody class="font-14">
-                                    @foreach($metas as $meta)
-                                    <tr>
-                                        <td><a href="/{!! $meta->url !!}">{!! $meta->url !!}</a> </td>
-                                        <td>{!! $meta->name !!}</td>
-                                        <input type="hidden" name="edited" value="0">
-                                        <td><input class="form-control description font-14" type="text" data-id="{!! $meta->id !!}" id="description{!! $meta->id !!}" name="description[{!! $meta->id !!}]" value="{!! $meta->description !!}" ></td>
-                                        <td><input class="form-control keywords font-14" type="text" data-id="{!! $meta->id !!}" id="keywords{!! $meta->id !!}" name="keywords[{!! $meta->id !!}]" value="{!! $meta->keywords !!}" ></td>
-                                        <td>
-                                            <input type="hidden" name="robots[{!! $meta->id !!}]" value="0">
-                                            <input class="form-control robots" type="checkbox" id="robots{!! $meta->id !!}" data-id="{!! $meta->id !!}" name="robots[{!! $meta->id !!}]" value="1" {!! $meta->robots ? 'checked' : '' !!}>
-                                            <label for="robots{!! $meta->id !!}"></label>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    </tbody>
+    <div class="main-content container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="divider">
+                            <div class="divider-text">{{ trans('cms::panel.metas_title') }}</div>
+                        </div>
+                        <div class="alert alert-secondary">
+                            <i data-feather="info"></i>{{ trans('cms::panel.metas_info') }}
+                        </div>
+                        <div class="divider">
+                            <div class="divider-text">{{ trans('cms::panel.metas_list') }}</div>
 
-                                </table>
+{{--                            <div class="form-group">--}}
+{{--                                @can('create',CMS\Models\Meta::class)--}}
+{{--                                    <a class="btn icon icon-left btn-primary float-right" href="{!! route('redirects.create') !!}"><i data-feather="plus-circle" ></i>{!! trans('cms::panel.redirects_create') !!}</a>--}}
+{{--                                @endcan--}}
+{{--                            </div>--}}
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class='table table-hover' id="myTable">
+                                        <thead >
+                                        <tr>
+                                            <th>{!! trans('cms::panel.metas_url') !!}</th>
+                                            <th>{!! trans('cms::panel.metas_name') !!}</th>
+                                            <th>{!! trans('cms::panel.metas_description') !!}</th>
+                                            <th>{!! trans('cms::panel.metas_keywords') !!}</th>
+                                            <th>{!! trans('cms::panel.metas_robots') !!}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($metas as $meta)
+                                            <tr>
+                                                @if($meta->url == "/")
+                                                    <td><a href="{!! substr(config('app.url'),0,-1).$meta->url !!}">{!! substr(config('app.url'),0,-1).$meta->url !!}</a> </td>
+                                                @else
+                                                    <td><a href="{!! config('app.url').$meta->url !!}">{!! config('app.url').$meta->url !!}</a> </td>
+                                                @endif
+                                                <td>{!! $meta->name !!}</td>
+                                                <input type="hidden" name="edited" value="0">
+                                                <td><input class="form-control description font-14" type="text" data-id="{!! $meta->id !!}" id="description{!! $meta->id !!}" name="description[{!! $meta->id !!}]" value="{!! $meta->description !!}" ></td>
+                                                <td><input class="form-control keywords font-14" type="text" data-id="{!! $meta->id !!}" id="keywords{!! $meta->id !!}" name="keywords[{!! $meta->id !!}]" value="{!! $meta->keywords !!}" ></td>
+                                                <td>
+                                                    <input type="hidden" name="robots[{!! $meta->id !!}]" value="0">
+                                                    <input class="form-check-sm robots" type="checkbox" id="robots{!! $meta->id !!}" data-id="{!! $meta->id !!}" name="robots[{!! $meta->id !!}]" value="1" {!! $meta->robots ? 'checked' : '' !!}>
+                                                    <label for="robots{!! $meta->id !!}"></label>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
