@@ -50,7 +50,7 @@
                 @endif
                 <li class='sidebar-title'>{{ trans('cms::panel.roles') }} & {{ trans('panel.roles') }}</li>
                 @if(Auth::user()->hasModulePermission(USER,'R'))
-                <li class="sidebar-item {{ request()->routeIs('pages*') ? 'active' : '' }}">
+                <li class="sidebar-item {{ request()->routeIs('roles*') ? 'active' : '' }}">
                     <a href="{!! route('roles.index') !!}" class='sidebar-link'>
                         <i data-feather="user-check" width="20"></i>
                         <span>{!! trans('cms::panel.roles') !!}</span>

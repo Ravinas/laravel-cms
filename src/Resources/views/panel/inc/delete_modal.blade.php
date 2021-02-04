@@ -1,5 +1,5 @@
-<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete_{!! $route_parameter !!}_{!! $model->id !!}">
-    {!! trans($trans_file.'.delete') !!}
+<button type="button" class="btn icon btn-danger ml-2" data-toggle="modal" data-target="#delete_{!! $route_parameter !!}_{!! $model->id !!}">
+    <i data-feather="delete"></i>
 </button>
 <form action="{!! route($route_group.'.destroy' , [$route_parameter => $model]) !!}" method="POST" class="pull-right">
 @method('DELETE')
