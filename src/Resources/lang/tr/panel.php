@@ -141,6 +141,21 @@ return [
     'slider_name' => 'Slider İsmi',
     'select_slider_language' => 'Slider Dilini seçin',
     'slider_dont_forgot' => 'Slider\'ı görmek istediğiniz tüm dilleri eklemeyi unutmayın',
-    'edit_your_sliders' => 'Slider\'ı düzenleyin'
+    'edit_your_sliders' => 'Slider\'ı düzenleyin',
 
+
+    //Redirects
+
+    'redirects_title' => 'Yönlendirmeler',
+    'redirects_subtitle' => 'Websitenizdeki URL yönlendirmelerini yönetin',
+    'redirects_info' => 'Websitenizdeki bir URLe gelen kullanıcıyı istediğiniz bir başka URLe yönlendirebilirsiniz. Yönlendirme oluştur butonuna basın ve formu doldurun, bu kadar basit.',
+    'redirects_list' => 'Yönlendirme Listesi',
+    'redirects_from' => 'Yönlendirme <b>buradan</b>',
+    'redirects_to' => '<b>Buraya</b> yapılacak',
+    'redirects_code' => '<b>HTTP kodu</b>',
+    'redirects_status' => 'Durumu',
+    'redirects_edit' => 'Yönlendirmeyi düzenleyin',
+    'redirects_save' => 'Kaydet',
+    'redirects_create' => 'Yönlendirme oluşturun',
+    'redirects_action' => 'Aksiyonlar',
 ];
