@@ -8,10 +8,6 @@
 @section('content')
 
     <div class="main-content container-fluid">
-        <div class="page-title">
-            <h3>{{ trans('cms::panel.redirects_title') }}</h3>
-            <p class="text-subtitle text-muted">{{ trans('cms::panel.redirects_subtitle') }}</p>
-        </div>
         <div class="card">
             <div class="card-header">
                 <div class="card-content">

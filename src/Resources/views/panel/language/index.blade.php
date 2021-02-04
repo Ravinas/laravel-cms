@@ -41,9 +41,9 @@
                     <div class="card-content">
                         <div class="card-body">
                             <div class="table-responsive">
-                            <p>
-                                {{ trans('cms::panel.mark_language') }}
-                            </p>
+                                <div class="alert alert-secondary">
+                                    <i data-feather="info"></i>{{ trans('cms::panel.mark_language') }}
+                                </div>
                             <table class='table table-hover' id="myTable">
                                 <thead >
                                     <tr>
@@ -104,22 +104,18 @@
 
             feather.replace();
 
-        $('#myTable').DataTable( {
-            "language": {
-                "lengthMenu": "Sayfa başına gösterilen eposta sayısı",
-                "zeroRecords": "Üzgünüz burada herhangi bir şey yok",
-                "info": "Gösterilen sayfa",
-                "infoEmpty": "Üzgünüz burada herhangi bir şey yok",
-                "infoFiltered": "Filtrelenmiş eposta sayısı"
-            },
-            "paging":   true,
-            "ordering": false,
-            "info":     true,
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
-        } );
+            $('#myTable').DataTable( {
+                "language": {
+    
+                    "zeroRecords": "Üzgünüz burada herhangi bir şey yok",
+                    "info": "Gösterilen sayfa",
+                    "infoEmpty": "Üzgünüz burada herhangi bir şey yok",
+                    "infoFiltered": "Filtrelenmiş eposta sayısı"
+                },
+                "paging":   true,
+                "ordering": false,
+                "info":     true
+            } );
 
         var csrf = "{!! csrf_token() !!}";
         $.ajaxSetup({

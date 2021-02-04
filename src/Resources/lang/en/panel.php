@@ -18,8 +18,8 @@ return [
     'remember_me' => 'Remember Me',
     'prime_login' => 'Please log in to continue prime.',
     'lost_password' => 'Forgotten your password?',
-    'parent' => 'Parent Page',
-    'no_parent' => 'No Parent Page',
+
+
     'order' => 'Order',
     'delete' => 'Delete',
     'close' => 'Close',
@@ -36,7 +36,7 @@ return [
     'email' => 'E-mail',
     'url' => 'URL',
     'content' => 'Content',
-    'pages' => 'Pages',
+
     'create' => 'Create',
     'edit' => 'Edit',
     'save' => 'Save',
@@ -47,12 +47,12 @@ return [
     'active_languages' => 'Active Languages',
     'update' => 'Update',
     'delete' => 'Delete',
-    'add_pages' => 'Add Page',
+
     'dynamic' => 'Dynamic',
     'static' => 'Static',
     'type' => 'Type',
     'generating' => 'Generating for',
-    'sub_pages' => 'Sub Pages',
+
     'message' => 'Message',
     'data' => 'Data',
     'show' => 'Show',
@@ -160,4 +160,18 @@ return [
     'redirects_save' => 'Save',
     'redirects_create' => 'Create a Redirection',
     'redirects_action' => 'Actions',
+
+    //Pages
+
+    'parent' => 'Parent Page',
+    'no_parent' => 'No Parent Page',
+    'pages' => 'Pages',
+    'add_pages' => 'Add Page',
+    'sub_pages' => 'Sub Pages',
+    'page_list' => 'Page List',
+    'page_title' => 'Page Title',
+    'pages_info' => 'In this section, you can add or update pages and access your sub-pages.',
+    'sub_page_icon' => 'Click on this icon to see sub-pages.',
+
+
 ];

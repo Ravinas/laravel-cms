@@ -36,7 +36,7 @@ return [
     'email' => 'E-Posta',
     'url' => 'URL',
     'content' => 'İçerik',
-    'pages' => 'Sayfalar',
+
     'create' => 'Oluştur',
     'edit' => 'Düzenle',
     'save' => 'Kaydet',
@@ -47,12 +47,12 @@ return [
     'active_languages' => 'Aktif Dil',
     'update' => 'Güncelle',
     'delete' => 'Sil',
-    'add_pages' => 'Sayfa ekle',
+ 
     'dynamic' => 'Dinamik',
     'static' => 'Statik',
     'type' => 'Tip',
     'generating' => 'Oluşturuluyor',
-    'sub_pages' => 'Alt Sayfalar',
+    
     'message' => 'İleti',
     'data' => 'Veri',
     'show' => 'Göster',
@@ -68,6 +68,17 @@ return [
     'settings' => 'Ayarlar',
     'save_changes' => 'Değişikliği Kaydedin',
     'default' => 'Varsayılan',
+
+    //Pages
+    'pages' => 'Sayfalar',
+    'parent' => 'Bağlı olduğu sayfa',
+    'no_parent' => 'Bağlı olduğu sayfa yok',
+    'add_pages' => 'Sayfa ekle',
+    'sub_pages' => 'Alt Sayfalar',
+    'page_list' => 'Sayfa Listesi',
+    'page_title' => 'Sayfa Başlığı',
+    'pages_info' => 'Bu kısımda sayfalarınızı ekleyebilir , düzenleyebilirsiniz.',
+    'sub_page_icon' => 'Bu simgeye tıklayarak alt sayfaları listeleyebilirsiniz.',
 
     // FORMS MEGA THREAD
     'forms' => 'FormLar',
