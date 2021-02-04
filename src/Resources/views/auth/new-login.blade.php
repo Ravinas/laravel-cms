@@ -41,17 +41,19 @@
                             </div>
                         @enderror
                         <div class="form-group position-relative has-icon-left">
-                            <div class="clearfix">
-                                <label for="password">{{ trans('cms::panel.password') }}</label>
-                                <a href="auth-forgot-password.html" class='float-right'>
-                                    <small>Şifrenizi mi unuttunuz?/TR</small>
-                                </a>
-                            </div>
+
+                            <label for="password">{{ trans('cms::panel.password') }}</label>
                             <div class="position-relative">
-                                <input type="text" class="form-control" id="password">
+
+                                <input type="password" class="form-control" id="password" name="password">
                                 <div class="form-control-icon">
                                     <i data-feather="lock"></i>
                                 </div>
+                            </div>
+                            <div class="clearfix">
+                                <a href="auth-forgot-password.html" class='float-right'>
+                                    <small>Şifrenizi mi unuttunuz?/TR</small>
+                                </a>
                             </div>
                         </div>
                         @error('password')
