@@ -142,5 +142,22 @@ return [
     'select_slider_language' => 'Select Slider Language',
     'slider_dont_forgot' => 'When adding your sliders , don\'t forget to add them to all the languages you want to see.',
     'edit_your_sliders' => 'Edit Your Sliders',
-    'slider_items_info' => 'In this section, you can add, delete and order slider images.'
+    'slider_items_info' => 'In this section, you can add, delete and order slider images.',
+
+
+
+    //Redirects
+
+    'redirects_title' => 'Redirects',
+    'redirects_subtitle' => 'Manage your websites redirection links',
+    'redirects_info' => 'You can redirect a user from any URL of your website to any URL you want. Just create a redirect and fill the form, simple as that.',
+    'redirects_list' => 'Redirects List',
+    'redirects_from' => 'Redirects <b>from</b> this URL',
+    'redirects_to' => '<b>To</b> this URL',
+    'redirects_code' => 'With this <b>HTTP code</b>',
+    'redirects_status' => 'Status',
+    'redirects_edit' => 'Edit the Redirection',
+    'redirects_save' => 'Save',
+    'redirects_create' => 'Create a Redirection',
+    'redirects_action' => 'Actions',
 ];
