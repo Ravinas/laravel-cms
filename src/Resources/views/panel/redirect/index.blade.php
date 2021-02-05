@@ -22,17 +22,17 @@
                 <div class="card-content">
                     <div class="card-body">
                         <div class="divider">
-                            <div class="divider-text">{{ trans('cms::panel.redirects') }}</div>
+                            <div class="divider-text">{{ trans('cms::panel.redirects.title') }}</div>
                         </div>
                         <div class="alert alert-secondary">
-                            <i data-feather="info"></i>{{ trans('cms::panel.redirects_info') }}
+                            <i data-feather="info"></i>{{ trans('cms::panel.redirects.info') }}
                         </div>
                         <div class="divider">
-                            <div class="divider-text">{{ trans('cms::panel.redirects_list') }}</div>
+                            <div class="divider-text">{{ trans('cms::panel.redirects.list') }}</div>
 
                             <div class="form-group">
                                 @can('create',CMS\Models\Redirect::class)
-                                    <a class="btn icon icon-left btn-primary float-right" href="{!! route('redirects.create') !!}"><i data-feather="plus-circle" ></i>{!! trans('cms::panel.redirects_create') !!}</a>
+                                    <a class="btn icon icon-left btn-primary float-right" href="{!! route('redirects.create') !!}"><i data-feather="plus-circle" ></i>{!! trans('cms::panel.redirects.create') !!}</a>
                                 @endcan
                             </div>
                         </div>
@@ -43,10 +43,10 @@
                                         <thead >
                                         <tr>
                                             <th>{!! trans('cms::panel.id') !!}</th>
-                                            <th>{!! trans('cms::panel.redirects_from') !!}</th>
-                                            <th>{!! trans('cms::panel.redirects_to') !!}</th>
-                                            <th>{!! trans('cms::panel.redirects_code') !!}</th>
-                                            <th>{!! trans('cms::panel.redirects_action') !!}</th>
+                                            <th>{!! trans('cms::panel.redirects.from') !!}</th>
+                                            <th>{!! trans('cms::panel.redirects.to') !!}</th>
+                                            <th>{!! trans('cms::panel.redirects.code') !!}</th>
+                                            <th>{!! trans('cms::panel.redirects.action') !!}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
