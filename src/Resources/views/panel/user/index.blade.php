@@ -22,16 +22,16 @@
                 <div class="card-content">
                     <div class="card-body">
                         <div class="divider">
-                            <div class="divider-text">{{ trans('cms::panel.users') }}</div>
+                            <div class="divider-text">{{ trans('cms::panel.users.title') }}</div>
                         </div>
                         <div class="alert alert-secondary">
-                            <i data-feather="info"></i>{{ trans('cms::panel.users_info') }}
+                            <i data-feather="info"></i>{{ trans('cms::panel.users.info') }}
                         </div>
                         <div class="divider">
-                            <div class="divider-text">{{ trans('cms::panel.users_list') }}</div>
+                            <div class="divider-text">{{ trans('cms::panel.users.list') }}</div>
 
                             <div class="form-group">
-                                <a class="btn icon icon-left btn-primary float-right" href="{!! route('users.create') !!}"><i data-feather="plus-circle" ></i>{!! trans('cms::panel.users_create') !!}</a>
+                                <a class="btn icon icon-left btn-primary float-right" href="{!! route('users.create') !!}"><i data-feather="plus-circle" ></i>{!! trans('cms::panel.users.create') !!}</a>
                             </div>
                         </div>
                         <div class="card-content">
@@ -40,11 +40,11 @@
                                     <table class='table table-hover' id="myTable">
                                         <thead >
                                         <tr>
-                                            <th>{!! trans('cms::panel.users_id') !!}</th>
-                                            <th>{!! trans('cms::panel.users_name') !!}</th>
-                                            <th>{!! trans('cms::panel.users_email') !!}</th>
-                                            <th>{!! trans('cms::panel.users_role') !!}</th>
-                                            <th>{!! trans('cms::panel.users_action') !!}</th>
+                                            <th>{!! trans('cms::panel.users.id') !!}</th>
+                                            <th>{!! trans('cms::panel.users.name') !!}</th>
+                                            <th>{!! trans('cms::panel.users.email') !!}</th>
+                                            <th>{!! trans('cms::panel.users.role') !!}</th>
+                                            <th>{!! trans('cms::panel.users.action') !!}</th>
                                         </tr>
                                         </thead>
                                         <tbody>

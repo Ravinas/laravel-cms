@@ -56,13 +56,13 @@
                 <div class="card-content">
                     <div class="card-body">
                         <div class="divider">
-                            <div class="divider-text">{{ trans('cms::panel.metas_title') }}</div>
+                            <div class="divider-text">{{ trans('cms::panel.metas.title') }}</div>
                         </div>
                         <div class="alert alert-secondary">
-                            <i data-feather="info"></i>{{ trans('cms::panel.metas_info') }}
+                            <i data-feather="info"></i>{{ trans('cms::panel.metas.info') }}
                         </div>
                         <div class="divider">
-                            <div class="divider-text">{{ trans('cms::panel.metas_list') }}</div>
+                            <div class="divider-text">{{ trans('cms::panel.metas.list') }}</div>
 
 {{--                            <div class="form-group">--}}
 {{--                                @can('create',CMS\Models\Meta::class)--}}
@@ -76,11 +76,11 @@
                                     <table class='table table-hover' id="myTable">
                                         <thead >
                                         <tr>
-                                            <th>{!! trans('cms::panel.metas_url') !!}</th>
-                                            <th>{!! trans('cms::panel.metas_name') !!}</th>
-                                            <th>{!! trans('cms::panel.metas_description') !!}</th>
-                                            <th>{!! trans('cms::panel.metas_keywords') !!}</th>
-                                            <th>{!! trans('cms::panel.metas_robots') !!}</th>
+                                            <th>{!! trans('cms::panel.metas.url') !!}</th>
+                                            <th>{!! trans('cms::panel.metas.name') !!}</th>
+                                            <th>{!! trans('cms::panel.metas.description') !!}</th>
+                                            <th>{!! trans('cms::panel.metas.keywords') !!}</th>
+                                            <th>{!! trans('cms::panel.metas.robots') !!}</th>
                                         </tr>
                                         </thead>
                                         <tbody>

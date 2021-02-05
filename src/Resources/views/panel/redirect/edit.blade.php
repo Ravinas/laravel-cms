@@ -13,7 +13,7 @@
                 <div class="card-content">
                     <div class="card-body">
                         <div class="divider">
-                            <div class="divider-text">{{ trans('cms::panel.redirects_edit') }}</div>
+                            <div class="divider-text">{{ trans('cms::panel.redirects.edit') }}</div>
                         </div>
                         <div class="card-content">
                             <div class="card-body">
@@ -21,22 +21,22 @@
                                     @method('PUT')
                                     @csrf
                                     <div class="form-group">
-                                        <label>{!! trans('cms::panel.redirects_from') !!}</label>
+                                        <label>{!! trans('cms::panel.redirects.from') !!}</label>
                                         <input type="text" class="form-control shadow-sm" id="from" name="from"  value="{!! old('from') ?? $redirect->from !!}">
                                         @include('cms::panel.inc.form_error',['input_name' => 'from'])
                                     </div>
                                     <div class="form-group">
-                                        <label>{!! trans('cms::panel.redirects_to') !!}</label>
+                                        <label>{!! trans('cms::panel.redirects.to') !!}</label>
                                         <input type="text" class="form-control shadow-sm" id="to" name="to"  value="{!! old('to') ?? $redirect->to !!}">
                                         @include('cms::panel.inc.form_error',['input_name' => 'to'])
                                     </div>
                                     <div class="form-group">
-                                        <label>{!! trans('cms::panel.redirects_code') !!}</label>
+                                        <label>{!! trans('cms::panel.redirects.code') !!}</label>
                                         <input type="text" class="form-control shadow-sm" id="code" name="code"  value="{!! old('code') ?? $redirect->code !!}">
                                         @include('cms::panel.inc.form_error',['input_name' => 'code'])
                                     </div>
                                     <div class="form-group">
-                                        <label>{!! trans('cms::panel.redirects_status') !!}</label>
+                                        <label>{!! trans('cms::panel.redirects.status') !!}</label>
                                         <div>
                                             <select class="custom-select custom-select-lg form-control shadow-sm" name="status">
                                                 <option value="1" @if($redirect->status == 1) selected @endif>{!! trans('cms::panel.active') !!}</option>
@@ -46,7 +46,7 @@
                                         @include('cms::panel.inc.form_error',['input_name' => 'status'])
                                     </div>
                                     <div class="form-group page-date">
-                                        <input type="submit" class="form-control btn-primary shadow-sm" id="submit" value="{!! trans('cms::panel.redirects_save') !!}">
+                                        <input type="submit" class="form-control btn-primary shadow-sm" id="submit" value="{!! trans('cms::panel.redirects.save') !!}">
                                     </div>
                                 </form>
                             </div>

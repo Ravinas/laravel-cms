@@ -61,7 +61,7 @@
                 <li class="sidebar-item {{ request()->routeIs('users*') ? 'active' : '' }}">
                     <a href="{!! route('users.index') !!}" class='sidebar-link'>
                         <i data-feather="users" width="20"></i>
-                        <span>{!! trans('cms::panel.users') !!}</span>
+                        <span>{!! trans('cms::panel.users.title') !!}</span>
                     </a>
                 </li>
                 @endif
@@ -79,7 +79,7 @@
                 <li class="sidebar-item {{ request()->routeIs('metas*') ? 'active' : '' }}">
                     <a href="{!! route('metas.index') !!}" class='sidebar-link'>
                         <i data-feather="key" width="20"></i>
-                        <span>{!! trans('cms::panel.metas') !!}</span>
+                        <span>{!! trans('cms::panel.metas.title') !!}</span>
                     </a>
                 </li>
                 @endif
@@ -87,7 +87,7 @@
                 <li class="sidebar-item {{ request()->routeIs('redirects*') ? 'active' : '' }}">
                     <a href="{!! route('redirects.index') !!}" class='sidebar-link'>
                         <i data-feather="home" width="20"></i>
-                        <span>{!! trans('cms::panel.redirects') !!}</span>
+                        <span>{!! trans('cms::panel.redirects.title') !!}</span>
                     </a>
                 </li>
                 @endif
