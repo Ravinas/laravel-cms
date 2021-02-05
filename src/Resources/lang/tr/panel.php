@@ -59,7 +59,6 @@ return [
     'ip' => 'IP Adresi',
     'messages' => 'İletiler',
     'ebulletins' => 'E-bültenler',
-    'roles' => 'Roller',
     'add' => 'Ekle',
     'interaction' => 'Etkileşim',
     'settings' => 'Ayarlar',
@@ -205,5 +204,36 @@ return [
         'editinfo' => 'Düzenleme yaparken kullanıcı şifresini değiştirmek istemiyorsanız boş bırakmanız yeterlidir. Eğer şifreyi değiştirmek isterseniz şifre ve şifre onaylaması olmak üzere iki defa girmeniz ve kayıt etmeniz gerekmektedir.',
         'createinfo' => 'Kullanıcının paneldeki yetkisi, görebileceği, düzenleyeceği sayfalar ve modülleri kullanıcı rolü seçerek belirleyebilirseniz. Yetkilendirme kişilere özel değil rollere özel olarak belirlenir.',
     ],
+
+    //Roles
+
+    'roles' => [
+        'id' => 'ID',
+        'title' => 'Roller',
+        'info' => 'Website yönetim panelinizdeki yetkiler roller üzerinden düzenlenir, oluşturulan kullanıcılar rollerine göre modüller ve sayfalar üzerinde işlem yapabilir. Otomatik olarak var olan WebsiteAdmin rolü paneldeki her şeye için tam yetki sahibidir. Oluşturacağınız bir rol ile en ince ayrıntısına kadar yetki sınırlarını belirleyebilirsiniz.',
+        'editinfo' => 'Rol yetkileri her modül ve sayfa için sırasıyla oluşturma, görme, düzenleme ve silmedir. ',
+        'createinfo' => 'Yetkiler, oluşturacağınız role sahip kullanıcıların paneldeki erişim ve düzenleme yetkilerini belirler. Vereceğiniz yetkilerle bir rolü sadece websitenizdeki sayfaları yöneten bir içerik editörü, hatta sadece blog sayfalarına erişimi olan bir blog yazarı olarak tanımlayabilirsiniz. Rolün adını ve yetkilerini aşağıdaki formda belirleyebilirsiniz.',
+        'list' => 'Rol listesi',
+        'create' => 'Rol Oluştur',
+        'edit' => 'Rolü Düzenle',
+        'name' => 'Rol adı',
+        'module_permissions' => 'Modül Yetkileri',
+        'page_permissions' => 'Sayfa Yetkileri',
+        'module_content' => 'Sayfalar ve İçerik',
+        'module_language' => 'Diller',
+        'module_form' => 'Formlar',
+        'module_ebulletin' => 'Ebültenler',
+        'module_meta' => 'Metalar',
+        'module_category' => 'Kategoriler',
+        'module_redirect' => 'Yönlendirmeler',
+        'crud_create' => 'Oluşturma',
+        'crud_read' => 'Görme',
+        'crud_update' => 'Düzenleme',
+        'crud_delete' => 'Silme',
+
+
+    ],
+
+    'users_roles' => 'Panel Kullanıcıları',
 
 ];
