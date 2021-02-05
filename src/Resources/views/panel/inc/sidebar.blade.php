@@ -54,7 +54,7 @@
                 @if(Auth::user()->hasModulePermission(USER,'R'))
                 <li>
                     <a class="waves-effect waves-dark" href="{!! route('users.index') !!}">
-                        <i class="mdi mdi-account-multiple"></i><span class="hide-menu">{!! trans('cms::panel.users') !!}</span>
+                        <i class="mdi mdi-account-multiple"></i><span class="hide-menu">{!! trans('cms::panel.users.title') !!}</span>
                     </a>
                 </li>
                 @endif
@@ -68,7 +68,7 @@
                 @if(Auth::user()->hasModulePermission(META,'R'))
                     <li>
                         <a class="waves-effect waves-dark" href="{!! route('metas.index') !!}">
-                            <i class="mdi mdi-earth"></i><span class="hide-menu">{!! trans('cms::panel.metas') !!}</span>
+                            <i class="mdi mdi-earth"></i><span class="hide-menu">{!! trans('cms::panel.metas.title') !!}</span>
                         </a>
                     </li>
                 @endif
@@ -82,7 +82,7 @@
                 @if(Auth::user()->hasModulePermission(REDIRECT,'R'))
                     <li>
                         <a class="waves-effect waves-dark" href="{!! route('redirects.index') !!}">
-                            <i class="mdi mdi-tumblr-reblog"></i><span class="hide-menu">{!! trans('cms::panel.redirects') !!}</span>
+                            <i class="mdi mdi-tumblr-reblog"></i><span class="hide-menu">{!! trans('cms::panel.redirects.title') !!}</span>
                         </a>
                     </li>
                 @endif
