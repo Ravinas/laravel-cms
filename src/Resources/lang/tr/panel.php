@@ -166,6 +166,7 @@ return [
         'save' => 'Kaydet',
         'create' => 'Yönlendirme oluşturun',
         'action' => 'Aksiyonlar',
+        'delete_text' => 'Seçtiğiniz <b>yönlendirme</b> silinecek, onaylıyor musunuz?',
     ],
 
 
@@ -184,7 +185,7 @@ return [
 
 
 
-    // Users
+    //Users
 
     'users' => [
         'title' => 'Kullanıcılar',
@@ -203,6 +204,8 @@ return [
         'save' => 'Kullanıcıyı Kaydet',
         'editinfo' => 'Düzenleme yaparken kullanıcı şifresini değiştirmek istemiyorsanız boş bırakmanız yeterlidir. Eğer şifreyi değiştirmek isterseniz şifre ve şifre onaylaması olmak üzere iki defa girmeniz ve kayıt etmeniz gerekmektedir.',
         'createinfo' => 'Kullanıcının paneldeki yetkisi, görebileceği, düzenleyeceği sayfalar ve modülleri kullanıcı rolü seçerek belirleyebilirseniz. Yetkilendirme kişilere özel değil rollere özel olarak belirlenir.',
+        'delete_text' => 'Seçtiğiniz <b>kullanıcı</b> silinecek, onaylıyor musunuz?',
+
     ],
 
     //Roles
@@ -210,7 +213,7 @@ return [
     'roles' => [
         'id' => 'ID',
         'title' => 'Roller',
-        'info' => 'Website yönetim panelinizdeki yetkiler roller üzerinden düzenlenir, oluşturulan kullanıcılar rollerine göre modüller ve sayfalar üzerinde işlem yapabilir. Otomatik olarak var olan WebsiteAdmin rolü paneldeki her şeye için tam yetki sahibidir. Oluşturacağınız bir rol ile en ince ayrıntısına kadar yetki sınırlarını belirleyebilirsiniz.',
+        'info' => 'Website yönetim panelinizdeki yetkiler roller üzerinden düzenlenir, oluşturulan kullanıcılar rollerine göre modüller ve sayfalar üzerinde işlem yapabilir. Otomatik olarak var olan WebsiteAdmin rolü paneldeki her işlem için tam yetki sahibidir. Oluşturacağınız bir rolde en ince ayrıntısına kadar yetki sınırlarını belirleyebilirsiniz.',
         'editinfo' => 'Rol yetkileri her modül ve sayfa için sırasıyla oluşturma, görme, düzenleme ve silmedir. ',
         'createinfo' => 'Yetkiler, oluşturacağınız role sahip kullanıcıların paneldeki erişim ve düzenleme yetkilerini belirler. Vereceğiniz yetkilerle bir rolü sadece websitenizdeki sayfaları yöneten bir içerik editörü, hatta sadece blog sayfalarına erişimi olan bir blog yazarı olarak tanımlayabilirsiniz. Rolün adını ve yetkilerini aşağıdaki formda belirleyebilirsiniz.',
         'list' => 'Rol listesi',
@@ -230,8 +233,17 @@ return [
         'crud_read' => 'Görme',
         'crud_update' => 'Düzenleme',
         'crud_delete' => 'Silme',
+        'delete_text' => 'Seçtiğiniz <b>rol</b> silinecek, onaylıyor musunuz?',
+
+    ],
 
 
+    //Delete diyaloğu
+    'delete_modal' => [
+        'title' => 'Uyarı! Silme işlemi için onay gerekmektedir.',
+        'yes' => 'Evet, sil.',
+        'no' => 'Hayır, şimdi değil.',
+        'button' => 'Sil',
     ],
 
     'users_roles' => 'Panel Kullanıcıları',
