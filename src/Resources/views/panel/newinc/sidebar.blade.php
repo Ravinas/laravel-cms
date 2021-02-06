@@ -36,7 +36,7 @@
                 <li class="sidebar-item {{ request()->routeIs('forms*') ? 'active' : '' }}">
                     <a href="{!! route('forms.index') !!}" class='sidebar-link'>
                         <i data-feather="file-text" width="20"></i>
-                        <span>{!! trans('cms::panel.forms') !!}</span>
+                        <span>{!! trans('cms::panel.forms.title') !!}</span>
                     </a>
                 </li>
                 @endif
@@ -44,7 +44,7 @@
                 <li class="sidebar-item {{ request()->routeIs('ebulletins*') ? 'active' : '' }}">
                     <a href="{!! route('ebulletins.index') !!}" class='sidebar-link'>
                         <i data-feather="mail" width="20"></i>
-                        <span>{!! trans('cms::panel.ebulletins') !!}</span>
+                        <span>{!! trans('cms::panel.ebulletins.title') !!}</span>
                     </a>
                 </li>
                 @endif

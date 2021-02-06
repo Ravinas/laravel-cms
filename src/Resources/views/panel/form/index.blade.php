@@ -1,62 +1,74 @@
-@extends('cms::panel.inc.app')
+@extends('cms::panel.newinc.app')
 @push('css')
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
 @endpush
 
 @push('js')
-<script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+    <script>
 
-    $(document).ready( function () {
-        $('#tbl').DataTable();
-    } );
+        $(document).ready( function () {
+            $('#myTable').DataTable();
+        } );
     </script>
 @endpush
 @section('content')
-    <div class="page-wrapper">
-        <div class="container-fluid">
-            @include('cms::panel.inc.breadcrumb')
-            <div class="row">
-                <div class="col-lg-12">
-                    @include('cms::panel.inc.alert')
-                    <div class="card">
-                        <div class="card-block">
-                            <h2 class="card-title">{!! trans('cms::form.forms') !!}</h2>
-                            @can('create',CMS\Models\Form::class)
-                            <a class="btn-success btn float-right" href="{!! route('forms.create') !!}">{!! trans('cms::form.create') !!}</a>
-                            @endcan
-                            <div class="table-responsive" id="tbl">
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th>{!! trans('cms::form.id') !!}</th>
-                                        <th>{!! trans('cms::form.name') !!}</th>
-                                        <th>{!! trans('cms::form.receiver') !!}</th>
-                                        <th>{!! trans('cms::form.slug') !!}</th>
-                                        <th>{!! trans('cms::form.action') !!}</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($forms as $form)
-                                    <tr>
-                                        <td>{!! $form->id !!}</td>
-                                        <td>{!! $form->name !!}</td>
-                                        <td>{!! $form->email !!}</td>
-                                        <td>{!! $form->slug !!}</td>
-                                        <td>
-                                            <a href="{!! route('forms.messages.index' , ['form' => $form]) !!}" class="btn waves-effect waves-light btn-success hidden-sm-down">{!! trans('cms::form.messages') !!}</a>
-                                            @can('update',$form)
-                                            <a href="{!! route('forms.edit' , ['form' => $form]) !!}" class="btn waves-effect waves-light btn-warning hidden-sm-down">{!! trans('cms::form.edit') !!}</a>
-                                            @endcan
-                                            @can('delete',$form)
-                                                @include('cms::panel.inc.delete_modal',['trans_file' => 'form', 'model' => $form, 'route_group' => 'forms', 'route_parameter' => 'form'])
-                                            @endcan
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
 
-                                {{ $forms->links() }}
+    <div class="main-content container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="divider">
+                            <div class="divider-text">{{ trans('cms::panel.forms.title') }}</div>
+                        </div>
+                        <div class="alert alert-secondary">
+                            <i data-feather="info"></i>{{ trans('cms::panel.forms.info') }}
+                        </div>
+                        <div class="divider">
+                            <div class="divider-text">{{ trans('cms::panel.forms.list') }}</div>
+
+                            <div class="form-group">
+                                @can('create',CMS\Models\Form::class)
+                                    <a class="btn icon icon-left btn-primary float-right" href="{!! route('forms.create') !!}"><i data-feather="plus-circle" ></i>{!! trans('cms::panel.forms.create') !!}</a>
+                                @endcan
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class='table table-hover' id="myTable">
+                                        <thead >
+                                        <tr>
+                                            <th>{!! trans('cms::panel.forms.id') !!}</th>
+                                            <th>{!! trans('cms::panel.forms.name') !!}</th>
+                                            <th>{!! trans('cms::panel.forms.receiver') !!}</th>
+                                            <th>{!! trans('cms::panel.forms.slug') !!}</th>
+                                            <th>{!! trans('cms::panel.forms.action') !!}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($forms as $form)
+                                            <tr>
+                                                <td>{!! $form->id !!}</td>
+                                                <td>{!! $form->name !!}</td>
+                                                <td>{!! $form->email !!}</td>
+                                                <td>{!! $form->slug !!}</td>
+                                                <td>
+                                                    <a href="{!! route('forms.messages.index' , $form) !!}" class="btn btn-success icon"><i data-feather="mail" ></i> {!! trans('cms::panel.forms.messages') !!}</a>
+                                                    <a href="{!! route('forms.edit' ,  $form) !!}" class="btn btn-warning icon"><i data-feather="edit" ></i> {!! trans('cms::panel.forms.edit') !!}</a>
+
+                                                    @component('cms::panel.newinc.delete_modal',[ 'model' => $form, 'route_group' => 'forms'])
+                                                        {!! trans('cms::panel.forms.delete_text') !!}
+                                                    @endcomponent
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

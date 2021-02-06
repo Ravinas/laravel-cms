@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{!! asset('vendor/cms/yeni/vendors/perfect-scrollbar/perfect-scrollbar.css') !!}">
     <link rel="stylesheet" href="{!! asset('vendor/cms/yeni/css/app.css') !!}">
     <link rel="shortcut icon" href="{!! asset('vendor/cms/yeni/images/favicon.svg') !!}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
     @stack('css')
 </head>
 <body>
@@ -19,7 +20,7 @@
         <div id="main">
             @include('cms::panel.newinc.header')
             @yield('content')
-        
+
             @include('cms::panel.newinc.footer')
         </div>
     </div>
@@ -32,6 +33,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     <script src="{!! asset('/vendor/laravel-filemanager/js/stand-alone-button.js') !!}"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
     @stack('js')
 </body>
 </html>

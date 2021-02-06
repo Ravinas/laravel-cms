@@ -69,9 +69,9 @@
                                             </div>
                                         @endforeach
                                     </div>
-                                    <div class="form-group page-date">
-                                        <input type="submit" class="form-control btn-primary col-3" id="submit" value="{!! trans('cms::panel.roles.edit') !!}">
-                                    </div>
+                                    <button type="submit" class="btn btn-success" id="submit" value="">
+                                        {!! trans('cms::panel.roles.save') !!}
+                                    </button>
                                 </form>
                             </div>
                         </div>

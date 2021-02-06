@@ -46,9 +46,9 @@
                                         @include('cms::panel.inc.form_error',['input_name' => 'status'])
                                     </div>
                                     <hr>
-                                    <div class="form-group page-date">
-                                        <input type="submit" class="form-control btn-primary shadow-sm" id="submit" value="{!! trans('cms::panel.redirects.save') !!}">
-                                    </div>
+                                    <button type="submit" class="btn btn-success" id="submit" value="">
+                                        {!! trans('cms::panel.redirects.save') !!}
+                                    </button>
                                 </form>
                             </div>
                         </div>
