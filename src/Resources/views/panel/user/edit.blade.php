@@ -54,9 +54,9 @@
                                         <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
                                         @include('cms::panel.inc.form_error',['input_name' => 'password_confirmation'])
                                     </div>
-                                    <div class="form-group page-date">
-                                        <input type="submit" class="form-control btn-primary col-3" id="submit" value="{!! trans('cms::panel.users.save') !!}">
-                                    </div>
+                                    <button type="submit" class="btn btn-success" id="submit" value="">
+                                        {!! trans('cms::panel.users.save') !!}
+                                    </button>
                                 </form>
                             </div>
                         </div>

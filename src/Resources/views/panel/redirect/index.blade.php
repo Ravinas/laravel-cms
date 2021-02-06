@@ -1,12 +1,9 @@
 @extends('cms::panel.newinc.app')
 @push('css')
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
 @endpush
 
 @push('js')
-    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
 <script>
 
     $(document).ready( function () {
