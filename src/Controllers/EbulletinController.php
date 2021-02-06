@@ -70,7 +70,7 @@ class EbulletinController extends Controller
         $ebulletins = Ebulletin::join('languages','languages.id','=','ebulletins.lang_id')
             ->select('languages.name','ebulletins.*')
             ->orderBy('id','desc')
-            ->paginate(15);
+            ->get();
         return view('cms::panel.ebulletin.index',compact('ebulletins'));
     }
 
