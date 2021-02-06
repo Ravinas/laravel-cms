@@ -57,12 +57,11 @@
                                                 <td>{{ $redirect->to }}</td>
                                                 <td>{{ $redirect->code }}</td>
                                                 <td>
-                                                    @can('update',$redirect)
-                                                        <a href="{!! route('redirects.edit' , ['redirect' => $redirect]) !!}" class="btn waves-effect waves-light btn-warning hidden-sm-down"><i data-feather="edit" ></i> {!! trans('cms::panel.edit') !!}</a>
-                                                    @endcan
-                                                    @can('delete',$redirect)
-                                                        @include('cms::panel.inc.delete_modal', ['trans_file' => 'redirect', 'model' => $redirect, 'route_group' => 'redirects', 'route_parameter' => 'redirect'])
-                                                    @endcan
+
+                                                    <a href="{!! route('redirects.edit' , $redirect) !!}" class="btn btn-warning icon"><i data-feather="edit" ></i> {!! trans('cms::panel.edit') !!}</a>
+                                                    @component('cms::panel.newinc.delete_modal',[ 'model' => $redirect, 'route_group' => 'redirects'])
+                                                        {!! trans('cms::panel.redirects.delete_text') !!}
+                                                    @endcomponent
                                                 </td>
                                             </tr>
                                         @endforeach

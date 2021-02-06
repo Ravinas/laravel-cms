@@ -55,8 +55,12 @@
                                                 <td>{!! $user->email !!}</td>
                                                 <td>{!! $user->roleName !!}</td>
                                                 <td>
-                                                    <a href="{!! route('users.edit' , ['user' => $user]) !!}" class="btn waves-effect waves-light btn-warning hidden-sm-down"><i data-feather="edit"></i>{!! trans('cms::user.edit') !!}</a>
-                                                    @include('cms::panel.inc.delete_modal',['trans_file' => 'user', 'model' => $user, 'route_group' => 'users', 'route_parameter' => 'user'])
+                                                    <a href="{!! route('users.edit' , $user) !!}" class="btn btn-warning icon"><i data-feather="edit"></i>{!! trans('cms::panel.edit') !!}</a>
+                                                    @if(Auth::user()->id != $user->id)
+                                                        @component('cms::panel.newinc.delete_modal',[ 'model' => $user, 'route_group' => 'users'])
+                                                            {!! trans('cms::panel.users.delete_text') !!}
+                                                        @endcomponent
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

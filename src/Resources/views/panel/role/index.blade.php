@@ -52,8 +52,11 @@
                                                 <td>{!! $role->id !!}</td>
                                                 <td>{!! $role->name !!}</td>
                                                 <td>
-                                                    <a href="{!! route('roles.edit' , ['role' => $role]) !!}" class="btn waves-effect waves-light btn-warning hidden-sm-down">{!! trans('cms::panel.roles.edit') !!}</a>
-                                                    @include('cms::panel.inc.delete_modal',['trans_file' => 'role', 'model' => $role, 'route_group' => 'roles', 'route_parameter' => 'role'])
+                                                    <a href="{!! route('roles.edit' , $role) !!}" class="btn btn-warning icon"><i data-feather="edit"></i> {!! trans('cms::panel.edit') !!}</a>
+                                                    @component('cms::panel.newinc.delete_modal',[ 'model' => $role, 'route_group' => 'roles'])
+                                                        {!! trans('cms::panel.roles.delete_text') !!}
+                                                    @endcomponent
+{{--                                                    @include('cms::panel.inc.delete_modal',['trans_file' => 'role', 'model' => $role, 'route_group' => 'roles', 'route_parameter' => 'role'])--}}
                                                 </td>
                                             </tr>
                                         @endforeach
