@@ -58,7 +58,6 @@ return [
     'show' => 'Göster',
     'ip' => 'IP Adresi',
     'messages' => 'İletiler',
-    'ebulletins' => 'E-bültenler',
     'add' => 'Ekle',
     'interaction' => 'Etkileşim',
     'settings' => 'Ayarlar',
@@ -76,34 +75,6 @@ return [
     'pages_info' => 'Bu kısımda sayfalarınızı ekleyebilir , düzenleyebilirsiniz.',
     'sub_page_icon' => 'Bu simgeye tıklayarak alt sayfaları listeleyebilirsiniz.',
 
-    // FORMS MEGA THREAD
-    'forms' => 'FormLar',
-    'form_create' => 'Form Oluşturun',
-    'form_messages' => 'Form" İletileri',
-    'form_input' => 'Giriş',
-    'form_value' => 'Değer',
-
-    'form_no_input' => 'Kullanıcı Giriş Yapmadı',
-    'form_created' => 'Form Oluşturun',
-    'form_saved' => 'Formu Kaydedin',
-    'form_deleted' => 'Form ismini sil',
-    'form_delete_modal_title' => 'Form Silinecek',
-    'form_delete_modal_body' => 'Silmek istediğinize emin misiniz?',
-    'form_delete_yes' => 'Evet,Formu Sil',
-    'form_delete_no' => 'Hayır,Formu Silme',
-
-    // Form create-edit input labels
-    'form_name' => 'Form İsmi',
-    'form_email' => 'Alıcı E-postası',
-    'form_slug' => 'Slug',
-    'form_rules' => 'Kurallar',
-    'form_error_messages' => 'Hata Mesajı',
-
-    // MESSAGES
-    'messages_email' => 'E-Posta',
-    'messages_ip' => 'IP Adresi',
-    'messages_show' => 'Göster',
-    'message_message' => 'İletiler',
 
     //Categories
     'categories' => 'Kategoriler',
@@ -237,6 +208,61 @@ return [
 
     ],
 
+    //Ebulletin
+
+    'ebulletins' => [
+        'title' => 'E-Bülten',
+        'info' => 'E-Bülteninize kayıtlı kullanıcıları burada görüntüleyebilirsiniz. E-bültene kayıt oldukları dil ve email hesaplarına gönderilen aktivasyonu onaylayıp onaylamadıklarını görebilirsiniz.',
+        'user_list' => 'E-Bültene Kullanıcı Listesi',
+        'id' => 'ID',
+        'email' => 'E-mail Adresi',
+        'language' => 'Kayıt Olduğu Dil',
+        'status' => 'Durumu',
+        'active' => 'Aktif',
+        'passive' => 'Pasif',
+    ],
+
+    //Forms
+    // FORMS MEGA THREAD
+    'forms' =>[
+        'title' => 'Formlar',
+        'info' => 'Websitenizde bulunan formları düzenleyebilir, formlara gelen mesajları görüntüleyebilirsiniz.',
+        'list' => 'Form Listesi',
+        'create' => 'Form Oluşturun',
+        'messages' => 'Form İletileri',
+        'input' => 'Giriş',
+        'id' => 'ID',
+        'receiver' => 'Alıcı',
+        'action' => 'Aksiyon',
+        'value' => 'Değer',
+        'save' => 'Formu Kaydet',
+        'edit' => 'Düzenle',
+
+        'no_input' => 'Kullanıcı Giriş Yapmadı',
+        'created' => 'Form Oluşturun',
+        'saved' => 'Formu Kaydedin',
+        'deleted' => 'Form ismini sil',
+        'delete_modal_title' => 'Form Silinecek',
+        'delete_modal_body' => 'Silmek istediğinize emin misiniz?',
+        'delete_yes' => 'Evet,Formu Sil',
+        'delete_no' => 'Hayır,Formu Silme',
+
+        'name' => 'Form İsmi',
+        'email' => 'Alıcı E-postası',
+        'slug' => 'Slug',
+        'rules' => 'Kurallar',
+        'error_messages' => 'Hata Mesajı',
+        'delete_text' => 'Bu <b>Form</b> silinecek, onaylıyor musunuz?',
+    ],
+
+
+
+    // MESSAGES
+    'messages_email' => 'E-Posta',
+    'messages_ip' => 'IP Adresi',
+    'messages_show' => 'Göster',
+    'message_message' => 'İletiler',
+
 
     //Delete diyaloğu
     'delete_modal' => [
@@ -245,6 +271,8 @@ return [
         'no' => 'Hayır, şimdi değil.',
         'button' => 'Sil',
     ],
+
+
 
     'users_roles' => 'Panel Kullanıcıları',
 

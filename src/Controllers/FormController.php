@@ -33,7 +33,7 @@ class FormController extends Controller
      */
     public function index()
     {
-        $forms = Form::where('name','!=',null)->paginate(15);
+        $forms = Form::where('name','!=',null)->get();
         return view('cms::panel.form.index',compact('forms'));
 
 
