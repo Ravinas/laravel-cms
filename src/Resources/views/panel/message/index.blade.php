@@ -1,52 +1,60 @@
-@extends('cms::panel.inc.app')
+@extends('cms::panel.newinc.app')
 @push('css')
 
 @endpush
 
 @push('js')
-<script>
+    <script>
 
-    $(document).ready( function () {
-        $('#tbl').DataTable();
-    } );
+        $(document).ready( function () {
+            $('#myTable').DataTable();
+        } );
     </script>
 @endpush
 @section('content')
-    <div class="page-wrapper">
-        <div class="container-fluid">
-            @include('cms::panel.inc.breadcrumb')
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-block">
-                            <h2 class="card-title">"{!! $form->name !!}" {!! trans('cms::form.messages') !!}</h2>
-                            <div class="table-responsive" id="tbl">
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th>{!! trans('cms::form.id') !!}</th>
-                                        <th>{!! trans('cms::form.email') !!}</th>
-                                        <th>{!! trans('cms::form.ip') !!}</th>
-                                        <th>{!! trans('cms::form.action') !!}</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($messages as $message)
-                                        @php
-                                            $decode = json_decode($message->data,true);
-                                            $message->email = $decode["email"];
-                                        @endphp
-                                    <tr>
-                                        <td>{!! $message->id !!}</td>
-                                        <td>{!! $message->email !!}</td>
-                                        <td>{!! $message->ip !!}</td>
-                                        <td><a href="{!! route('messages.show' , ['message' => $message]) !!}" class="btn waves-effect waves-light btn-warning hidden-sm-down">{!! trans('cms::form.show') !!}</a></td>
-                                    </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
 
-                                {{ $messages->links() }}
+    <div class="main-content container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="divider">
+                            <div class="divider-text">{{ $form->name." ".trans('cms::panel.messages.title') }}</div>
+                        </div>
+                        <div class="alert alert-secondary">
+                            <i data-feather="info"></i>{{ trans('cms::panel.messages.info') }}
+                        </div>
+                        <div class="divider">
+                            <div class="divider-text">{{ trans('cms::panel.messages.list') }}</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class='table table-hover' id="myTable">
+                                        <thead >
+                                        <tr>
+                                            <th>{!! trans('cms::panel.messages.id') !!}</th>
+                                            <th>{!! trans('cms::panel.messages.email') !!}</th>
+                                            <th>{!! trans('cms::panel.messages.ip') !!}</th>
+                                            <th>{!! trans('cms::panel.messages.action') !!}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($messages as $message)
+                                            @php
+                                                $decode = json_decode($message->data,true);
+                                                $message->email = $decode["email"];
+                                            @endphp
+                                            <tr>
+                                                <td>{!! $message->id !!}</td>
+                                                <td>{!! $message->email !!}</td>
+                                                <td>{!! $message->ip !!}</td>
+                                                <td><a href="{!! route('messages.show' ,$message ) !!}" class="btn btn-info icon"><i data-feather="mail" > </i> {!! trans('cms::panel.messages.show') !!}</a></td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
