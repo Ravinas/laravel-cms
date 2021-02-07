@@ -57,7 +57,6 @@ return [
     'data' => 'Veri',
     'show' => 'Göster',
     'ip' => 'IP Adresi',
-    'messages' => 'İletiler',
     'add' => 'Ekle',
     'interaction' => 'Etkileşim',
     'settings' => 'Ayarlar',
@@ -257,11 +256,19 @@ return [
 
 
 
-    // MESSAGES
-    'messages_email' => 'E-Posta',
-    'messages_ip' => 'IP Adresi',
-    'messages_show' => 'Göster',
-    'message_message' => 'İletiler',
+    //Messages
+    'messages' => [
+        'title' => 'İletileri',
+        'info' => 'İlgili formu dolduranların listesi aşağıdadır. Göster butonuna basarak her iletiyi tek tek ayrıntılı şekilde inceleyebilirsiniz.',
+        'list' => 'İleti Listesi',
+        'id' => 'ID',
+        'email' => 'E-Posta',
+        'ip' => 'IP Adresi',
+        'action' => 'Aksiyon',
+        'show' => 'Göster',
+        'message' => 'İletiler',
+    ],
+
 
 
     //Delete diyaloğu

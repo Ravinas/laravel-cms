@@ -28,7 +28,7 @@ class MessageController extends Controller
     {
         $messages = Message::where('form_id',$form->id)
             ->orderBy('created_at','desc')
-            ->paginate(15);
+            ->get();
         /*foreach($messages as $m){
             $decode = json_decode($m->data);
             $messages->email = $decode["email"];
@@ -83,7 +83,7 @@ class MessageController extends Controller
         $m = $message;
         $m->read = 1;
         $m->save();
-        $message->inputs = json_decode($m->data);
+        $message->inputs = json_decode($m->data,true);
         $message->form_name = Form::where('id',$m->form_id)->first()->name;
         return view('cms::panel.message.show',compact('message'));
     }
