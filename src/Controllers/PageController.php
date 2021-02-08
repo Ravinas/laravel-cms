@@ -91,36 +91,6 @@ class PageController extends Controller
     public function create(Request $request)
     {
         return $this->store($request);
-//        $include = false;
-//
-//
-//        $page = null;
-//        $type=0;
-//        $parent = null;
-//        $order = null;
-//        $categories = null;
-//
-//        if ($request->get('type') == 'subpage')
-//        {
-//            if(View::exists('panel.extras.page'.$request->get('page').'.sub')){
-//                $include = "panel.extras.page".$request->get('page').".sub";
-//            }
-//            $categories = Category::all();
-//            $type = 1;
-//            $parent = Page::where('id',$request->get('page'))->with('detail')->first();
-//            $max_order = Page::where('page_id',$parent->id)->where('status',1)->max('order');
-//            $order = $max_order +1;
-//        }
-//        $this->options = "";
-//        foreach($categories as $category){
-//            $this->options .= '<option value="'. $category->id .'" >'.$category->detail->name.'</option>';
-//        }
-//        Blade::directive('category', function ($arguments) {
-//            return '<select class="form-control form-group" multiple name="category[]" id="multiselect">
-//               '.$this->options.'
-//            </select>';
-//        });
-//        return view('cms::panel.page.create',compact('type','parent','order','categories','page','include'));
     }
 
     /**
@@ -151,39 +121,6 @@ class PageController extends Controller
         }
         return redirect()->route('pages.edit',['page'=> $page]);
 
-//        $check_url = PageDetail::whereIn('url',$request->post('url'))->first();
-//        if ($check_url)
-//        {
-//            return redirect()->route('pages.create')->with('error' ,$check_url->lang_id)->withInput();
-//        }
-//
-//
-//
-//        $page = new Page();
-//        $page->page_id = $request->post('page_id') ?? 0;
-//        $page->order = $request->post('order') ?? 0;
-//        $page->status = $request->post('status');
-//        if(Auth::user()->role_id == 1){
-//            $page->type = $request->post('type');
-//        }
-//        $page->type = 0;
-//        $page->save();
-//        if ($request->has('category')) {
-//            foreach ($request->category as $ct) {
-//                $page->categories()->attach($ct);
-//            }
-//        }
-//        if ($request->has('order') && $request->post('page_id') )
-//        {
-//            $this->updateOrder($request->post('page_id'),$request->post('order'),$page);
-//
-//        }
-//
-//        foreach(LanguageFacade::all() as $l){
-//
-//            $this->storePageDetail($request, $page->id, $l);
-//        }
-//        return redirect()->route('pages.edit',['page'=> $page]);
     }
 
     /**
@@ -206,14 +143,14 @@ class PageController extends Controller
     public function edit(Page $page)
     {
         $include = false;
-
+        
         if(View::exists('pages.page'.$page->id.'.main')){
             $include = "pages.page".$page->id.".main";
         } elseif($page->page_id && View::exists('panel.extras.page'.$page->page_id.'.sub')){
             $include = "pages.page".$page->page_id.".sub";
         }
         $files = File::all();
-        $categories = Category::all();
+        $categories = Category::with('details')->get();
         $page_categories = $page->categories->pluck('id')->toArray();
         $languagesWithPageDetail = Language::join('page_details','languages.id','=','page_details.lang_id')
             ->where('languages.status',1)
@@ -240,10 +177,6 @@ class PageController extends Controller
             ->where('page_details.page_id',$page->id)
             ->select('page_details.*')
             ->get();
-//        $pageDetails = PageDetail::where("page_id",$page->id)->with(['files','extras','language' => function($language){
-//            $language->where('status','1');
-//        }])->get();
-
         //urllerden tr/ en/ varsa at
         foreach($pageDetails as $pd){
             $cond1 = app()->showDefaultLanguageCode;
@@ -263,19 +196,10 @@ class PageController extends Controller
                 // url sadece / ise default dil gösterilmiyor ve anasayfadır, host/tr/ inputun solunda yazacağı için boş gönder
                 $pd->url = "";
             }
-        }
-        $this->options = "";
-        foreach($categories as $category){
-            $selected = in_array($category->id, $page_categories) ? "selected" :"";
-            $this->options .= '<option value="'. $category->id .'" '.$selected.'>'.$category->detail->name.'</option>';
-        }
-        Blade::directive('category', function ($arguments) {
-            return '<select class="form-control form-group" multiple name="category[]" id="multiselect">
-               '.$this->options.'
-            </select>';
-        });
 
-        return view('cms::panel.page.edit',compact('page','pageDetails','include','files','categories','page_categories'));
+            $order = Page::where('page_id',$page->page_id)->max('order');
+        }
+        return view('cms::panel.page.new-edit',compact('page','pageDetails','include','files','categories','page_categories','order'));
     }
 
     /**
@@ -290,7 +214,6 @@ class PageController extends Controller
     public function update(Request $request, Page $page)
     {
         $order_check = null;
-
         if ($request->has('order') && $page->page_id) {
             $this->setOrders($request->post('order'),$page);
         }
@@ -326,7 +249,7 @@ class PageController extends Controller
             $page->type = $request->post('type');
         }
         $page->view = $request->post('view');
-        $page->status = $request->post('status');
+        $page->status = $request->post('status') ?? 0;
         $page->save();
         $this->createLog($page,Auth::user()->id,"U");
 
@@ -421,7 +344,7 @@ class PageController extends Controller
             ->orderBy('order')
             ->get();
         $parent = Page::find($parent_id);
-        return view('cms::panel.page.subpage',compact('sub_pages','parent_id','parent'));
+        return view('cms::panel.page.new-sub',compact('sub_pages','parent_id','parent'));
     }
 
     public function urlControl(Request $request)

@@ -12,7 +12,7 @@ class Category extends Model
 
     public function detail()
     {
-    	return $this->hasOne(CategoryDetail::class)->where('lang_id',default_lang());
+    	return $this->hasOne(CategoryDetail::class)->where('lang_id',app()->defaultLanguage->id);
     }
 
     public function details()
