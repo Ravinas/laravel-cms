@@ -199,7 +199,7 @@ class PageController extends Controller
 
             $order = Page::where('page_id',$page->page_id)->max('order');
         }
-        return view('cms::panel.page.new-edit',compact('page','pageDetails','include','files','categories','page_categories','order'));
+        return view('cms::panel.page.edit',compact('page','pageDetails','include','files','categories','page_categories','order'));
     }
 
     /**
@@ -344,7 +344,7 @@ class PageController extends Controller
             ->orderBy('order')
             ->get();
         $parent = Page::find($parent_id);
-        return view('cms::panel.page.new-sub',compact('sub_pages','parent_id','parent'));
+        return view('cms::panel.page.subpage',compact('sub_pages','parent_id','parent'));
     }
 
     public function urlControl(Request $request)
