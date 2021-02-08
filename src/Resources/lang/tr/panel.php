@@ -73,6 +73,13 @@ return [
     'page_title' => 'Sayfa Başlığı',
     'pages_info' => 'Bu kısımda sayfalarınızı ekleyebilir , düzenleyebilirsiniz.',
     'sub_page_icon' => 'Bu simgeye tıklayarak alt sayfaları listeleyebilirsiniz.',
+    'edit_page' => 'İçeriklerinizi sayfanın tüm dillerine girmeyi unutmayın.',
+    'page_isactive' => 'Sayfa yayınlansın mı?',
+    'blade_file' => 'Blade Dosyası',
+    
+    'homepage' => 'Anasayfa',
+    'search' => 'Arama',
+    'page_type' => 'Sayfa Tipi',
 
 
     //Categories

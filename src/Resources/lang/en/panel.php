@@ -172,6 +172,12 @@ return [
     'page_title' => 'Page Title',
     'pages_info' => 'In this section, you can add or update pages and access your sub-pages.',
     'sub_page_icon' => 'Click on this icon to see sub-pages.',
+    'edit_page' => 'In this section, you can make basic settings such as the page\'s activity status.',
+    'homepage' => 'Homepage',
+    'search' => 'Search',
+    'page_type' => 'Page Type',
+    'page_isactive' => 'Should the page be published?',
+    'blade_file' => 'Blade File',
 
 
     //Metas
