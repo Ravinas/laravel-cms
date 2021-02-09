@@ -143,7 +143,7 @@ class PageController extends Controller
     public function edit(Page $page)
     {
         $include = false;
-        
+
         if(View::exists('pages.page'.$page->id.'.main')){
             $include = "pages.page".$page->id.".main";
         } elseif($page->page_id && View::exists('panel.extras.page'.$page->page_id.'.sub')){
@@ -169,6 +169,15 @@ class PageController extends Controller
             $newPageDetail->url = "automatic_url_".$page->id."_".$l;
             $newPageDetail->status = 0;
             $newPageDetail->save();
+            $this->createLog($newPageDetail,Auth::user()->id,"C");
+            // sonradan açılan dillerde meta eksik
+            $newMeta = new Meta();
+            $newMeta->page_detail_id = $newPageDetail->id;
+            $newMeta->description = "";
+            $newMeta->keywords = "";
+            $newMeta->robots = 1;
+            $newMeta->save();
+            $this->createLog($newMeta,Auth::user()->id,"C");
         }
 
         $pageDetails = PageDetail::join('pages','pages.id','=','page_details.page_id')
