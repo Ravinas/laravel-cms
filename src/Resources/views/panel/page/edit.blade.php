@@ -18,25 +18,25 @@
                     <div class="divider">
                         <div class="divider-text">{{ trans('cms::panel.settings') }}</div>
                     </div>
-                    <div class="row">    
+                    <div class="row">
                         <form method="POST" action="{!! route('pages.update',array('page'=>$page)) !!}" enctype="multipart/form-data" novalidate>
                             @method('PUT')
-                            @csrf  
+                            @csrf
                             <div class="row justify-content-end">
-                                <div class="from-group">     
+                                <div class="from-group">
                                     <div class="form-check form-switch  float-right">
                                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="status" value="1"  {!! $page->status == 1 ? 'checked' : '' !!}>
                                         <label class="form-check-label" for="flexSwitchCheckDefault">{!! trans('cms::panel.page_isactive') !!}</label>
                                     </div>
-                                </div>      
-                            </div> 
+                                </div>
+                            </div>
                             @if($page->page_id)
                                     <input type="hidden" class="form-control" name="page_id" value="{!! $page->page_id !!}">
-                                    <div class="row">                                     
+                                    <div class="row">
                                         <div class="col-lg-6 col-md-6">
                                             <label>{!! trans('cms::panel.categories') !!}</label>
                                             <div class="form-group">
-                                                <select class="choices form-select multiple-remove" multiple="multiple" name="category[]">          
+                                                <select class="choices form-select multiple-remove" multiple="multiple" name="category[]">
                                                     @foreach ($categories as $category)
                                                     <option value="{!! $category->id !!}" {!! in_array($category->id,$page_categories) ? 'selected' : '' !!}>{!! $category->detail->name !!}</option>
                                                     @endforeach
@@ -53,29 +53,29 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>          
-                            @endif 
-                            @if(Auth::user()->role_id == 1)   
+                                    </div>
+                            @endif
+                            @if(Auth::user()->role_id == 1)
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <label>Sayfa Tipi </label>
                                     <div class="form-group">
-                                        <select class="form-select" id="basicSelect" name="type">                                   
+                                        <select class="form-select" id="basicSelect" name="type">
                                             <option value="0" {!! $page->type == 0 ? 'selected' : '' !!}>{!! trans('cms::panel.static') !!}</option>
                                             <option value="1" {!! $page->type == 1 ? 'selected' : ''!!}>{!! trans('cms::panel.dynamic') !!}</option>
                                             <option value="2" {!! $page->type == 2 ? 'selected' : ''!!}>{!! trans('cms::panel.homepage') !!}</option>
-                                            <option value="3" {!! $page->type == 3 ? 'selected' : ''!!}>{!! trans('cms::panel.search') !!}</option>                                 
+                                            <option value="3" {!! $page->type == 3 ? 'selected' : ''!!}>{!! trans('cms::panel.search') !!}</option>
                                         </select>
                                     </div>
-                                </div> 
+                                </div>
                                 <div class="col-lg-6 col-md-6">
                                     <label>{!! trans('cms::panel.blade_file') !!}</label>
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="view">
                                     </div>
-                                </div> 
-                            </div>                 
-                        @endif  
+                                </div>
+                            </div>
+                        @endif
                     </div>
                     <div class="divider">
                         <div class="divider-text">{!! trans('cms::panel.content') !!}</div>
@@ -86,7 +86,7 @@
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     @foreach ($pageDetails as $pd)
                                         @if ($pd->language)
-                                            <a class="nav-link  {!! $loop->first ? 'active' : '' !!}" id="p{!! $pd->id !!}-tab" data-toggle="pill" href="#v{!! $pd->id !!}" role="tab" 
+                                            <a class="nav-link  {!! $loop->first ? 'active' : '' !!}" id="p{!! $pd->id !!}-tab" data-toggle="pill" href="#v{!! $pd->id !!}" role="tab"
                                             aria-controls="{!! $pd->id !!}" aria-selected="{!! $loop->first ? "true" : "" !!}">{!! $pd->language->name !!}</a>
                                         @endif
                                     @endforeach
@@ -104,7 +104,7 @@
                                             <div class="form-group">
                                                 <label>{!! trans('cms::panel.url') !!}</label>
                                                 <br/>
-                                                <strong>{!! env('APP_URL') !!}/{!! ($pd->showLanguageCode) ? $pd->language->code."/" : "" !!}</strong>
+                                                <strong>{!! env('APP_URL') !!}{!! ($pd->showLanguageCode) ? $pd->language->code."/" : "" !!}</strong>
                                                 <input  type="text" class="form-control urls {!! app()->defaultLanguage == $pd->language ? 'default_lang' : '' !!}"
                                                        lang-code="{!! $pd->language->code !!}"
                                                        page-id="{!! $pd->id !!}"
