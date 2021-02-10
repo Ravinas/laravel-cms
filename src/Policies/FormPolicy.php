@@ -17,12 +17,12 @@ class FormPolicy
 
     public function viewAny(User $user)
     {
-        return $user->hasModulePermission($this->module_id,'R');
+        return $user->hasModulePermission($this->module_id,'C');
     }
 
     public function view(User $user, Form $form)
     {
-        return $user->hasModulePermission($this->module_id,'R');
+        return $user->hasModulePermission($this->module_id,'C');
     }
 
     public function create(User $user)
@@ -32,12 +32,12 @@ class FormPolicy
 
     public function edit(User $user, Form $form)
     {
-        return $user->hasModulePermission($this->module_id,'U');
+        return $user->hasModulePermission($this->module_id,'C');
     }
 
     public function update(User $user, Form $form)
     {
-        return $user->hasModulePermission($this->module_id,'U');
+        return $user->hasModulePermission($this->module_id,'C');
     }
 
     public function delete(User $user, Form $form)

@@ -44,7 +44,7 @@ class User extends Authenticatable
         return $this->hasOne('CMS\Role');
     }
 
-    public function hasModulePermission($module_id,$permission){
+    public function hasModulePermission($module_id="",$permission=""){
         if($this->role_id <= 2){
             return 1;
         } else {
@@ -54,7 +54,7 @@ class User extends Authenticatable
         }
     }
 
-    public function hasPagePermission($page_id,$permission){
+    public function hasPagePermission($page_id="",$permission=""){
         if($this->role_id <= 2){
             return 1;
         } else {

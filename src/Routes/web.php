@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
-Route::prefix('/panel')->middleware('auth')->group( function () {
+Route::prefix('/w-admin')->middleware('auth')->group( function () {
     Route::resource('pages' , 'PageController');
     Route::get('pages/{id}/subpages','PageController@subPages')->name('subpages');
     Route::post('pages/checkurl','PageController@urlControl')->name('pages.checkurl');
@@ -60,15 +60,15 @@ Route::prefix('/panel')->middleware('auth')->group( function () {
 
 });
 
-Route::get('panel/login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('panel/login/', 'Auth\LoginController@login');
-Route::post('panel/logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('w-admin/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('w-admin/login/', 'Auth\LoginController@login');
+Route::post('w-admin/logout', 'Auth\LoginController@logout')->name('logout');
 
 
 Route::group(['prefix'=>'ebulletin'],function(){
-    Route::get('activate/{token}', 'EbulletinController@activate')->name('ebulletin-activate');
-    Route::get('cancel/{token}', 'EbulletinController@cancel')->name('ebulletin-cancel');
-    Route::post('store','EbulletinController@store')->name('ebulletin-store');
+    Route::get('activate/{token}', 'ActionsController@activate')->name('ebulletin.activate');
+    Route::get('cancel/{token}', 'ActionsController@cancel')->name('ebulletin.cancel');
+    Route::post('save','ActionsController@save')->name('ebulletin.save');
 });
 
 

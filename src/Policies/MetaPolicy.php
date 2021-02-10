@@ -17,12 +17,12 @@ class MetaPolicy
 
     public function viewAny(User $user)
     {
-        return $user->hasModulePermission($this->module_id,'R');
+        return $user->hasModulePermission($this->module_id,'C');
     }
 
     public function view(User $user, Meta $meta)
     {
-        return $user->hasModulePermission($this->module_id,'R');
+        return $user->hasModulePermission($this->module_id,'C');
     }
 
     public function create(User $user)
@@ -32,12 +32,12 @@ class MetaPolicy
 
     public function edit(User $user, Meta $meta)
     {
-        return $user->hasModulePermission($this->module_id,'U');
+        return $user->hasModulePermission($this->module_id,'C');
     }
 
     public function update(User $user, Meta $meta)
     {
-        return $user->hasModulePermission($this->module_id,'U');
+        return $user->hasModulePermission($this->module_id,'C');
     }
 
     public function delete(User $user, Meta $meta)
