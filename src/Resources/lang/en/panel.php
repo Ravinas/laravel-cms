@@ -178,6 +178,8 @@ return [
     'page_type' => 'Page Type',
     'page_isactive' => 'Should the page be published?',
     'blade_file' => 'Blade File',
+    'page_detail_status' => 'This language specific publication status of the page',
+    'non-lang-content' => 'Non-language Content',
 
 
     //Metas

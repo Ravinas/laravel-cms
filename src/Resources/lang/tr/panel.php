@@ -20,7 +20,7 @@ return [
     'lost_password' => 'Şifrenizi mi unuttunuz?',
     'parent' => 'Üst Sayfa',
     'no_parent' => 'Üst Sayfa Yok',
-    'order' => 'Sipariş',
+    'order' => 'Sıra',
     'delete' => 'Sil',
     'close' => 'Kapat',
     'received' => 'Alınan Formlar',
@@ -76,6 +76,8 @@ return [
     'edit_page' => 'İçeriklerinizi sayfanın tüm dillerine girmeyi unutmayın.',
     'page_isactive' => 'Sayfa yayınlansın mı?',
     'blade_file' => 'Blade Dosyası',
+    'page_detail_status' => 'Sayfanın bu dile özgü yayın durumu',
+    'non-lang-content' => 'Dile Bağlı Olmayan İçerik',
     
     'homepage' => 'Anasayfa',
     'search' => 'Arama',
