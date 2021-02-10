@@ -50,13 +50,13 @@ class PageController extends Controller
             return '<div class="form-group">
                         <div class="input-group">
                             <span class="input-group-btn">
-                                <a id="'.$id.'" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                <a id="'.$id.'" data-input="thumbnail2" data-preview="holder2" class="btn btn-primary">
                                  '.$label.'
                                 </a>
                             </span>
-                            <input id="thumbnail" class="form-control" type="text" name="'.$name.'" value="'.$value.'">
+                            <input id="thumbnail2" class="form-control" type="text" name="'.$name.'" value="'.$value.'">
                         </div>
-                        <img id="holder" style="margin-top:15px;max-height:100px;">
+                        <img id="holder2" style="margin-top:15px;max-height:100px;">
                     </div>';
         });
 
@@ -198,9 +198,10 @@ class PageController extends Controller
         } elseif($page->page_id && View::exists('vendor.prime.extras.page'.$page->page_id.'.detail-extra.page'.$page->id)){
             $detail_extra_include = "vendor.prime.extras.page".$page->page_id.'.detail-extra.page'.$page->id;
         }
-        if (View::exists('vendor.prime.extras.page'.$page->id.'extra.'.$page->id))
+        if ($page->page_id && View::exists('vendor.prime.extras.page'.$page->page_id.'.extras.page'.$page->id))
         {
-            $extra_include = 'vendor.prime.extras.page'.$page->id.'extra.'.$page->id;
+            $extra_include = 'vendor.prime.extras.page'.$page->page_id.'.extras.page'.$page->id;
+
         }
         $files = File::all();
         $categories = Category::with('details')->get();
@@ -298,7 +299,6 @@ class PageController extends Controller
             }
 
         }
-
         if ($request->has('detail_extras')) {
             $this->checkDetailExtra($request->detail_extras);
         }
