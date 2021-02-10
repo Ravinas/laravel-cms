@@ -28,36 +28,48 @@ class PageController extends Controller
     {
         $this->authorizeResource(Page::class);
         //file
-        Blade::directive('filePage', function ($expression) {
-            return '<button type="button" class="btn btn-primary file-select" data-toggle="modal" data-target="#filemanager" data-key="'.$expression.'">
-                    '.trans("cms::panel.select_file").'
-                </button>';
+        Blade::directive('detailFile', function ($arguments) {
+            list($label,$name,$key,$value,$id) = explode(',',$arguments);
+
+            return '<div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <a id="'.$id.'" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                 '.$label.'
+                                </a>
+                            </span>
+                            <input id="thumbnail" class="form-control" type="text" name="'.$name.'['.$key.']" value="'.$value.'">
+                        </div>
+                        <img id="holder" style="margin-top:15px;max-height:100px;">
+                    </div>';
         });
-        Blade::directive('filePageDetail', function ($arguments) {
-            return '<button type="button" class="btn btn-primary file-select-detail" data-toggle="modal" data-target="#filemanager" data-key="'.$arguments.'" data-pageDetail="{!! $pd->id !!}">
-                    '.trans("cms::panel.select_file").'
-                </button>';
+
+        Blade::directive('file', function ($arguments) {
+            list($label,$name,$value,$id) = explode(',',$arguments);
+
+            return '<div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <a id="'.$id.'" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                 '.$label.'
+                                </a>
+                            </span>
+                            <input id="thumbnail" class="form-control" type="text" name="'.$name.'" value="'.$value.'">
+                        </div>
+                        <img id="holder" style="margin-top:15px;max-height:100px;">
+                    </div>';
         });
+
 
         //text
-        Blade::directive('textExtra', function ($arguments) {
-            return '<input type="text" class="form-control" name="extras['.$arguments.']" value="{!! $page->'.$arguments.' !!}"/>';
-        });
-        Blade::directive('textDetailExtra', function ($arguments) {
-            return '<input type="text" class="form-control" name="detail_extras[{!! $pd->id !!}]['.$arguments.']" value="{!! $pd->'.$arguments.' !!}"/>';
-        });
-
-        Blade::directive('order', function ($arguments) {
-            return '<input type="text" class="form-control" id="order" name="order" placeholder="{!! trans(\'cms::panel.order\') !!}" value="{!! $page->order !!}">';
+        Blade::directive('text', function ($arguments) {
+            list($label,$name,$key,$value) = explode(',',$arguments);
+            return '<div class="form-group">
+                        <label for="">'.$label.'</label>
+                        <input type="text" class="form-control" name="extras['.$key.']" value="'.$value.'"/>
+                    </div>';
         });
 
-        Blade::directive('date', function ($arguments) {
-            return '<input type="date" class="form-control" name="extras['.$arguments.']" value="{!! $page->'.$arguments.' !!}">';
-        });
-
-        Blade::directive('dateDetail', function ($arguments) {
-            return '<input type="date" class="form-control" name="detail_extras[{!! $pd->id !!}]['.$arguments.']" value="{!! $pd->'.$arguments.' !!}">';
-        });
 
 
         //select
@@ -178,12 +190,17 @@ class PageController extends Controller
      */
     public function edit(Page $page)
     {
-        $include = false;
 
-        if(View::exists('pages.page'.$page->id.'.main')){
-            $include = "pages.page".$page->id.".main";
-        } elseif($page->page_id && View::exists('panel.extras.page'.$page->page_id.'.sub')){
-            $include = "pages.page".$page->page_id.".sub";
+        $detail_extra_include = false;
+        $extra_include = false;
+        if(View::exists('vendor.prime.extras.page'.$page->id.'detail-extra.main')){
+            $detail_extra_include = "pages.page".$page->id.".main";
+        } elseif($page->page_id && View::exists('vendor.prime.extras.page'.$page->page_id.'.detail-extra.page'.$page->id)){
+            $detail_extra_include = "vendor.prime.extras.page".$page->page_id.'.detail-extra.page'.$page->id;
+        }
+        if (View::exists('vendor.prime.extras.page'.$page->id.'extra.'.$page->id))
+        {
+            $extra_include = 'vendor.prime.extras.page'.$page->id.'extra.'.$page->id;
         }
         $files = File::all();
         $categories = Category::with('details')->get();
@@ -244,7 +261,7 @@ class PageController extends Controller
 
             $order = Page::where('page_id',$page->page_id)->max('order');
         }
-        return view('cms::panel.page.edit',compact('page','pageDetails','include','files','categories','page_categories','order'));
+        return view('cms::panel.page.edit',compact('page','pageDetails','detail_extra_include','extra_include','files','categories','page_categories','order'));
     }
 
     /**
@@ -267,7 +284,7 @@ class PageController extends Controller
             $pc = $page->categories->pluck('id')->toArray();
             $delete_pivot = array_diff($pc, $request->category);
             foreach ($delete_pivot as $value) {
-                 $page->categories()->wherePivot('category_id','=',$value)->detach();
+                $page->categories()->wherePivot('category_id','=',$value)->detach();
             }
 
             foreach ($request->category as $ct) {
@@ -275,7 +292,7 @@ class PageController extends Controller
                     $query->where('category_id',$ct);
                 })->first();
                 if ($pg) {
-                   $page->categories()->wherePivot('category_id','=',$ct)->detach();
+                    $page->categories()->wherePivot('category_id','=',$ct)->detach();
                 }
                 $page->categories()->attach($ct);
             }
@@ -367,7 +384,7 @@ class PageController extends Controller
             $pd->url = $language->code."/auto_url_".$page_id;
         }
 
-        $pd->status = 0;
+        $pd->status = 1;
         $pd->save();
         $this->createLog($pd,Auth::user()->id,"C");
         $meta = new Meta();
