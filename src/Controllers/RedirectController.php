@@ -16,6 +16,12 @@ class RedirectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->authorizeResource(Redirect::class);
+    }
+
     public function index()
     {
         $redirects = Redirect::where('from' ,'!=',null)->get();

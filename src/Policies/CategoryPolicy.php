@@ -12,7 +12,7 @@ class CategoryPolicy
 
     public function __construct()
     {
-        $this->module_id = CATEGORY;
+        $this->module_id = CONTENT;
     }
 
     public function viewAny(User $user)

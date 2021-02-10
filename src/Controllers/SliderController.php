@@ -3,6 +3,7 @@
 namespace CMS\Controllers;
 
 use CMS\Models\Language;
+use CMS\Models\Page;
 use CMS\Models\Slider;
 use CMS\Models\SliderItems;
 use Illuminate\Http\Request;
@@ -13,6 +14,10 @@ use Auth;
 class SliderController extends Controller
 {
     use LogAgent;
+    public function __construct()
+    {
+        $this->authorizeResource(Page::class);
+    }
     /**
      * Display a listing of the resource.
      *
