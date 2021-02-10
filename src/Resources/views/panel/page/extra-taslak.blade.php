@@ -1,7 +1,8 @@
 {{--Örnek kullanımlar--}}
 @detailFile(Banner,detail_extras[{!! $pd->id !!}],banner,{!! $pd->banner !!},lfm)
-@file(Banner,detail_extras[{!! $pd->id !!}],{!! $pd->banner !!},lfm2)
 @text(İsim,extras[{!! $pd->id !!}],isim,{!! $page->isim !!})
+@file(Banner,extras[banner],{!! $page->banner !!},lfm2)
+
 {{--Filemanager için mutlaka kullanılmalı--}}
 @push('js')
     <script>
@@ -9,3 +10,4 @@
         $('#lfm2').filemanager('image');
     </script>
 @endpush
+
