@@ -6,6 +6,7 @@ use CMS\Models\Language;
 use CMS\Models\Menu;
 use CMS\Models\MenuItem;
 use CMS\Models\PageDetail;
+use CMS\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use CMS\Traits\LogAgent;
@@ -20,6 +21,11 @@ class MenuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->authorizeResource(Role::class);
+    }
+
     public function index()
     {
 

@@ -14,6 +14,12 @@ use Auth;
 class CategoryController extends Controller
 {
     use LogAgent;
+
+    public function __construct()
+    {
+        $this->authorizeResource(Category::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -137,8 +143,8 @@ class CategoryController extends Controller
                 $category_order->save();
             }
 
-          
- 
+
+
         foreach (app()->activeLanguages as $lang) {
              $detail = CategoryDetail::where('category_id',$category->id)->where('lang_id',$lang->id)->first();
              $detail->name = $request->name[$lang->id];
