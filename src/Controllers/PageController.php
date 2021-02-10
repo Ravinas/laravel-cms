@@ -11,6 +11,8 @@ use CMS\Models\Meta;
 use CMS\Models\Page;
 use CMS\Models\Category;
 use CMS\Models\PageDetail;
+use CMS\Models\PagePermission;
+use CMS\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
@@ -102,6 +104,10 @@ class PageController extends Controller
     public function store(Request $request)
     {
         $page = new Page();
+
+        $roles = Role::where('id','>',2)->pluck('id');
+        $page_permissions= [];
+
         if($request->get('page')){
             $page->page_id = $request->get('page');
             $page->type = 1;
@@ -112,8 +118,38 @@ class PageController extends Controller
             $page->type = 0;
             $page->order = 0;
         }
+
         $page->status = 0;
         $page->save();
+
+
+        // rol oluşturulurken tüm sayfalar için yetki satırı oluşturuluyor ama sonradan oluşturulan sayfalar??
+        // yeni sayfa oluşturulduğunda sonradan oluşturulan her rol için pagePermission yetki satırı oluştur.
+        foreach($roles as $r){
+            $page_permissions[] = [
+                'role_id' => $r,
+                'page_id' => $page->id,
+                'permission' => 'C',
+            ];
+            $page_permissions[] = [
+                'role_id' => $r,
+                'page_id' => $page->id,
+                'permission' => 'R',
+            ];
+            $page_permissions[] = [
+                'role_id' => $r,
+                'page_id' => $page->id,
+                'permission' => 'U',
+            ];
+            $page_permissions[] = [
+                'role_id' => $r,
+                'page_id' => $page->id,
+                'permission' => 'D',
+            ];
+        }
+        PagePermission::insert($page_permissions);
+        PagePermission::where('page_id',$page->id)->delete();
+
         $this->createLog($page,Auth::user()->id,"C");
 
         foreach(LanguageFacade::all() as $l){
@@ -166,7 +202,7 @@ class PageController extends Controller
             $newPageDetail->lang_id = $l;
             $newPageDetail->name = "";
             $newPageDetail->content = "";
-            $newPageDetail->url = "automatic_url_".$page->id."_".$l;
+            $newPageDetail->url = "auto_url_".$page->id."_".$l;
             $newPageDetail->status = 0;
             $newPageDetail->save();
             $this->createLog($newPageDetail,Auth::user()->id,"C");
@@ -323,12 +359,12 @@ class PageController extends Controller
         $pd = new PageDetail();
         $pd->page_id = $page_id;
         $pd->lang_id = $language->id;
-        $pd->name = $language->code."_".trans('cms::page.example_page_name')."_".$page_id;
+        $pd->name = $language->code."_auto_url_".$page_id;
         $pd->content = "";
         if($language->code == app()->defaultLanguage->code && app()->showDefaultLanguageCode == false){
-            $pd->url = trans('cms::page.example_page_url')."_".$page_id;
+            $pd->url = "auto_url_".$page_id;
         } else {
-            $pd->url = $language->code."/".trans('cms::page.example_page_url')."_".$page_id;
+            $pd->url = $language->code."/auto_url_".$page_id;
         }
 
         $pd->status = 0;
