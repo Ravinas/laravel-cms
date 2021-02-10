@@ -11,15 +11,15 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
-class EbulletinController extends Controller
+class ActionsController extends Controller
 {
 
     public function __construct()
     {
-        $this->authorizeResource(Ebulletin::class);
+
     }
+
     // aktivasyon fonksiyonu
     public function activate($token){
         $ebulletin = Ebulletin::where('activate_token',$token)->first();
@@ -61,41 +61,13 @@ class EbulletinController extends Controller
             dd("zaten pasifti");
         }
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $ebulletins = Ebulletin::join('languages','languages.id','=','ebulletins.lang_id')
-            ->select('languages.name','ebulletins.*')
-            ->orderBy('id','desc')
-            ->get();
-        return view('cms::panel.ebulletin.index',compact('ebulletins'));
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function save(Request $request)
     {
         $rules = [
           'email' => 'required|email'
         ];
+        dd($request->post('email'));
         $valid = Validator::make($request->all(),$rules);
         if($valid->fails()){
             return response(['status' => 'error' , 'response' => trans('cms::panel.ebulletins.error.bad_email')]);
@@ -115,61 +87,16 @@ class EbulletinController extends Controller
                 $ebulletin->lang_id = $request->post('lang_id');
                 $ebulletin->email = $request->post('email');
                 $ebulletin->status = 0;
-                $ebulletin->activate_token = base64_encode(Hash::make('kullanici2@gmail.com'));
+                $ebulletin->activate_token = base64_encode(Hash::make($request->post('email')));
                 $ebulletin->save();
+
+                //aktivasyon için mail
+                $locale = Language::find($request->post('lang_id'));
+                Mail::to($ebulletin->email)->locale($locale->code)->send(new EbulletinMail($ebulletin,'activation'));
+
+                return response(['status'=>'success' , 'response' => trans('cms::panel.ebulletins.success.registered')]);
             }
 
-            //aktivasyon için mail
-            $locale = Language::find($request->post('lang_id'));
-            Mail::to($ebulletin->email)->locale($locale->code)->send(new EbulletinMail($ebulletin,'activation'));
-
-            return response(['status'=>'success' , 'response' => trans('cms::panel.ebulletins.success.registered')]);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \CMS\Models\Ebulletin  $ebulletin
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Ebulletin $ebulletin)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \CMS\Models\Ebulletin  $ebulletin
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Ebulletin $ebulletin)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \CMS\Models\Ebulletin  $ebulletin
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Ebulletin $ebulletin)
-    {
-        $rules = ['status'=>'required|boolean'];
-
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \CMS\Models\Ebulletin  $ebulletin
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Ebulletin $ebulletin)
-    {
-        //
     }
 }

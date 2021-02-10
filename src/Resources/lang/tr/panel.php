@@ -78,7 +78,7 @@ return [
     'blade_file' => 'Blade Dosyası',
     'page_detail_status' => 'Sayfanın bu dile özgü yayın durumu',
     'non-lang-content' => 'Dile Bağlı Olmayan İçerik',
-    
+
     'homepage' => 'Anasayfa',
     'search' => 'Arama',
     'page_type' => 'Sayfa Tipi',
@@ -228,6 +228,13 @@ return [
         'status' => 'Durumu',
         'active' => 'Aktif',
         'passive' => 'Pasif',
+        'success' => [
+            'registered' => 'Email adresiniz ebülten listesine kaydedildi. Doğrulama için hesabınıza email gönderildi.',
+        ],
+        'error' => [
+            'registered' => 'Hata! Email adresi ebülten listesine önceden kaydedilmiştir.',
+            'bad_email' => 'Hata! Email adresi hatalı, tekrar kontrol ediniz.'
+        ],
     ],
 
     //Forms

@@ -17,12 +17,12 @@ class EbulletinPolicy
 
     public function viewAny(User $user)
     {
-        return $user->hasModulePermission($this->module_id,'R');
+        return $user->hasModulePermission($this->module_id,'C');
     }
 
     public function view(User $user,Ebulletin $ebulletin)
     {
-        return $user->hasModulePermission($this->module_id,'R');
+        return $user->hasModulePermission($this->module_id,'C');
     }
 
     public function create(User $user)
@@ -32,12 +32,12 @@ class EbulletinPolicy
 
     public function edit(User $user,Ebulletin $ebulletin)
     {
-        return $user->hasModulePermission($this-> module_id,'U');
+        return $user->hasModulePermission($this-> module_id,'C');
     }
 
     public function update(User $user,Ebulletin $ebulletin)
     {
-        return $user->hasModulePermission($this-> module_id,'U');
+        return $user->hasModulePermission($this-> module_id,'C');
     }
 
     public function delete(User $user,Ebulletin $ebulletin)

@@ -54,7 +54,7 @@ class CMS extends ServiceProvider
 
         $router = $this->app->make(Router::class);
         $router->pushMiddlewareToGroup('web',Localization::class);
-        
+
         app()->setLocale('tr');
         if ($this->app->runningInConsole()) {
             $this->commands([
@@ -86,13 +86,11 @@ class CMS extends ServiceProvider
 
 
         define('CONTENT',1);
-        define('LANGUAGE',2);
-        define('FORM',3);
-        define('EBULLETIN',4);
-        define('USER',5);
-        define('META',6);
-        define('CATEGORY', 7);
-        define('REDIRECT',8);
+        define('FORM',2);
+        define('EBULLETIN',3);
+        define('USER',4);
+        define('META',5);
+        define('REDIRECT',6);
         Schema::defaultStringLength(191);
 
         Route::middleware('web')

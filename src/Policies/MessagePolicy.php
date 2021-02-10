@@ -17,12 +17,12 @@ class MessagePolicy
 
     public function viewAny(User $user)
     {
-        return $user->hasModulePermission($this->module_id,'R');
+        return $user->hasModulePermission($this->module_id,'C');
     }
 
     public function view(User $user, Message $message)
     {
-        return $user->hasModulePermission($this->module_id,'R');
+        return $user->hasModulePermission($this->module_id,'C');
     }
 
     public function create(User $user)
@@ -32,12 +32,12 @@ class MessagePolicy
 
     public function edit(User $user, Message $message)
     {
-        return $user->hasModulePermission($this->module_id,'U');
+        return $user->hasModulePermission($this->module_id,'C');
     }
 
     public function update(User $user, Message $message)
     {
-        return $user->hasModulePermission($this->module_id,'U');
+        return $user->hasModulePermission($this->module_id,'C');
     }
 
     public function delete(User $user, Message $message)
