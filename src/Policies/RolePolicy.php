@@ -10,43 +10,26 @@ class RolePolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user)
-    {
+    public function cru(User $user){
+        return $user->hasModulePermission();
+    }
+    public function del(User $user){
         return $user->hasModulePermission();
     }
 
-    public function view(User $user  )
-    {
-        return $user->hasModulePermission();
-    }
+    public function viewAny(User $user) { return $this->cru($user); }
 
-    public function create(User $user)
-    {
-        return $user->hasModulePermission();
-    }
+    public function view(User $user ) { return $this->cru($user); }
 
-    public function edit(User $user  )
-    {
-        return $user->hasModulePermission();
-    }
+    public function create(User $user) { return $this->cru($user); }
 
-    public function update(User $user  )
-    {
-        return $user->hasModulePermission();
-    }
+    public function edit(User $user ) { return $this->cru($user); }
 
-    public function delete(User $user  )
-    {
-        return $user->hasModulePermission();
-    }
+    public function update(User $user ) { return $this->cru($user); }
 
-    public function restore(User $user  )
-    {
-        return $user->hasModulePermission();
-    }
+    public function delete(User $user ) { return $this->del($user); }
 
-    public function forceDelete(User $user  )
-    {
-        return $user->hasModulePermission();
-    }
+    public function restore(User $user ) { return $this->del($user); }
+
+    public function forceDelete(User $user ) { return $this->del($user); }
 }

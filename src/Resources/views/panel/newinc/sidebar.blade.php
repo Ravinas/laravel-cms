@@ -49,7 +49,7 @@
                 </li>
                 @endif
 
-                @if(Auth::user()->hasModulePermission(USER,'C'))
+                @if(Auth::user()->hasModulePermission())
                 <li class='sidebar-title'>{{ trans('cms::panel.users_roles') }}</li>
                 @if(Auth::user()->hasModulePermission())
                 <li class="sidebar-item {{ request()->routeIs('roles*') ? 'active' : '' }}">
@@ -79,7 +79,7 @@
                     </a>
                 </li>
                 @endif
-                @if(Auth::user()->hasModulePermission(META,'C'))
+                @if(Auth::user()->hasModulePermission(META,'C') || Auth::user()->hasModulePermission(CONTENT,'C'))
                 <li class="sidebar-item {{ request()->routeIs('metas*') ? 'active' : '' }}">
                     <a href="{!! route('metas.index') !!}" class='sidebar-link'>
                         <i data-feather="key" width="20"></i>
