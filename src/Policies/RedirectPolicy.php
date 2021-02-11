@@ -20,7 +20,7 @@ class RedirectPolicy
         return $user->hasModulePermission($this->module_id,'C');
     }
 
-    public function view(User $user, Redirect $redirect)
+    public function view(User $user )
     {
         return $user->hasModulePermission($this->module_id,'C');
     }
@@ -30,27 +30,27 @@ class RedirectPolicy
         return $user->hasModulePermission($this->module_id,'C');
     }
 
-    public function edit(User $user, Redirect $redirect)
+    public function edit(User $user )
     {
         return $user->hasModulePermission($this->module_id,'C');
     }
 
-    public function update(User $user, Redirect $redirect)
+    public function update(User $user )
     {
         return $user->hasModulePermission($this->module_id,'C');
     }
 
-    public function delete(User $user, Redirect $redirect)
+    public function delete(User $user)
     {
         return $user->hasModulePermission($this->module_id,'D');
     }
 
-    public function restore(User $user, Redirect $redirect)
+    public function restore(User $user )
     {
         return $user->hasModulePermission($this->module_id,'D');
     }
 
-    public function forceDelete(User $user, Redirect $redirect)
+    public function forceDelete(User $user )
     {
         return $user->hasModulePermission($this->module_id,'D');
     }

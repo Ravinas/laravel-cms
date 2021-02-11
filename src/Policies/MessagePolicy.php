@@ -20,7 +20,7 @@ class MessagePolicy
         return $user->hasModulePermission($this->module_id,'C');
     }
 
-    public function view(User $user, Message $message)
+    public function view(User $user )
     {
         return $user->hasModulePermission($this->module_id,'C');
     }
@@ -30,27 +30,27 @@ class MessagePolicy
         return true;
     }
 
-    public function edit(User $user, Message $message)
+    public function edit(User $user )
     {
         return $user->hasModulePermission($this->module_id,'C');
     }
 
-    public function update(User $user, Message $message)
+    public function update(User $user )
     {
         return $user->hasModulePermission($this->module_id,'C');
     }
 
-    public function delete(User $user, Message $message)
+    public function delete(User $user )
     {
         return $user->hasModulePermission($this->module_id,'D');
     }
 
-    public function restore(User $user, Message $message)
+    public function restore(User $user )
     {
         return $user->hasModulePermission($this->module_id,'D');
     }
 
-    public function forceDelete(User $user, Message $message)
+    public function forceDelete(User $user )
     {
         return $user->hasModulePermission($this->module_id,'D');
     }

@@ -56,10 +56,11 @@
                                                 <td>
                                                     <a href="{!! route('forms.messages.index' , $form) !!}" class="btn btn-success icon"><i data-feather="mail" ></i> {!! trans('cms::panel.forms.messages') !!}</a>
                                                     <a href="{!! route('forms.edit' ,  $form) !!}" class="btn btn-warning icon"><i data-feather="edit" ></i> {!! trans('cms::panel.forms.edit') !!}</a>
-
+                                                    @can('delete',\CMS\Models\Form::class)
                                                     @component('cms::panel.newinc.delete_modal',[ 'model' => $form, 'route_group' => 'forms'])
                                                         {!! trans('cms::panel.forms.delete_text') !!}
                                                     @endcomponent
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach

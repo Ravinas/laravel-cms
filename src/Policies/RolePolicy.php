@@ -15,7 +15,7 @@ class RolePolicy
         return $user->hasModulePermission();
     }
 
-    public function view(User $user, Role $role)
+    public function view(User $user  )
     {
         return $user->hasModulePermission();
     }
@@ -25,27 +25,27 @@ class RolePolicy
         return $user->hasModulePermission();
     }
 
-    public function edit(User $user, Role $role)
+    public function edit(User $user  )
     {
         return $user->hasModulePermission();
     }
 
-    public function update(User $user, Role $role)
+    public function update(User $user  )
     {
         return $user->hasModulePermission();
     }
 
-    public function delete(User $user, Role $role)
+    public function delete(User $user  )
     {
         return $user->hasModulePermission();
     }
 
-    public function restore(User $user, Role $role)
+    public function restore(User $user  )
     {
         return $user->hasModulePermission();
     }
 
-    public function forceDelete(User $user, Role $role)
+    public function forceDelete(User $user  )
     {
         return $user->hasModulePermission();
     }

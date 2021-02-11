@@ -82,16 +82,6 @@ class RoleController extends Controller
                     $module_permissions[] = [
                         'role_id' => $role->id,
                         'module_id' => $m,
-                        'permission' => 'R',
-                    ];
-                    $module_permissions[] = [
-                        'role_id' => $role->id,
-                        'module_id' => $m,
-                        'permission' => 'U',
-                    ];
-                    $module_permissions[] = [
-                        'role_id' => $role->id,
-                        'module_id' => $m,
                         'permission' => 'D',
                     ];
                 }
@@ -101,16 +91,6 @@ class RoleController extends Controller
                         'role_id' => $role->id,
                         'page_id' => $p,
                         'permission' => 'C',
-                    ];
-                    $page_permissions[] = [
-                        'role_id' => $role->id,
-                        'page_id' => $p,
-                        'permission' => 'R',
-                    ];
-                    $page_permissions[] = [
-                        'role_id' => $role->id,
-                        'page_id' => $p,
-                        'permission' => 'U',
                     ];
                     $page_permissions[] = [
                         'role_id' => $role->id,

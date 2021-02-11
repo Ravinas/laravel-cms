@@ -19,7 +19,7 @@ class CategoryPolicy
     {
         return $user->hasModulePermission($this->module_id,'C');
     }
-    public function view(User $user, Category $category)
+    public function view(User $user   )
     {
         return $user->hasModulePermission($this->module_id,'C');
     }
@@ -29,27 +29,27 @@ class CategoryPolicy
         return $user->hasModulePermission($this->module_id,'C');
     }
 
-    public function edit(User $user, Category $category)
+    public function edit(User $user   )
     {
         return $user->hasModulePermission($this->module_id,'C');
     }
 
-    public function update(User $user, Category $category)
+    public function update(User $user   )
     {
         return $user->hasModulePermission($this->module_id,'C');
     }
 
-    public function delete(User $user, Category $category)
+    public function delete(User $user   )
     {
         return $user->hasModulePermission($this->module_id,'D');
     }
 
-    public function restore(User $user, Category $category)
+    public function restore(User $user   )
     {
         return $user->hasModulePermission($this->module_id,'D');
     }
 
-    public function forceDelete(User $user, Category $category)
+    public function forceDelete(User $user   )
     {
         return $user->hasModulePermission($this->module_id,'D');
     }
