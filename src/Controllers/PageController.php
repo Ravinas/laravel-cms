@@ -180,7 +180,9 @@ class PageController extends Controller
      */
     public function edit(Page $page)
     {
-
+        if(!Auth::user()->hasPagePermission($page->id,'C')){
+            return abort(403);
+        }
         $detail_extra_include = false;
         $extra_include = false;
         if(View::exists('vendor.prime.extras.page'.$page->id.'detail-extra.main')){
@@ -266,6 +268,9 @@ class PageController extends Controller
 
     public function update(Request $request, Page $page)
     {
+        if(!Auth::user()->hasPagePermission($page->id,'C')){
+            return abort(403);
+        }
         $order_check = null;
         if ($request->has('order') && $page->page_id) {
             $this->setOrders($request->post('order'),$page);
@@ -353,6 +358,9 @@ class PageController extends Controller
      */
     public function destroy(Page $page)
     {
+        if(!Auth::user()->hasPagePermission($page->id,'D')){
+            return abort(403);
+        }
         $page->delete();
         $this->createLog($page,Auth::user()->id,"D");
         return redirect()->route('pages.index');

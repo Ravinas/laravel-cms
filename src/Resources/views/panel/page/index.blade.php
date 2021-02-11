@@ -39,6 +39,7 @@
                         <tbody>
                             @foreach ($pages as $page)
                             <tr>
+                                @if(Auth::user()->hasPagePermission($page->id,'C'))
                                 <td>{!! $page->id !!}</td>
                                 <td>{!! $page->name !!}</td>
                                 <td>{!! $page->url !!}</td>
@@ -48,9 +49,12 @@
                                     <a href="{!! route('subpages' , ['id' => $page->id]) !!}" class="btn icon btn-info ml-1 "><i data-feather="layout"></i></a>
                                     @endif
                                     @can('delete',\CMS\Models\Page::class)
+                                        @if(Auth::user()->hasPagePermission($page->id,'D'))
                                         @include('cms::panel.inc.delete_modal',['trans_file' => 'page', 'model' => $page, 'route_group' => 'pages', 'route_parameter' => 'page'])
+                                        @endif
                                     @endcan
                                 </td>
+                                @endif
                             </tr>
                             @endforeach
                         </tbody>
