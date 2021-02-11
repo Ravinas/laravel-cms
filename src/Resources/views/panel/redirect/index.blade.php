@@ -56,9 +56,11 @@
                                                 <td>
 
                                                     <a href="{!! route('redirects.edit' , $redirect) !!}" class="btn btn-warning icon"><i data-feather="edit" ></i> {!! trans('cms::panel.edit') !!}</a>
-                                                    @component('cms::panel.newinc.delete_modal',[ 'model' => $redirect, 'route_group' => 'redirects'])
-                                                        {!! trans('cms::panel.redirects.delete_text') !!}
-                                                    @endcomponent
+                                                    @can('delete',CMS\Models\Redirect::class)
+                                                        @component('cms::panel.newinc.delete_modal',[ 'model' => $redirect, 'route_group' => 'redirects'])
+                                                            {!! trans('cms::panel.redirects.delete_text') !!}
+                                                        @endcomponent
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach

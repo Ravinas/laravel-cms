@@ -20,7 +20,7 @@ class EbulletinPolicy
         return $user->hasModulePermission($this->module_id,'C');
     }
 
-    public function view(User $user,Ebulletin $ebulletin)
+    public function view(User $user  )
     {
         return $user->hasModulePermission($this->module_id,'C');
     }
@@ -30,27 +30,27 @@ class EbulletinPolicy
         return $user->hasModulePermission($this->module_id,'C');
     }
 
-    public function edit(User $user,Ebulletin $ebulletin)
+    public function edit(User $user  )
     {
         return $user->hasModulePermission($this-> module_id,'C');
     }
 
-    public function update(User $user,Ebulletin $ebulletin)
+    public function update(User $user  )
     {
         return $user->hasModulePermission($this-> module_id,'C');
     }
 
-    public function delete(User $user,Ebulletin $ebulletin)
+    public function delete(User $user  )
     {
         return $user->hasModulePermission($this->module_id,'D');
     }
 
-    public function restore(User $user,Ebulletin $ebulletin)
+    public function restore(User $user  )
     {
         return $user->hasModulePermission($this->module_id,'D');
     }
 
-    public function forceDelete(User $user,Ebulletin $ebulletin)
+    public function forceDelete(User $user  )
     {
         return $user->hasModulePermission($this->module_id,'D');
     }

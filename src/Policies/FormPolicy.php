@@ -20,7 +20,7 @@ class FormPolicy
         return $user->hasModulePermission($this->module_id,'C');
     }
 
-    public function view(User $user, Form $form)
+    public function view(User $user )
     {
         return $user->hasModulePermission($this->module_id,'C');
     }
@@ -30,27 +30,27 @@ class FormPolicy
         return $user->hasModulePermission($this->module_id,'C');
     }
 
-    public function edit(User $user, Form $form)
+    public function edit(User $user )
     {
         return $user->hasModulePermission($this->module_id,'C');
     }
 
-    public function update(User $user, Form $form)
+    public function update(User $user )
     {
         return $user->hasModulePermission($this->module_id,'C');
     }
 
-    public function delete(User $user, Form $form)
+    public function delete(User $user )
     {
         return $user->hasModulePermission($this->module_id,'D');
     }
 
-    public function restore(User $user, Form $form)
+    public function restore(User $user )
     {
         return $user->hasModulePermission($this->module_id,'D');
     }
 
-    public function forceDelete(User $user, Form $form)
+    public function forceDelete(User $user )
     {
         return $user->hasModulePermission($this->module_id,'D');
     }

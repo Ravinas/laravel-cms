@@ -93,7 +93,7 @@ class MetaController extends Controller
             $meta->keywords = $request->post('keywords');
             $meta->robots = $request->post('robots');
             $meta->save();
-            $this->createLog($meta,Auth::user()->id,"U");    
+            $this->createLog($meta,Auth::user()->id,"U");
             return response('success',200);
         }
     }

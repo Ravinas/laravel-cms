@@ -43,14 +43,12 @@
                                 <td>{!! $page->name !!}</td>
                                 <td>{!! $page->url !!}</td>
                                 <td class="d-flex justify-content-end">
-                                    @can('edit',$page)
                                     <a href="{!! route('pages.edit' , ['page' => $page->id]) !!}" class="btn icon btn-primary ml-1"><i data-feather="edit"></i></a>
-                                    @endcan
                                     @if($page->type == 1)
                                     <a href="{!! route('subpages' , ['id' => $page->id]) !!}" class="btn icon btn-info ml-1 "><i data-feather="layout"></i></a>
                                     @endif
-                                    @can('delete',$page)
-                                    @include('cms::panel.inc.delete_modal',['trans_file' => 'page', 'model' => $page, 'route_group' => 'pages', 'route_parameter' => 'page'])
+                                    @can('delete',\CMS\Models\Page::class)
+                                        @include('cms::panel.inc.delete_modal',['trans_file' => 'page', 'model' => $page, 'route_group' => 'pages', 'route_parameter' => 'page'])
                                     @endcan
                                 </td>
                             </tr>

@@ -20,7 +20,7 @@ class LanguagePolicy
         return $user->hasModulePermission();
     }
 
-    public function view(User $user,Language $language)
+    public function view(User $user )
     {
         return $user->hasModulePermission();
     }
@@ -30,27 +30,27 @@ class LanguagePolicy
         return $user->hasModulePermission();
     }
 
-    public function edit(User $user,Language $language)
+    public function edit(User $user )
     {
         return $user->hasModulePermission();
     }
 
-    public function update(User $user,Language $language)
+    public function update(User $user )
     {
         return $user->hasModulePermission();
     }
 
-    public function delete(User $user,Language $language)
+    public function delete(User $user )
     {
         return $user->hasModulePermission();
     }
 
-    public function restore(User $user,Language $language)
+    public function restore(User $user )
     {
         return $user->hasModulePermission();
     }
 
-    public function forceDelete(User $user,Language $language)
+    public function forceDelete(User $user )
     {
         return $user->hasModulePermission();
     }

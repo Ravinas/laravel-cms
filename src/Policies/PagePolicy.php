@@ -20,7 +20,7 @@ class PagePolicy
         return $user->hasModulePermission($this->module_id,'C');
     }
 
-    public function view(User $user, Page $page)
+    public function view(User $user )
     {
         return $user->hasModulePermission($this->module_id,'C');
     }
@@ -30,27 +30,27 @@ class PagePolicy
         return $user->hasModulePermission($this->module_id,'C');
     }
 
-    public function edit(User $user, Page $page)
+    public function edit(User $user )
     {
         return $user->hasModulePermission($this->module_id,'C');
     }
 
-    public function update(User $user, Page $page)
+    public function update(User $user )
     {
         return $user->hasModulePermission($this->module_id,'C');
     }
 
-    public function delete(User $user, Page $page)
+    public function delete(User $user )
     {
         return $user->hasModulePermission($this->module_id,'D');
     }
 
-    public function restore(User $user, Page $page)
+    public function restore(User $user )
     {
         return $user->hasModulePermission($this->module_id,'D');
     }
 
-    public function forceDelete(User $user, Page $page)
+    public function forceDelete(User $user )
     {
         return $user->hasModulePermission($this->module_id,'D');
     }

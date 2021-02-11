@@ -57,9 +57,11 @@
                                                 <td>
                                                     <a href="{!! route('users.edit' , $user) !!}" class="btn btn-warning icon"><i data-feather="edit"></i>{!! trans('cms::panel.edit') !!}</a>
                                                     @if(Auth::user()->id != $user->id)
+                                                        @can('delete',\CMS\Models\User::class)
                                                         @component('cms::panel.newinc.delete_modal',[ 'model' => $user, 'route_group' => 'users'])
                                                             {!! trans('cms::panel.users.delete_text') !!}
                                                         @endcomponent
+                                                        @endcan
                                                     @endif
                                                 </td>
                                             </tr>

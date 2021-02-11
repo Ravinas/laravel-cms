@@ -146,16 +146,6 @@ class PageController extends Controller
             $page_permissions[] = [
                 'role_id' => $r,
                 'page_id' => $page->id,
-                'permission' => 'R',
-            ];
-            $page_permissions[] = [
-                'role_id' => $r,
-                'page_id' => $page->id,
-                'permission' => 'U',
-            ];
-            $page_permissions[] = [
-                'role_id' => $r,
-                'page_id' => $page->id,
                 'permission' => 'D',
             ];
         }
