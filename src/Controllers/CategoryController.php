@@ -14,12 +14,6 @@ use Auth;
 class CategoryController extends Controller
 {
     use LogAgent;
-
-    public function __construct()
-    {
-        $this->authorizeResource(Category::class);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -29,11 +23,11 @@ class CategoryController extends Controller
     {
 
         $categories = Category::join('category_details','categories.id','=','category_details.category_id')
-        ->where('categories.parent_id',0)
-        ->where('category_details.lang_id',LanguageFacade::default())
-        ->select('categories.id','category_details.name')
-        ->orderBy('order')
-        ->get();
+            ->where('categories.parent_id',0)
+            ->where('category_details.lang_id',app()->defaultLanguage->id)
+            ->select('categories.id','category_details.name')
+            ->orderBy('order')
+            ->get();
         return view('cms::panel.category.index',compact('categories'));
     }
 
@@ -44,14 +38,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $max_order = Category::where('parent_id',0)->max('order');
-        $order = $max_order +1;
-        $categories = Category::join('category_details','categories.id','=','category_details.category_id')
-        ->where('category_details.lang_id',LanguageFacade::default())
-        ->select('categories.id','category_details.name')
-        ->get();
-        $files = File::all();
-        return view('cms::panel.category.create',compact('categories','files','order'));
+
     }
 
     /**
@@ -64,30 +51,17 @@ class CategoryController extends Controller
     {
         $category = new Category();
         $category->parent_id = $request->parent_id;
-        $category->status = $request->status;
-        $category->order = $request->order;
-        if ($request->hasFile('picture')) {
-            $file_controller = new FileController();
-            $file_controller->validateImageFile($request->file('picture'));
-            $category->image =  $file_controller->storeCategoryFile($request->file('picture'));
-        }
+        $category->status = $request->status ?? 0;
+        $category->order = 0;
+        $category->image =  $request->picture;
         $category->save();
-        $check_order = Category::where('order',$category->order)->where('parent_id',$category->parent_id)->first();
-        if ($check_order) {
-            $update_orders = Category::where('order','>=',$category->order)->where('parent_id',$category->parent_id)->where('id','!=',$category->id)->get();
-            foreach ($update_orders as $category_order)
-            {
-                $category_order->order = $category_order->order + 1;
-                $category_order->save();
-            }
-        }
         foreach (LanguageFacade::all() as $lang) {
+
             $this->storeDetail($category->id,$lang->id,$request);
+
         }
-
         $this->createLog($category,Auth::user()->id,"C");
-
-        return redirect()->route('categories.index');
+        return response()->json(['Message' => 'Ok'],200);
     }
 
     /**
@@ -109,13 +83,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        $categories = Category::join('category_details','categories.id','=','category_details.category_id')
-        ->where('category_details.lang_id',LanguageFacade::default())
-        ->select('categories.id','category_details.name')
-        ->get();
-        $orders = Category::where('parent_id',$category->parent_id)->select('order')->pluck('order')->toArray();
-        $files = File::all();
-        return view('cms::panel.category.edit',compact('categories','files','orders','category'));
+
     }
 
     /**
@@ -127,29 +95,24 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $category->parent_id = $request->parent_id;
-        $category->status = $request->status;
-        $category->order = $request->order ?? 0;
-            if ($request->hasFile('picture')) {
-                $file_controller = new FileController();
-                $file_controller->validateImageFile($request->file('picture'));
-                $category->image =  $file_controller->storeCategoryFile($request->file('picture'));
-            }
+
+    }
+
+    public function customUpdate(Request $request)
+    {
+
+        $category = Category::find($request->edit_id);
+        $category->parent_id = $request->edit_parent_id ?? 0;
+        $category->status = $request->edit_status ?? 0;
+        $category->image = $request->edit_picture;
         $category->save();
-        $update_orders = Category::where('order','>=',$category->order)->where('parent_id',$category->parent_id)->where('id','=!',$category->id)->get();
-            foreach ($update_orders as $category_order)
-            {
-                $category_order->order = $category_order->order + 1;
-                $category_order->save();
-            }
-
-
 
         foreach (app()->activeLanguages as $lang) {
-             $detail = CategoryDetail::where('category_id',$category->id)->where('lang_id',$lang->id)->first();
-             $detail->name = $request->name[$lang->id];
-             $detail->slug = Str::slug($request->name[$lang->id]);
-             $detail->save();
+            $detail = CategoryDetail::where('category_id',$category->id)->where('lang_id',$lang->id)->first();
+            $detail->name = $request->edit_name[$lang->id];
+            $detail->status = $request->edit_detail_status[$lang->id] ?? 0;
+            $detail->slug = Str::slug($request->edit_name[$lang->id]);
+            $detail->save();
         }
 
         $this->createLog($category,Auth::user()->id,"U");
@@ -164,11 +127,6 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $cats = Category::where('parent_id',$category->parent_id)->where('order','>',$category->order)->get();
-        foreach ($cats as $key => $cat) {
-            $cat->order = $cat->order -1;
-            $cat->save();
-        }
         $category->delete();
         $this->createLog($category,Auth::user()->id,"D");
         return redirect()->route('categories.index');
@@ -186,19 +144,35 @@ class CategoryController extends Controller
         $this->createLog($detail,Auth::user()->id,"C");
     }
 
-    public function order(Request $request)
+    public function getCategory(Request $request)
     {
-        $orders = Category::where('parent_id',$request->parent_id)->orderBy('order')->pluck('order')->toArray();
-        if ($orders)
-        {
-           $orders = array_unique($orders);
-            array_push($orders, max($orders) + 1);
-        }else
-        {
-                $orders[] = 1;
-        }
-        return response()->json(["orders" => $orders]);
-
+        $category = Category::with('details')->find($request->id);
+        return response()->json(['Message' => 'Ok' , 'Data' => $category],200);
     }
+
+    public function sortCategory(Request $request)
+    {
+        $sort = $request->sort;
+        parse_str($sort,$arr);
+        $order = 1;
+        foreach($arr['categoryItem'] as $id => $parent_id)
+        {
+
+            $category = Category::where('id',$id)->first();
+            $category->order = $order;
+            if($parent_id == 'null')
+            {
+                $category->parent_id = 0;
+            }else
+            {
+                $category->parent_id = $parent_id;
+            }
+            $category->save();
+            $order++;
+        }
+        $this->createLog($category,Auth::user()->id,"U");
+        return response(['Message' => 'Ok'],200);
+    }
+
 
 }

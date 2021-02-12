@@ -36,6 +36,8 @@ return [
     'email' => 'E-Posta',
     'url' => 'URL',
     'content' => 'İçerik',
+    'image' => 'Resim',
+    'choose' => 'Seçiniz',
 
     'create' => 'Oluştur',
     'edit' => 'Düzenle',
@@ -89,6 +91,12 @@ return [
     'category_name' => 'Kategori Adı',
     'select_file' => "Dosya seçin",
     'confirm_text' => 'Emin misiniz?',
+    'category_items_info' => 'Bu bölümde kategori ekleyebilir, silebilir ve sıralayabilirsiniz.',
+    'category_type' => 'Kategori Tipi',
+    'main_category' => 'Ana Kategori',
+    'sub_category_for' => 'Şunun Alt Kategorisi',
+    'category_ison' => 'Kategori yayınlansın mı?',
+    'category_detail_status' => 'Kategorinin bu dile özgü yayın durumu',
 
     //Menu
     'menu' => 'Menü',
