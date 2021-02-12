@@ -23,6 +23,7 @@ class MetaController extends Controller
             ->where('pages.deleted_at',null)
             ->where('page_details.deleted_at',null)
             ->select('pages.*','page_details.*','metas.*')
+            ->orderBy('page_details.page_id')
             ->get();
         return view('cms::panel.meta.index',compact('metas'));
     }

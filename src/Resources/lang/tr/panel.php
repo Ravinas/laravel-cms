@@ -160,6 +160,7 @@ return [
     //Metas
 
     'metas' => [
+        'id' => 'Sayfa ID - Adı',
         'title' => 'Metalar',
         'info' => 'Websitenizdeki tüm sayfalara ait Açıklama ve Anahtar Kelimeler alanları buradan düzenlenebilir, daha iyi SEO sonuçları ve sayfa görünürlüğü için önemlidir. İstediğiniz alanı değiştirip sayfada boş bir yere tıkladığınızda otomatik olarak kaydedilecektir.',
         'list' => 'Meta değerleri listesi',
