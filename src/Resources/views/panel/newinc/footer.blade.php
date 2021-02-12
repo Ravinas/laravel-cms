@@ -1,10 +1,19 @@
+@php
+    $version = "";
+    $packages = json_decode(file_get_contents('../vendor/composer/installed.json'));
+    foreach ($packages->packages as $package)
+        {
+            if ($package->name == "revise/prime-cms")
+                {
+                    $version = $package->version;
+                    break;
+                }
+        }
+@endphp
 <footer>
     <div class="footer clearfix mb-0 text-muted">
-        <div class="float-left">
-            <p>2020 &copy; Prime Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})</p>
-        </div>
         <div class="float-right">
-            <p>ARME Yazılım Donanım A.Ş</p>
+            <p>2020 &copy; Webarme İçerik Yönetim Sistemi Versiyon ({!! $version !!})</p>
         </div>
     </div>
 </footer>

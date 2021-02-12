@@ -9,5 +9,8 @@
                 @include('cms::panel.inc.delete_modal',['trans_file' => 'category', 'model' => $children, 'route_group' => 'categories', 'route_parameter' => 'category'])
             </div>
         </li>
+        @if($children->childrens)
+            @include('cms::panel.category.new-children',['childs' => $children->childrens])
+        @endif
     @endforeach
 </ol>

@@ -27,10 +27,10 @@
                                                 <button class="btn icon btn-info ml-2 edit" data-id="{!! $category->id !!}" data-toggle="modal" data-target="#edit_modal"><i data-feather="edit" ></i></button>
                                                 @include('cms::panel.inc.delete_modal',['trans_file' => 'category', 'model' => $category, 'route_group' => 'categories', 'route_parameter' => 'category'])
                                             </div>
+                                            @if($category->childrens)
+                                                @include('cms::panel.category.new-children',['childs' => $category->childrens])
+                                            @endif
                                         </li>
-                                        @if($category->childrens)
-                                            @include('cms::panel.category.children',['childs' => $category->childrens])
-                                        @endif
                                     @endforeach
                                 </ol>
                             </div>
