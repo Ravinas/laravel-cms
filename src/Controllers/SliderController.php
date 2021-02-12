@@ -16,7 +16,7 @@ class SliderController extends Controller
     use LogAgent;
     public function __construct()
     {
-        $this->authorizeResource(Page::class);
+        $this->authorizeResource(Slider::class);
     }
     /**
      * Display a listing of the resource.
