@@ -63,12 +63,6 @@
                         </div>
                         <div class="divider">
                             <div class="divider-text">{{ trans('cms::panel.metas.list') }}</div>
-
-{{--                            <div class="form-group">--}}
-{{--                                @can('create',CMS\Models\Meta::class)--}}
-{{--                                    <a class="btn icon icon-left btn-primary float-right" href="{!! route('redirects.create') !!}"><i data-feather="plus-circle" ></i>{!! trans('cms::panel.redirects_create') !!}</a>--}}
-{{--                                @endcan--}}
-{{--                            </div>--}}
                         </div>
                         <div class="card-content">
                             <div class="card-body">
@@ -76,8 +70,8 @@
                                     <table class='table table-hover' id="myTable">
                                         <thead >
                                         <tr>
+                                            <th>{!! trans('cms::panel.metas.id') !!}</th>
                                             <th>{!! trans('cms::panel.metas.url') !!}</th>
-                                            <th>{!! trans('cms::panel.metas.name') !!}</th>
                                             <th>{!! trans('cms::panel.metas.description') !!}</th>
                                             <th>{!! trans('cms::panel.metas.keywords') !!}</th>
                                             <th>{!! trans('cms::panel.metas.robots') !!}</th>
@@ -86,12 +80,12 @@
                                         <tbody>
                                         @foreach($metas as $meta)
                                             <tr>
+                                                <td>{!! $meta->page_id !!} - {!! $meta->name !!}</td>
                                                 @if($meta->url == "/")
                                                     <td><a href="{!! substr(config('app.url'),0,-1).$meta->url !!}">{!! substr(config('app.url'),0,-1).$meta->url !!}</a> </td>
                                                 @else
                                                     <td><a href="{!! config('app.url').$meta->url !!}">{!! config('app.url').$meta->url !!}</a> </td>
                                                 @endif
-                                                <td>{!! $meta->name !!}</td>
                                                 <input type="hidden" name="edited" value="0">
                                                 <td><input class="form-control description font-14" type="text" data-id="{!! $meta->id !!}" id="description{!! $meta->id !!}" name="description[{!! $meta->id !!}]" value="{!! $meta->description !!}" ></td>
                                                 <td><input class="form-control keywords font-14" type="text" data-id="{!! $meta->id !!}" id="keywords{!! $meta->id !!}" name="keywords[{!! $meta->id !!}]" value="{!! $meta->keywords !!}" ></td>
