@@ -36,6 +36,8 @@ return [
     'email' => 'E-mail',
     'url' => 'URL',
     'content' => 'Content',
+    'image' => 'Resim',
+    'choose' => 'Seçiniz',
 
     'create' => 'Create',
     'edit' => 'Edit',
@@ -103,6 +105,12 @@ return [
     'category_name' => 'Category Name',
     'select_file' => "Select a File",
     'confirm_text' => 'Are you sure?',
+    'category_items_info' => 'In this section, you can add, delete and order category.',
+    'category_type' => 'Category Type',
+    'main_category' => 'Main Category',
+    'sub_category_for' => 'Sub Category For',
+    'category_ison' => 'Should the page be published?',
+    'category_detail_status' => 'Kategorinin bu dile özgü yayın durumu',
 
     //Menu
     'menu' => 'Menu',

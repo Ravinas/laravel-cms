@@ -14,8 +14,13 @@ Route::prefix('/w-admin')->middleware('auth')->group( function () {
     Route::post('languages/update/extensions' , 'LanguageController@extensions')->name('update.Extensions');
     Route::post('languages/update/default' , 'LanguageController@changeDefault')->name('change.default');
     Route::post('languages/update/list','LanguageController@updateList')->name('updateList');
+
+    //Category
     Route::resource('categories','CategoryController');
     Route::post('category/order','CategoryController@order')->name('categories.order');
+    Route::post('category/getCategory','CategoryController@getCategory')->name('get-category');
+    Route::post('category/updateCategory','CategoryController@customUpdate')->name('update-category');
+    Route::post('category/sortCategory','CategoryController@sortCategory')->name('sort-category');
 
     Route::resource('metas' , 'MetaController');
     Route::resource('redirects' , 'RedirectController');
