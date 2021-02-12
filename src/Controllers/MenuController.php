@@ -23,7 +23,7 @@ class MenuController extends Controller
      */
     public function __construct()
     {
-        $this->authorizeResource(Page::class);
+        $this->authorizeResource(Menu::class);
     }
 
     public function index()
