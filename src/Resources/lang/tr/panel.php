@@ -18,10 +18,7 @@ return [
     'remember_me' => 'Beni Hatırla',
     'prime_login' => 'Prime\'a devam edebilmek için lütfen giriş yapın.',
     'lost_password' => 'Şifrenizi mi unuttunuz?',
-    'parent' => 'Üst Sayfa',
-    'no_parent' => 'Üst Sayfa Yok',
     'order' => 'Sıra',
-    'delete' => 'Sil',
     'close' => 'Kapat',
     'received' => 'Alınan Formlar',
     'create_socialmedia'=> 'Sosyal Medya Oluştur',
@@ -64,6 +61,7 @@ return [
     'settings' => 'Ayarlar',
     'save_changes' => 'Değişikliği Kaydedin',
     'default' => 'Varsayılan',
+    'panel_logs' => 'Panel Logları',
 
     //Pages
     'pages' => 'Sayfalar',

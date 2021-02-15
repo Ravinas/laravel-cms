@@ -14,6 +14,7 @@ Route::prefix('/w-admin')->middleware('auth')->group( function () {
     Route::post('languages/update/extensions' , 'LanguageController@extensions')->name('update.Extensions');
     Route::post('languages/update/default' , 'LanguageController@changeDefault')->name('change.default');
     Route::post('languages/update/list','LanguageController@updateList')->name('updateList');
+    Route::get('logs','LogController@index')->name('log-index');
 
     //Category
     Route::resource('categories','CategoryController');

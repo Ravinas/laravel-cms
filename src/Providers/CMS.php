@@ -40,6 +40,7 @@ class CMS extends ServiceProvider
      */
     public function boot()
     {
+        Paginator::useBootstrap();
         // collectionlarda paginate yapabilmeyi sağlayan reyiz
         if (!Collection::hasMacro('paginate')) {
 
