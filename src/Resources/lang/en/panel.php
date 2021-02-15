@@ -48,7 +48,7 @@ return [
     'default_language' => 'Default Language',
     'active_languages' => 'Active Languages',
     'update' => 'Update',
-    'delete' => 'Delete',
+    'panel_logs' => 'Panel Logs',
 
     'dynamic' => 'Dynamic',
     'static' => 'Static',
@@ -188,6 +188,7 @@ return [
     'blade_file' => 'Blade File',
     'page_detail_status' => 'This language specific publication status of the page',
     'non-lang-content' => 'Non-language Content',
+
 
 
     //Metas
