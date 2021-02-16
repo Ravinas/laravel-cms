@@ -1,94 +1,104 @@
-<aside class="left-sidebar">
-    <!-- Sidebar scroll-->
-    <div class="scroll-sidebar">
-        <!-- Sidebar navigation-->
-        <nav class="sidebar-nav">
-            <ul id="sidebarnav">
-                <li>
-                    <a class="waves-effect waves-dark" href="/panel" aria-expanded="false">
-                        <i class="mdi mdi-gauge"></i><span class="hide-menu">{!! trans('cms::panel.dashboard') !!}</span>
-                    </a>
-                </li>
-                @if(Auth::user()->hasModulePermission(REDIRECT,'R'))
-                    <li>
-                        <a class="waves-effect waves-dark" href="{!! route('menu.index') !!}">
-                            <i class="mdi mdi-chart-timeline"></i><span class="hide-menu">{!! trans('cms::panel.menu') !!}</span>
-                        </a>
-                    </li>
-                @endif
-                @if(Auth::user()->hasModulePermission(REDIRECT,'R'))
-                    <li>
-                        <a class="waves-effect waves-dark" href="{!! route('slider.index') !!}">
-                            <i class="mdi mdi-airplay"></i><span class="hide-menu">{!! trans('cms::panel.slider') !!}</span>
-                        </a>
-                    </li>
-                @endif
-                @if(Auth::user()->hasModulePermission(CONTENT,'R'))
-                <li>
-                    <a class="waves-effect waves-dark" href="{!! route('pages.index') !!}">
-                        <i class="mdi mdi-book-open-page-variant"></i><span class="hide-menu">{!! trans('cms::panel.pages') !!}</span>
-                    </a>
-                </li>
-                @endif
-                @if(Auth::user()->hasModulePermission(LANGUAGE,'R'))
-                <li>
-                    <a class="waves-effect waves-dark" href="{!! route('languages.index') !!}">
-                        <i class="mdi mdi-text-to-speech"></i><span class="hide-menu">{!! trans('cms::panel.languages') !!}</span>
-                    </a>
-                </li>
-                @endif
-                @if(Auth::user()->hasModulePermission(FORM,'R'))
-                <li>
-                    <a class="waves-effect waves-dark" href="{!! route('forms.index') !!}">
-                        <i class="mdi mdi-book-open"></i><span class="hide-menu">{!! trans('cms::panel.forms') !!}</span>
-                    </a>
-                </li>
-                @endif
-                @if(Auth::user()->hasModulePermission(EBULLETIN,'R'))
-                <li>
-                    <a class="waves-effect waves-dark" href="{!! route('ebulletins.index') !!}">
-                        <i class="mdi mdi-message-text"></i><span class="hide-menu">{!! trans('cms::panel.ebulletins') !!}</span>
-                    </a>
-                </li>
-                @endif
-                @if(Auth::user()->hasModulePermission(USER,'R'))
-                <li>
-                    <a class="waves-effect waves-dark" href="{!! route('users.index') !!}">
-                        <i class="mdi mdi-account-multiple"></i><span class="hide-menu">{!! trans('cms::panel.users.title') !!}</span>
-                    </a>
-                </li>
-                @endif
-                @if(Auth::user()->hasModulePermission(USER,'R'))
-                <li>
-                    <a class="waves-effect waves-dark" href="{!! route('roles.index') !!}">
-                        <i class="mdi mdi-security"></i><span class="hide-menu">{!! trans('cms::panel.roles') !!}</span>
-                    </a>
-                </li>
-                @endif
-                @if(Auth::user()->hasModulePermission(META,'R'))
-                    <li>
-                        <a class="waves-effect waves-dark" href="{!! route('metas.index') !!}">
-                            <i class="mdi mdi-earth"></i><span class="hide-menu">{!! trans('cms::panel.metas.title') !!}</span>
-                        </a>
-                    </li>
-                @endif
-                @if(Auth::user()->hasModulePermission(CATEGORY,'R'))
-                    <li>
-                        <a class="waves-effect waves-dark" href="{!! route('categories.index') !!}">
-                            <i class="mdi mdi-sort-variant"></i><span class="hide-menu">{!! trans('cms::panel.categories') !!}</span>
-                        </a>
-                    </li>
-                @endif
-                @if(Auth::user()->hasModulePermission(REDIRECT,'R'))
-                    <li>
-                        <a class="waves-effect waves-dark" href="{!! route('redirects.index') !!}">
-                            <i class="mdi mdi-tumblr-reblog"></i><span class="hide-menu">{!! trans('cms::panel.redirects.title') !!}</span>
-                        </a>
-                    </li>
-                @endif
-            </ul>
-        </nav>
-        <!-- End Sidebar navigation -->
+<div class="sidebar-wrapper active">
+    <div class="sidebar-header">
+        <a  href="{!! route('panel') !!}">
+            <img src="{!! asset('vendor/cms/yeni/images/plogo.png') !!}" alt="" srcset="">
+        </a>
     </div>
-    <!-- End Sidebar scroll-->
-</aside>
+    <div class="sidebar-menu">
+        <ul class="menu">
+            @if(Auth::user()->hasModulePermission(CONTENT,'R'))
+                <li class='sidebar-title'>{{ trans('cms::panel.content') }}</li>
+                <li class="sidebar-item {{ request()->routeIs('menu*') ? 'active' : '' }}">
+                    <a href="{!! route('menu.index') !!}" class='sidebar-link'>
+                        <i data-feather="menu" width="20"></i>
+                        <span>{!! trans('cms::panel.menu') !!}</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ request()->routeIs('slider*') ? 'active' : '' }}">
+                    <a href="{!! route('slider.index') !!}" class='sidebar-link'>
+                        <i data-feather="sliders" width="20"></i>
+                        <span>{!! trans('cms::panel.slider') !!}</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ request()->routeIs('pages*') ? 'active' : '' }}">
+                    <a href="{!! route('pages.index') !!}" class='sidebar-link'>
+                        <i data-feather="layout" width="20"></i>
+                        <span>{!! trans('cms::panel.pages') !!}</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ request()->routeIs('categories*') ? 'active' : '' }}">
+                    <a href="{!! route('categories.index') !!}" class='sidebar-link'>
+                        <i data-feather="slack" width="20"></i>
+                        <span>{!! trans('cms::panel.categories') !!}</span>
+                    </a>
+                </li>
+            @endif
+            <li class='sidebar-title'>{{ trans('cms::panel.interaction') }}</li>
+            @if(Auth::user()->hasModulePermission(FORM,'R'))
+                <li class="sidebar-item {{ request()->routeIs('forms*') ? 'active' : '' }}">
+                    <a href="{!! route('forms.index') !!}" class='sidebar-link'>
+                        <i data-feather="file-text" width="20"></i>
+                        <span>{!! trans('cms::panel.forms.title') !!}</span>
+                    </a>
+                </li>
+            @endif
+            @if(Auth::user()->hasModulePermission(EBULLETIN,'R'))
+                <li class="sidebar-item {{ request()->routeIs('ebulletins*') ? 'active' : '' }}">
+                    <a href="{!! route('ebulletins.index') !!}" class='sidebar-link'>
+                        <i data-feather="mail" width="20"></i>
+                        <span>{!! trans('cms::panel.ebulletins.title') !!}</span>
+                    </a>
+                </li>
+            @endif
+            <li class='sidebar-title'>{{ trans('cms::panel.users_roles') }}</li>
+            @if(Auth::user()->hasModulePermission(USER,'R'))
+                <li class="sidebar-item {{ request()->routeIs('roles*') ? 'active' : '' }}">
+                    <a href="{!! route('roles.index') !!}" class='sidebar-link'>
+                        <i data-feather="user-check" width="20"></i>
+                        <span>{!! trans('cms::panel.roles.title') !!}</span>
+                    </a>
+                </li>
+            @endif
+            @if(Auth::user()->hasModulePermission(USER,'R'))
+                <li class="sidebar-item {{ request()->routeIs('users*') ? 'active' : '' }}">
+                    <a href="{!! route('users.index') !!}" class='sidebar-link'>
+                        <i data-feather="users" width="20"></i>
+                        <span>{!! trans('cms::panel.users.title') !!}</span>
+                    </a>
+                </li>
+            @endif
+            <li class="sidebar-item {{ request()->routeIs('logs*') ? 'active' : '' }}">
+                <a href="{!! route('log-index') !!}" class='sidebar-link'>
+                    <i data-feather="feather" width="20"></i>
+                    <span>{!! trans('cms::panel.logs.title') !!}</span>
+                </a>
+            </li>
+            <li class='sidebar-title'>{{ trans('cms::panel.settings') }}</li>
+            @if(Auth::user()->hasModulePermission(LANGUAGE,'R'))
+                <li class="sidebar-item {{ request()->routeIs('languages*') ? 'active' : '' }}">
+                    <a href="{!! route('languages.index') !!}" class='sidebar-link'>
+                        <i data-feather="globe" width="20"></i>
+                        <span>{!! trans('cms::panel.languages') !!}</span>
+                    </a>
+                </li>
+            @endif
+            @if(Auth::user()->hasModulePermission(META,'R'))
+                <li class="sidebar-item {{ request()->routeIs('metas*') ? 'active' : '' }}">
+                    <a href="{!! route('metas.index') !!}" class='sidebar-link'>
+                        <i data-feather="key" width="20"></i>
+                        <span>{!! trans('cms::panel.metas.title') !!}</span>
+                    </a>
+                </li>
+            @endif
+            @if(Auth::user()->hasModulePermission(REDIRECT,'R'))
+                <li class="sidebar-item {{ request()->routeIs('redirects*') ? 'active' : '' }}">
+                    <a href="{!! route('redirects.index') !!}" class='sidebar-link'>
+                        <i data-feather="home" width="20"></i>
+                        <span>{!! trans('cms::panel.redirects.title') !!}</span>
+                    </a>
+                </li>
+            @endif
+        </ul>
+    </div>
+    <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+</div>

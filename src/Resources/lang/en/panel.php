@@ -38,6 +38,8 @@ return [
     'content' => 'Content',
     'image' => 'Resim',
     'choose' => 'Seçiniz',
+    'notifications' => 'Notifications',
+    'unread_form' => 'There are unread posts!',
 
     'create' => 'Create',
     'edit' => 'Edit',

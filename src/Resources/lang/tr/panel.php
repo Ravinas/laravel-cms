@@ -35,6 +35,8 @@ return [
     'content' => 'İçerik',
     'image' => 'Resim',
     'choose' => 'Seçiniz',
+    'notifications' => 'Bildirimler',
+    'unread_form' => 'Okunmamış gönderiler var!',
 
     'create' => 'Oluştur',
     'edit' => 'Düzenle',
