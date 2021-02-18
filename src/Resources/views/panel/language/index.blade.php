@@ -11,16 +11,16 @@
             <div class="card-content">
                 <div class="card-body">
                     <div class="divider">
-                        <div class="divider-text">{{ trans('cms::panel.languages') }}</div>
+                        <div class="divider-text">{{ trans('cms::panel.languages.title') }}</div>
                     </div>
                     <div class="alert alert-secondary">
-                        <i data-feather="info"></i>{{ trans('cms::panel.lang_info') }}
+                        <i data-feather="info"></i>{{ trans('cms::panel.languages.info') }}
                     </div>
                     <div class="alert alert-secondary">
-                        <i data-feather="globe"></i>{{ trans('cms::panel.default_language') }} {!! $langs->default_language->name !!}
+                        <i data-feather="globe"></i>{{ trans('cms::panel.languages.default_language') }} <b>{!! $langs->default_language->name !!}</b>
                     </div>
                     <div class="alert alert-secondary">
-                        <i data-feather="eye"></i>{{ trans('cms::panel.lang_extensions') }}  <u class="extension_submit" style="font-wariant:bold;cursor:pointer">{!! $langs->extensions["text"] !!}</u>.
+                        <i data-feather="eye"></i>{{ trans('cms::panel.languages.extensions') }}  <u class="extension_submit" style="font-wariant:bold;cursor:pointer">{!! trans('cms::panel.languages.'.$langs->extensions["text"]) !!}</u>.
                         <input type="hidden" value="{!! $langs->extensions["key"] !!}" name="ext" class="ext">
                     </div>
                 </div>
@@ -35,22 +35,22 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="divider">
-                            <div class="divider-text">{{ trans('cms::panel.lang_list') }}</div>
+                            <div class="divider-text">{{ trans('cms::panel.languages.list') }}</div>
                         </div>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
                             <div class="table-responsive">
                                 <div class="alert alert-secondary">
-                                    <i data-feather="info"></i>{{ trans('cms::panel.mark_language') }}
+                                    <i data-feather="info"></i>{{ trans('cms::panel.languages.mark') }}
                                 </div>
                             <table class='table table-hover' id="myTable">
                                 <thead >
                                     <tr>
-                                        <th>{!! trans('cms::panel.name') !!}</th>
-                                        <th>{!! trans('cms::panel.slug') !!}</th>
-                                        <th>{!! trans('cms::panel.status') !!}</th>
-                                        <th >{!! trans('cms::panel.default') !!}</th>
+                                        <th>{!! trans('cms::panel.languages.name') !!}</th>
+                                        <th>{!! trans('cms::panel.languages.slug') !!}</th>
+                                        <th>{!! trans('cms::panel.languages.status') !!}</th>
+                                        <th style="width: 10%;">{!! trans('cms::panel.languages.default') !!}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -106,7 +106,7 @@
 
             $('#myTable').DataTable( {
                 "language": {
-    
+
                     "zeroRecords": "Üzgünüz burada herhangi bir şey yok",
                     "info": "Gösterilen sayfa",
                     "infoEmpty": "Üzgünüz burada herhangi bir şey yok",
@@ -139,14 +139,14 @@
                         {
                             $('#'+id).removeClass().addClass( "btn icon btn-success" );
                             $('#'+id).html("<i data-feather='check-circle'></i>");
-                            $('.toast-body').html('Dil aktif/pasif işlemi başarılı.');
+                            $('.toast-body').html("{!! trans('cms::panel.languages.active_passive') !!}");
                             $('#myToast').toast('show');
                             feather.replace();
                         }else{
                             $('#'+id).removeClass().addClass( "btn icon btn-danger" );
                             $('#'+id).html("<i data-feather='lock'></i>");
                             feather.replace();
-                            $('.toast-body').html('Bir sorun oluştu.');
+                            $('.toast-body').html("{!! trans('cms::panel.an_error') !!}");
                             $('#myToast').toast('show');
                         }
                     }else{
@@ -166,15 +166,17 @@
                     success:function(response){
                         if(response.Message == "Ok")
                         {
-                            $('.extension_submit').html(response.Text);;
+
                             if(response.Code == 1)
                             {
                                 $('.ext').val(0);
-                                $('.toast-body').html('Uzantılar Açıldı');
+                                $('.extension_submit').html("{!! trans('cms::panel.languages.open') !!}");
+                                $('.toast-body').html("{!! trans('cms::panel.languages.extensions_opened') !!}");
                                 $('#myToast').toast('show');
                             }else{
-                                $('.ext').val(1);
-                                $('.toast-body').html('Uzantılar Kapatıldı');
+                                $('.ext').val(1)
+                                $('.extension_submit').html("{!! trans('cms::panel.languages.close') !!}");
+                                $('.toast-body').html("{!! trans('cms::panel.languages.extensions_closed') !!}");
                                 $('#myToast').toast('show');
                             }
                         }
@@ -192,11 +194,11 @@
                     success:function(response){
                         if(response.Message == "Ok")
                         {
-                            $('.toast-body').html('Varsayılan dil başarıyla değiştirildi..');
+                            $('.toast-body').html("{!! trans('cms::panel.languages.default_changed') !!}");
                             $('#myToast').toast('show');
                             window.location.reload();
                         }else{
-                            $('.toast-body').html('İşlem Başarısız');
+                            $('.toast-body').html("{!! trans('cms::panel.an_error') !!}");
                             $('#myToast').toast('show');
 
                             }

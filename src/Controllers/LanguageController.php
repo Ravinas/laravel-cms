@@ -16,7 +16,7 @@ class LanguageController extends Controller
 {
     use LogAgent;
 
-    protected $lang_extensions_visibility = [ 1 => "Open",  0 => "Close"];
+    protected $lang_extensions_visibility = [ 1 => "open",  0 => "close"];
 
     public function __construct()
     {
