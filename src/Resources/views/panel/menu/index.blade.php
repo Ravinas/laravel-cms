@@ -10,18 +10,18 @@
                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel33">{!! trans('cms::panel.create') !!} </h4>
+                        <h4 class="modal-title" id="myModalLabel33">{!! trans('cms::panel.menus.create') !!} </h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <i data-feather="x"></i>
                         </button>
                         </div>
                         <form id="menuform">
                         <div class="modal-body">
-                            <label>{{ trans('cms::panel.menu_name') }} </label>
+                            <label>{{ trans('cms::panel.menus.name') }} </label>
                             <div class="form-group">
-                            <input type="text" placeholder="Menüyü Adlandırın" class="form-control" name="name">
+                            <input type="text" class="form-control" name="name">
                             </div>
-                            <label>{{ trans('cms::panel.select_menu_language') }} </label>
+                            <label>{{ trans('cms::panel.menus.select_language') }} </label>
                             <div class="form-group">
                             <select class="form-select" id="basicSelect" name="lang">
                                 @foreach($lang as $language)
@@ -32,7 +32,7 @@
                         </div>
                         </form>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary float-right" id="post">Oluştur</button>
+                            <button type="button" class="btn btn-primary float-right" id="post">{!! trans('cms::panel.menus.create') !!}</button>
                         </div>
                     </div>
                     </div>
@@ -41,13 +41,13 @@
         </div>
         <div class="card-body">
             <div class="divider">
-                <div class="divider-text">{{ trans('cms::panel.edit_your_menus') }}</div>
+                <div class="divider-text">{{ trans('cms::panel.menus.list') }}</div>
             </div>
             <div class="alert alert-secondary">
-                <i data-feather="info"></i>{{ trans('cms::panel.menu_dont_forgot') }}
+                <i data-feather="info"></i>{{ trans('cms::panel.menus.info') }}
             </div>
             <div class="form-group">
-                <button type="button" class="btn icon icon-left btn-primary float-right" data-toggle="modal" data-target="#inlineForm"><i data-feather="edit" ></i> {{ trans('cms::panel.create_menu') }}</button>
+                <button type="button" class="btn icon icon-left btn-primary float-right" data-toggle="modal" data-target="#inlineForm"><i data-feather="edit" ></i> {{ trans('cms::panel.menus.create') }}</button>
             </div>
             <div class="row">
                 <div class="row">
@@ -100,8 +100,8 @@
                         if (response.Message == "Ok")
                         {
                             Swal.fire({
-                                title: 'Başarılı',
-                                text: 'Menü ekleme işleminiz başarı ile gerçekleşti.',
+                                title: '{!! trans('cms::panel.menus.success') !!}',
+                                text: '{!! trans('cms::panel.menus.delete_success') !!}',
                                 icon: 'success',
                                 type: 'success'
                             }).then(function(){
@@ -116,8 +116,8 @@
             var id = $(this).attr("data");
             var url =$(this).attr("data-url");
             Swal.fire({
-                title: 'Bunu yapmak istediğinize emin misiniz?',
-                text: "Bu işlemi geri alamazsınız!",
+                title: '{!! trans('cms::panel.menus.confirm') !!}',
+                text: "{!! trans('cms::panel.menus.confirm_warning') !!}",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -135,8 +135,8 @@
                         },
                         success:function (response) {
                             Swal.fire(
-                            'Silindi!',
-                            'Menü tamamen silindi.',
+                            '{!! trans('cms::panel.menus.deleted') !!}',
+                            '{!! trans('cms::panel.menus.deleted_text') !!}',
                             'success'
                             ).then(function(){
                                 location.reload();

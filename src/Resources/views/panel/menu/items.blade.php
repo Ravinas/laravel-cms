@@ -5,16 +5,16 @@
         <div class="divider-text">{!! Str::ucfirst($menu->name)  !!}</div>
     </div>
     <div class="alert alert-secondary">
-        <i data-feather="info"></i>{{ trans('cms::panel.menu_items_info') }}
+        <i data-feather="info"></i>{{ trans('cms::panel.menus.items_info') }}
     </div>
     <section class="section">
         <div class="row mb-4">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class='card-heading p-1 pl-3 float-left'>{!! trans('cms::panel.items') !!}</h3>
-                        <button type="button" class="btn icon icon-left btn-primary float-right" data-toggle="modal" data-target="#inlineForm"><i data-feather="plus-circle" ></i>{{ trans('cms::panel.add') }}</button>
-                        <button type="button" id="send_list" class="btn icon icon-left btn-warning float-right mr-2" style="display: none"><i data-feather="check-circle" ></i>{!! trans('cms::panel.save_changes') !!}</button>
+                        <h3 class='card-heading p-1 pl-3 float-left'>{!! trans('cms::panel.menus.items') !!}</h3>
+                        <button type="button" class="btn icon icon-left btn-primary float-right" data-toggle="modal" data-target="#inlineForm"><i data-feather="plus-circle" ></i>{{ trans('cms::panel.menus.add') }}</button>
+                        <button type="button" id="send_list" class="btn icon icon-left btn-warning float-right mr-2" style="display: none"><i data-feather="check-circle" ></i>{!! trans('cms::panel.menus.save_changes') !!}</button>
                         <div class="form-group">
                             <!--Modal -->
                             <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog"
@@ -22,7 +22,7 @@
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                    <h4 class="modal-title" id="myModalLabel33">{{ trans('panel.crate_menu_item') }} </h4>
+                                    <h4 class="modal-title" id="myModalLabel33">{{ trans('cms::panel.menus.create_menu_item') }} </h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <i data-feather="x"></i>
                                     </button>
@@ -30,29 +30,29 @@
                                     <form id="menuform">
                                     <input type="hidden" name="menu_id" value="{!! $menu->id !!}">
                                     <div class="modal-body">
-                                        <label>{{ trans('cms::panel.text') }}</label>
+                                        <label>{{ trans('cms::panel.menus.text') }}</label>
                                         <div class="form-group">
-                                            <input type="text" placeholder="{{ trans('cms::panel.text') }}" autocomplete="off" class="form-control" name="text" required>
+                                            <input type="text" placeholder="{{ trans('cms::panel.menus.text') }}" autocomplete="off" class="form-control" name="text" required>
                                         </div>
-                                        <label>{{ trans('cms::panel.type') }}</label>
+                                        <label>{{ trans('cms::panel.menus.type') }}</label>
                                         <div class="form-group">
                                             <select class="form-select" id="basicSelect" name="type">
-                                                <option value="1">{{ trans('cms::panel.single') }}</option>
-                                                <option value="2">{{ trans('cms::panel.dropdwon') }}</option>
+                                                <option value="1">{{ trans('cms::panel.menus.single') }}</option>
+                                                <option value="2">{{ trans('cms::panel.menus.dropdown') }}</option>
                                             </select>
                                         </div>
-                                        <label>{{ trans('cms::panel.url_type') }}</label>
+                                        <label>{{ trans('cms::panel.menus.link_type') }}</label>
                                         <div class="form-group">
                                             <select class="form-select" id="basicSelect" name="link_type">
-                                                <option value="0">{{ trans('cms::panel.internal') }}</option>
-                                                <option value="1">{{ trans('cms::panel.external') }}</option>
+                                                <option value="0">{{ trans('cms::panel.menus.internal') }}</option>
+                                                <option value="1">{{ trans('cms::panel.menus.external') }}</option>
                                             </select>
                                         </div>
-                                        <label class="external_div" style="display: none;">{!! trans('cms::panel.external_url') !!}</label>
+                                        <label class="external_div" style="display: none;">{!! trans('cms::panel.menus.external_url') !!}</label>
                                         <div class="form-group external_div" style="display: none;">
                                             <input type="text" placeholder="" class="form-control" name="external" autocomplete="off"  id="external">
                                         </div>
-                                        <label class="internal_div">{!! trans('cms::panel.url') !!}</label>
+                                        <label class="internal_div">{!! trans('cms::panel.menus.url') !!}</label>
                                         <div class="form-group internal_div">
                                             <select class="form-select" id="basicSelect" name="link">
                                                 @foreach($urls as $url)
@@ -60,14 +60,14 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <label>{{ trans('panel.icon') }}</label>
+                                        <label>{{ trans('cms::panel.menus.icon') }}</label>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="inputGroupFileAddon01"><i data-feather="upload"></i></span>
                                                 <div class="form-file">
                                                     <input type="file" class="form-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
                                                     <label class="form-file-label" for="inputGroupFile01">
-                                                        <span class="form-file-text">{{ trans('cms::panel.choose_icon') }}</span>
-                                                        <span class="form-file-button">{{ trans('cms::panel.upload') }}</span>
+                                                        <span class="form-file-text">{{ trans('cms::panel.menus.choose_icon') }}</span>
+                                                        <span class="form-file-button">{{ trans('cms::panel.menus.upload') }}</span>
                                                     </label>
                                                 </div>
                                             </div>
@@ -75,7 +75,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-primary ml-1" data-dismiss="modal">
                                         <i class="bx bx-check d-block d-sm-none"></i>
-                                        <span class="d-none d-sm-block" id="post">{{ trans('cms::panel.create') }}</span>
+                                        <span class="d-none d-sm-block" id="post">{{ trans('cms::panel.menus.create') }}</span>
                                         </button>
                                     </div>
                                     </form>
@@ -88,7 +88,7 @@
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                    <h4 class="modal-title" id="myModalLabel33">{{ trans('cms::panel.edit_menu_item') }}</h4>
+                                    <h4 class="modal-title" id="myModalLabel33">{{ trans('cms::panel.menus.edit_menu_item') }}</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <i data-feather="x"></i>
                                     </button>
@@ -96,29 +96,29 @@
                                     <form id="editform">
                                     <input type="hidden" id="edit_item_id" name="item_id" value="{!! $menu->id !!}">
                                     <div class="modal-body">
-                                        <label>{!! trans('cms::panel.text') !!}</label>
+                                        <label>{!! trans('cms::panel.menus.text') !!}</label>
                                         <div class="form-group">
                                             <input type="text" placeholder="Menüde Görünmesini İstediğiniz Metin (Örn: Hakkımızda)" class="form-control" name="edit_text" autocomplete="off" required id="edit_text">
                                         </div>
-                                        <label>{!! trans('cms::panel.type') !!}</label>
+                                        <label>{!! trans('cms::panel.menus.type') !!}</label>
                                         <div class="form-group">
                                             <select class="form-select" id="edit_type" name="edit_type">
-                                                <option value="1">{{ trans('cms::panel.single') }}</option>
-                                                <option value="2">{{ trans('cms::panel.dropdwon') }}</option>
+                                                <option value="1">{{ trans('cms::panel.menus.single') }}</option>
+                                                <option value="2">{{ trans('cms::panel.menus.dropdown') }}</option>
                                             </select>
                                         </div>
-                                        <label>{!! trans('cms::panel.link_type') !!}</label>
+                                        <label>{!! trans('cms::panel.menus.link_type') !!}</label>
                                         <div class="form-group">
                                             <select class="form-select" id="edit_link_type" name="edit_link_type">
-                                                <option value="0">{{ trans('cms::panel.internal') }}</option>
-                                                <option value="1">{{ trans('cms::panel.external') }}</option>
+                                                <option value="0">{{ trans('cms::panel.menus.internal') }}</option>
+                                                <option value="1">{{ trans('cms::panel.menus.external') }}</option>
                                             </select>
                                         </div>
-                                        <label class="external_div" style="display: none;">{!! trans('cms::panel.external_url') !!}</label>
+                                        <label class="external_div" style="display: none;">{!! trans('cms::panel.menus.external_url') !!}</label>
                                         <div class="form-group external_div" style="display: none;">
                                             <input type="text" placeholder="" class="form-control" name="edit_external" autocomplete="off"  id="edit_external">
                                         </div>
-                                        <label class="internal_div">{!! trans('cms::panel.url') !!}</label>
+                                        <label class="internal_div">{!! trans('cms::panel.menus.url') !!}</label>
                                         <div class="form-group internal_div">
                                             <select class="form-select" id="edit_link" name="edit_link">
                                                 @foreach($urls as $url)
@@ -126,14 +126,14 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <label>{{ trans('panel.icon') }}</label>
+                                        <label>{{ trans('cms::panel.menus.icon') }}</label>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="inputGroupFileAddon01"><i data-feather="upload"></i></span>
                                                 <div class="form-file">
                                                     <input type="file" class="form-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
                                                     <label class="form-file-label" for="inputGroupFile01">
-                                                        <span class="form-file-text">{{ trans('cms::panel.choose_icon') }}</span>
-                                                        <span class="form-file-button">{{ trans('cms::panel.upload') }}</span>
+                                                        <span class="form-file-text">{{ trans('cms::panel.menus.choose_icon') }}</span>
+                                                        <span class="form-file-button">{{ trans('cms::panel.menus.upload') }}</span>
                                                     </label>
                                                 </div>
                                             </div>
@@ -141,7 +141,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-primary ml-1" data-dismiss="modal">
                                         <i class="bx bx-check d-block d-sm-none"></i>
-                                        <span class="d-none d-sm-block" id="edit_post">{{ trans('cms::panel.create') }}</span>
+                                        <span class="d-none d-sm-block" id="edit_post">{{ trans('cms::panel.menus.create') }}</span>
                                         </button>
                                     </div>
                                     </form>
@@ -301,13 +301,13 @@
                 }
             });
             Swal.fire({
-                title: 'Bunu yapmak istediğinize emin misiniz?',
-                text: "Tüm alt elemanlarda silinecek!",
+                title: '{!! trans('cms::panel.menus.confirm') !!}',
+                text: "{!! trans('cms::panel.menus.confirm_submenus') !!}",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Evet, silmek istiyorum!'
+                confirmButtonText: '{!! trans('cms::panel.menus.delete_confirm') !!}'
                 }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
@@ -319,8 +319,8 @@
                         },
                         success:function (response) {
                             Swal.fire(
-                            'Silindi!',
-                            'Menü elemanı tamamen silindi.',
+                            '{!! trans('cms::panel.menus.deleted') !!}',
+                            '{!! trans('cms::panel.menus.deleted_text') !!}',
                             'success'
                             ).then(function(){
                                 location.reload();

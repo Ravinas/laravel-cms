@@ -6,7 +6,9 @@
                                             {!! ucfirst($children->detail->name)  !!}
                                         </span>
                 <button class="btn icon btn-info ml-2 edit" data-id="{!! $children->id !!}" data-toggle="modal" data-target="#edit_modal"><i data-feather="edit" ></i></button>
-                @include('cms::panel.inc.delete_modal',['trans_file' => 'category', 'model' => $children, 'route_group' => 'categories', 'route_parameter' => 'category'])
+                @component('cms::panel.newinc.delete_modal',[ 'model' => $category, 'route_group' => 'categories'])
+                    {!! trans('cms::panel.categories.delete_text') !!}
+                @endcomponent
             </div>
         </li>
         @if($children->childrens)

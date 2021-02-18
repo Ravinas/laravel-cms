@@ -6,23 +6,23 @@
                 <div class="card-content">
                     <div class="card-body">
                         <div class="divider">
-                            <div class="divider-text">{{ trans('cms::panel.panel_logs') }}</div>
+                            <div class="divider-text">{{ trans('cms::panel.logs.title') }}</div>
                         </div>
                         <div class="card-body">
                             @foreach($logs as $log)
                                 @php( $type = explode("\\", $log->loggable_type))
                                 @switch($log->crud)
                                     @case("C")
-                                    <div class="alert alert-success">
-                                        {!!$log->created_at." ". $log->user->name ." ". $type[2] . " modülünden " . $log->loggable_id. " numaralı içeriği oluşturdu. " !!}
+                                    <div class="" data-user="{!! $log->user->name !!}" data-module="{!! $type[2] !!}">
+                                        {!!$log->created_at." | ".trans('cms::panel.logs.created',['name' => $log->user->name, 'module' => $type[2], 'id' => $log->loggable_id ]) !!}
                                         @break
                                         @case("U")
-                                        <div class="alert alert-primary">
-                                            {!!$log->created_at." ".  $log->user->name ." ". $type[2] . " modülünden " . $log->loggable_id. " numaralı içeriği güncelledi. " !!}
+                                        <div class="" data-user="{!! $log->user->name !!}" data-module="{!! $type[2] !!}">
+                                            {!!$log->created_at." | ".trans('cms::panel.logs.updated',['name' => $log->user->name, 'module' => $type[2], 'id' => $log->loggable_id ]) !!}
                                         @break
                                         @case("D")
-                                        <div class="alert alert-danger">
-                                            {!!$log->created_at." ".  $log->user->name ." ". $type[2] . " modülünden " . $log->loggable_id. " numaralı içeriği sildi. " !!}
+                                        <div class="" data-user="{!! $log->user->name !!}" data-module="{!! $type[2] !!}">
+                                            {!!$log->created_at." | ".trans('cms::panel.logs.deleted',['name' => $log->user->name, 'module' => $type[2], 'id' => $log->loggable_id ]) !!}
                                         @break
                                 @endswitch
                                     </div>

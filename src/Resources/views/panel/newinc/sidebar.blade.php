@@ -29,7 +29,7 @@
                 <li class="sidebar-item {{ request()->routeIs('categories*') ? 'active' : '' }}">
                     <a href="{!! route('categories.index') !!}" class='sidebar-link'>
                         <i data-feather="slack" width="20"></i>
-                        <span>{!! trans('cms::panel.categories') !!}</span>
+                        <span>{!! trans('cms::panel.categories.title') !!}</span>
                     </a>
                 </li>
             @endif

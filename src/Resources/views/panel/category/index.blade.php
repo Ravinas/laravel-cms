@@ -7,13 +7,13 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="divider">
-                                <div class="divider-text">{!! trans('cms::panel.categories')  !!}</div>
+                                <div class="divider-text">{!! trans('cms::panel.categories.title')  !!}</div>
                             </div>
                             <div class="alert alert-secondary">
-                                <i data-feather="info"></i>{{ trans('cms::panel.menu_items_info') }}
+                                <i data-feather="info"></i>{{ trans('cms::panel.categories.info') }}
                             </div>
-                            <button type="button" class="btn icon icon-left btn-primary float-right" data-toggle="modal" data-target="#inlineForm"><i data-feather="plus-circle" ></i>{{ trans('cms::panel.add') }}</button>
-                            <button type="button" id="send_list" class="btn icon icon-left btn-warning float-right mr-2" style="display: none"><i data-feather="check-circle" ></i>{!! trans('cms::panel.save_changes') !!}</button>
+                            <button type="button" class="btn icon icon-left btn-primary float-right" data-toggle="modal" data-target="#inlineForm"><i data-feather="plus-circle" ></i>{{ trans('cms::panel.categories.add') }}</button>
+                            <button type="button" id="send_list" class="btn icon icon-left btn-warning float-right mr-2" style="display: none"><i data-feather="check-circle" ></i>{!! trans('cms::panel.categories.save') !!}</button>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -25,7 +25,9 @@
                                             {!! ucfirst($category->detail->name)  !!}
                                         </span>
                                                 <button class="btn icon btn-info ml-2 edit" data-id="{!! $category->id !!}" data-toggle="modal" data-target="#edit_modal"><i data-feather="edit" ></i></button>
-                                                @include('cms::panel.inc.delete_modal',['trans_file' => 'category', 'model' => $category, 'route_group' => 'categories', 'route_parameter' => 'category'])
+                                                @component('cms::panel.newinc.delete_modal',[ 'model' => $category, 'route_group' => 'categories'])
+                                                    {!! trans('cms::panel.categories.delete_text') !!}
+                                                @endcomponent
                                             </div>
                                             @if($category->childrens)
                                                 @include('cms::panel.category.children',['childs' => $category->childrens])
@@ -47,7 +49,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel33">{!! trans('cms::panel.create') !!} </h4>
+                    <h4 class="modal-title" id="myModalLabel33">{!! trans('cms::panel.categories.create') !!} </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <i data-feather="x"></i>
                     </button>
@@ -57,26 +59,26 @@
                         <div class="from-group">
                             <div class="form-check form-switch  float-right">
                                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="status" value="1" checked>
-                                <label class="form-check-label" for="flexSwitchCheckDefault">{!! trans('cms::panel.category_ison') !!}</label>
+                                <label class="form-check-label" for="flexSwitchCheckDefault">{!! trans('cms::panel.categories.category_ison') !!}</label>
                             </div>
                         </div>
                         <label>{{ trans('cms::panel.category_type') }} </label>
                         <div class="form-group">
                             <select class="choices form-select" name="parent_id">
-                                <option value="0">{!! trans('cms::panel.main_category') !!}</option>
-                                <optgroup label="{!! trans('cms::panel.sub_category_for') !!}">
+                                <option value="0">{!! trans('cms::panel.categories.main_category') !!}</option>
+                                <optgroup label="{!! trans('cms::panel.categories.sub_category_for') !!}">
                                     @foreach($categories as $category)
                                         <option value="{!! $category->id !!}">{!! $category->name !!}</option>
                                     @endforeach
                                 </optgroup>
                             </select>
                         </div>
-                        <label>{!! trans('cms::panel.image') !!}</label>
+                        <label>{!! trans('cms::panel.categories.image') !!}</label>
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-btn">
                                     <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
-                                    <i class="fa fa-picture-o"></i> {!! trans('cms::panel.choose') !!}
+                                    <i class="fa fa-picture-o"></i> {!! trans('cms::panel.categories.choose') !!}
                                     </a>
                                 </span>
                                 <input id="thumbnail" class="form-control edit_filepath" type="text" name="picture">
@@ -87,10 +89,10 @@
                             <div class="from-group">
                                 <div class="form-check form-switch  float-right">
                                     <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="detail_status[{!! $language->id !!}]" value="1" checked>
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">{!! trans('cms::panel.category_ison') !!}</label>
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">{!! trans('cms::panel.categories.category_ison') !!}</label>
                                 </div>
                             </div>
-                            <label>{!! $language->name !!} {{ trans('cms::panel.category_name') }} </label>
+                            <label>{!! $language->name !!} {{ trans('cms::panel.categories.name') }} </label>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="name[{!! $language->id !!}]" autocomplete="none" required>
                             </div>
@@ -110,7 +112,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel33">{!! trans('cms::panel.update') !!} </h4>
+                    <h4 class="modal-title" id="myModalLabel33">{!! trans('cms::panel.categories.edit') !!} </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <i data-feather="x"></i>
                     </button>
@@ -121,27 +123,27 @@
                         <div class="from-group">
                             <div class="form-check form-switch  float-right">
                                 <input class="form-check-input" type="checkbox" id="edit_status" name="edit_status" value="1">
-                                <label class="form-check-label" for="flexSwitchCheckDefault">{!! trans('cms::panel.category_ison') !!}</label>
+                                <label class="form-check-label" for="flexSwitchCheckDefault">{!! trans('cms::panel.categories.category_ison') !!}</label>
                             </div>
                         </div>
                         <input type="hidden" id="edit_id" name="edit_id"/>
-                        <label>{{ trans('cms::panel.category_type') }} </label>
+                        <label>{{ trans('cms::panel.categories.category_type') }} </label>
                         <div class="form-group">
                             <select class="choices form-select" name="edit_parent_id" id="edit_parent_id">
-                                <option value="0">{!! trans('cms::panel.main_category') !!}</option>
-                                <optgroup label="{!! trans('cms::panel.sub_category_for') !!}">
+                                <option value="0">{!! trans('cms::panel.categories.main_category') !!}</option>
+                                <optgroup label="{!! trans('cms::panel.categories.sub_category_for') !!}">
                                     @foreach($categories as $category)
                                         <option value="{!! $category->id !!}">{!! $category->name !!}</option>
                                     @endforeach
                                 </optgroup>
                             </select>
                         </div>
-                        <label>{!! trans('cms::panel.image') !!}</label>
+                        <label>{!! trans('cms::panel.categories.image') !!}</label>
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-btn">
                                     <a id="lfm2" data-input="thumbnail2" data-preview="holder2" class="btn btn-primary">
-                                    <i class="fa fa-picture-o"></i> {!! trans('cms::panel.choose') !!}
+                                    <i class="fa fa-picture-o"></i> {!! trans('cms::panel.categories.choose') !!}
                                     </a>
                                 </span>
                                 <input id="thumbnail2" class="form-control edit_image" type="text" name="edit_picture">
@@ -152,10 +154,10 @@
                             <div class="from-group">
                                 <div class="form-check form-switch  float-right">
                                     <input class="form-check-input " type="checkbox" id="edit_detail_status-{!! $language->id !!}" name="edit_detail_status[{!! $language->id !!}]" value="1">
-                                    <label class="form-check-label" for="{!! $language->id !!}">{!! trans('cms::panel.category_ison') !!}</label>
+                                    <label class="form-check-label" for="{!! $language->id !!}">{!! trans('cms::panel.categories.category_ison') !!}</label>
                                 </div>
                             </div>
-                            <label>{!! $language->name !!} {{ trans('cms::panel.category_name') }} </label>
+                            <label>{!! $language->name !!} {{ trans('cms::panel.categories.name') }} </label>
                             <div class="form-group">
                                 <input type="text" id="edit_name-{!! $language->id !!}" class="form-control" name="edit_name[{!! $language->id !!}]" autocomplete="none" required>
                             </div>
@@ -164,7 +166,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary float-right">{!! trans('cms::panel.update') !!}</button>
+                        <button type="submit" class="btn btn-primary float-right">{!! trans('cms::panel.categories.save') !!}</button>
                     </div>
                 </form>
             </div>
