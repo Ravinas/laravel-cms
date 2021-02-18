@@ -10,7 +10,7 @@
             </div>
         </li>
         @if($children->childrens)
-            @include('cms::panel.category.new-children',['childs' => $children->childrens])
+            @include('cms::panel.category.children',['childs' => $children->childrens])
         @endif
     @endforeach
 </ol>

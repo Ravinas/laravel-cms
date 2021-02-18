@@ -10,7 +10,7 @@
                         </div>
                         <div class="card-body">
                             @foreach($logs as $log)
-                                @php( $type = explode("\\",$log->loggable_type))
+                                @php( $type = explode("\\", $log->loggable_type))
                                 @switch($log->crud)
                                     @case("C")
                                     <div class="alert alert-success">

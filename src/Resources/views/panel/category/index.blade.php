@@ -28,7 +28,7 @@
                                                 @include('cms::panel.inc.delete_modal',['trans_file' => 'category', 'model' => $category, 'route_group' => 'categories', 'route_parameter' => 'category'])
                                             </div>
                                             @if($category->childrens)
-                                                @include('cms::panel.category.new-children',['childs' => $category->childrens])
+                                                @include('cms::panel.category.children',['childs' => $category->childrens])
                                             @endif
                                         </li>
                                     @endforeach

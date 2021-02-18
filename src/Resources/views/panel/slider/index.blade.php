@@ -6,16 +6,16 @@
             <div class="card-content">
                 <div class="card-body">
                     <div class="divider">
-                        <div class="divider-text">{{ trans('cms::panel.slider') }}</div>
+                        <div class="divider-text">{{ trans('cms::panel.sliders.title') }}</div>
                     </div>
                     <div class="alert alert-secondary">
-                        <i data-feather="info"></i>{{ trans('cms::panel.slider_dont_forgot') }}
+                        <i data-feather="info"></i>{{ trans('cms::panel.sliders.subtitle') }}
                     </div>
                     <div class="divider">
-                        <div class="divider-text">{{ trans('cms::panel.edit_your_sliders') }}</div>
+                        <div class="divider-text">{{ trans('cms::panel.sliders.info') }}</div>
                     </div>
                     <div class="form-group">
-                    <button type="button" class="btn icon icon-left btn-primary float-right d-block" data-toggle="modal" data-target="#inlineForm"><i data-feather="plus-circle" ></i> {{ trans('cms::panel.create_slider') }}</button>
+                    <button type="button" class="btn icon icon-left btn-primary float-right d-block" data-toggle="modal" data-target="#inlineForm"><i data-feather="plus-circle" ></i> {{ trans('cms::panel.sliders.create') }}</button>
                     </div>
                     <div class="row">
                         <div class="row">
@@ -53,18 +53,18 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel33">{!! trans('cms::panel.create') !!} </h4>
+                <h4 class="modal-title" id="myModalLabel33">{!! trans('cms::panel.sliders.create') !!} </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <i data-feather="x"></i>
                 </button>
                 </div>
                 <form id="sliderform">
                 <div class="modal-body">
-                    <label>{{ trans('cms::panel.slider_name') }} </label>
+                    <label>{{ trans('cms::panel.sliders.name') }} </label>
                     <div class="form-group">
                     <input type="text" placeholder="" class="form-control" name="name" autocomplete="none">
                     </div>
-                    <label>{{ trans('cms::panel.select_slider_language') }} </label>
+                    <label>{{ trans('cms::panel.sliders.select_language') }} </label>
                     <div class="form-group">
                     <select class="form-select" id="basicSelect" name="lang">
                         @foreach($lang as $language)
@@ -75,7 +75,7 @@
                 </div>
                 </form>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary float-right" id="post">{!! trans('cms::panel.create') !!}</button>
+                    <button type="button" class="btn btn-primary float-right" id="post">{!! trans('cms::panel.sliders.create') !!}</button>
                 </div>
             </div>
         </div>
@@ -99,7 +99,7 @@
                 success:function (response) {
                     if (response.Message == "Ok")
                     {
-                        $('.toast-body').html('Slider oluşturma işlemi başarılı.');
+                        $('.toast-body').html('{!! trans("cms::panel.sliders.create_success") !!}');
                         $('#myToast').toast('show');
                         window.location.reload(true);
                     }else{
@@ -116,13 +116,13 @@
             var id = $(this).attr("data");
             var url =$(this).attr("data-url");
             Swal.fire({
-                title: 'Bunu yapmak istediğinize emin misiniz?',
-                text: "Bu işlemi geri alamazsınız!",
+                title: '{!! trans("cms::panel.sliders.delete_title") !!}',
+                text: "{!! trans("cms::panel.sliders.delete_body") !!}",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Evet, silmek istiyorum!'
+                confirmButtonText: '{!! trans("cms::panel.sliders.delete_confirm") !!}'
                 }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
@@ -135,8 +135,8 @@
                         },
                         success:function (response) {
                             Swal.fire(
-                            'Silindi!',
-                            'Slider tamamen silindi.',
+                            '{!! trans("cms::panel.sliders.delete_success_title") !!}',
+                            '{!! trans("cms::panel.sliders.delete_success_body") !!}',
                             'success'
                             ).then(function(){
                                 location.reload();

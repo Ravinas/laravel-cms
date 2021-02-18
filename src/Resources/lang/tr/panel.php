@@ -26,7 +26,6 @@ return [
     'status' => 'Durum',
     'active' => 'Aktif',
     'passive' => 'Pasif',
-    'languages' => 'Diller',
     'view' => 'Görünüm',
     'slug' => 'Slug',
     'name' => 'Ad',
@@ -37,6 +36,8 @@ return [
     'choose' => 'Seçiniz',
     'notifications' => 'Bildirimler',
     'unread_form' => 'Okunmamış gönderiler var!',
+
+    'an_error' => 'Bir hata oluştu',
 
     'create' => 'Oluştur',
     'edit' => 'Düzenle',
@@ -121,21 +122,46 @@ return [
 
 
     //Language
-    'lang_info' => 'Varsayılan diliniz ve diğer aktif dilleri düzenleyin',
-    'def_lang_info' => 'Sitenizde varsayılan olarak kullanılan dil',
-    'mark_language' => 'Sisteminizde aktif olmasını istediğiniz dilleri işaretleyin.',
-    'lang_extensions' => 'Varsayılan Dil Uzantıları',
-    'lang_list' => 'Dil listesi',
+    'languages' => [
+        'open' => 'Açık',
+        'close' => 'Kapalı',
+        'name' => 'Ad',
+        'slug' => 'Slug',
+        'status' => 'Durumu',
+        'default' => 'Varsayılan',
+        'default_language' => 'Varsayılan dil',
+        'title' => 'Diller',
+        'info' => 'Varsayılan dilinizi seçin ve diğer aktif dilleri düzenleyin.',
+        'def_lang_info' => 'Sitenizde varsayılan olarak kullanılan dil',
+        'mark' => 'Sisteminizde aktif olmasını istediğiniz dilleri işaretleyin.',
+        'extensions' => 'Varsayılan dil için URL uzantıları',
+        'list' => 'Dil listesi',
+        'extensions_opened' => 'Uzantılar açıldı',
+        'extensions_closed' => 'Uzantılar kapatıldı',
+        'active_passive' => 'Dil aktif/pasif işlemi başarılı.',
+        'default_changed' => 'Varsayılan dil başarılı şekilde değiştirildi.',
+    ],
 
 
 
-    //Slider
-    'slider' => 'Slider',
-    'create_slider' => 'Slider Oluşturun',
-    'slider_name' => 'Slider İsmi',
-    'select_slider_language' => 'Slider Dilini seçin',
-    'slider_dont_forgot' => 'Slider\'ı görmek istediğiniz tüm dilleri eklemeyi unutmayın',
-    'edit_your_sliders' => 'Slider\'ı düzenleyin',
+
+    'sliders' => [
+        'title' => 'Slider',
+        'subtitle' => 'Slider\'ı görmek istediğiniz tüm diller için ayrı ayrı oluşturmayı unutmayın.',
+        'info' => 'Slider\'ı düzenleyin',
+        'name' => 'Slider İsmi',
+        'select_language' => 'Slider Dilini seçin',
+        'save' => 'Kaydet',
+        'create' => 'Slider oluşturun',
+        'delete_text' => 'Seçtiğiniz <b>Slider</b> silinecek, onaylıyor musunuz?',
+        'create_success' => 'Slider oluşturma işlemi başarılı.',
+        'delete_title' => 'Bunu yapmak istediğinize emin misiniz?',
+        'delete_body' => ' Bu işlemi geri alamazsınız!',
+        'delete_confirm' => 'Evet, silmek istiyorum!',
+        'delete_success_title' => 'Silindi!',
+        'delete_success_body' => 'Slider tamamen silindi.',
+
+    ],
 
 
     //Redirects
@@ -247,7 +273,6 @@ return [
     ],
 
     //Forms
-    // FORMS MEGA THREAD
     'forms' =>[
         'title' => 'Formlar',
         'info' => 'Websitenizde bulunan formları düzenleyebilir, formlara gelen mesajları görüntüleyebilirsiniz.',
