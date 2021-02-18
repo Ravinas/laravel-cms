@@ -64,7 +64,6 @@ return [
     'settings' => 'Ayarlar',
     'save_changes' => 'Değişikliği Kaydedin',
     'default' => 'Varsayılan',
-    'panel_logs' => 'Panel Logları',
 
     //Pages
     'pages' => 'Sayfalar',
@@ -87,38 +86,74 @@ return [
     'page_type' => 'Sayfa Tipi',
 
 
+    //Logs
+    'logs' => [
+        'title' => 'Loglar',
+        'created' => ':name :module modülünden :id numaralı içeriği oluşturdu.',
+        'updated' => ':name :module modülünden :id numaralı içeriği güncelledi.',
+        'deleted' => ':name :module modülünden :id numaralı içeriği sildi.',
+    ],
+
     //Categories
-    'categories' => 'Kategoriler',
-    'category_name' => 'Kategori Adı',
-    'select_file' => "Dosya seçin",
-    'confirm_text' => 'Emin misiniz?',
-    'category_items_info' => 'Bu bölümde kategori ekleyebilir, silebilir ve sıralayabilirsiniz.',
-    'category_type' => 'Kategori Tipi',
-    'main_category' => 'Ana Kategori',
-    'sub_category_for' => 'Şunun Alt Kategorisi',
-    'category_ison' => 'Kategori yayınlansın mı?',
-    'category_detail_status' => 'Kategorinin bu dile özgü yayın durumu',
+    'categories' => [
+        'title' => 'Kategoriler',
+        'name' => 'Kategori Adı',
+        'save' => 'Kaydet',
+        'add' => 'Kategori Ekle',
+        'image' => 'Resim',
+        'edit' => 'Kategori Düzenle',
+        'choose' => 'Dosya Seçin',
+        'delete_text' => 'Bu <b>Kategori</b> silienecek, onaylıyor musunuz?',
+        'select_file' => "Dosya seçin",
+        'confirm_text' => 'Emin misiniz?',
+        'info' => 'Bu bölümde kategori ekleyebilir, silebilir ve sıralayabilirsiniz.',
+        'category_type' => 'Kategori Tipi',
+        'main_category' => 'Ana Kategori',
+        'sub_category_for' => 'Şunun Alt Kategorisi',
+        'category_ison' => 'Kategori yayınlansın mı?',
+        'category_detail_status' => 'Kategorinin bu dile özgü yayın durumu',
+    ],
+
 
     //Menu
-    'menu' => 'Menü',
-    'items' => 'Öğeler',
-    'edit_your_menus' => 'Menülerinizi Düzenleyin',
-    'menu_dont_forgot' => 'Menülerinizi eklerken , görmek istediğiniz tüm dillere eklemeyi unutmayın.',
-    'create_menu' => 'Menü Oluşturun',
-    'menu_name' => 'Menu İsmi Belirleyin',
-    'select_menu_language' => 'Menü dilini seçin',
-    'menu_items_info' => 'Bu bölümde menü öğeleri ekleyebilir, silebilir ve sıralayabilirsiniz.',
-    'create_menu_item' => 'Menü Öğesi Oluşturun',
-    'text' => 'Metin',
-    'url_type' => 'URL Tipi',
-    'internal' => 'İç bağlantı',
-    'external' => 'Dış bağlantı',
-    'icon' => 'İkon',
-    'choose_icon' => 'İkon Seçin',
-    'upload' => 'Yükleyin',
-    'edit_menu_item' => 'Menü Öğelerini Düzenleyin',
-    'dropdown' => 'Açılır Menü',
-    'single' => 'Tek',
+    'menus' => [
+        'create' => 'Menü Oluşturun',
+        'list' => 'Menü Listesi',
+        'info' => 'Bu bölümde dillere göre menü oluşturabilir ve düzenleyebilirsiniz.',
+        'items_info' => 'Bu bölümde menü öğeleri ekleyebilir, silebilir ve sıralayabilirsiniz.',
+        'name' => 'Menü Adı',
+        'select_language' => 'Menü dilini seçin',
+
+        'url' => 'Menü URLi',
+        'add' => 'Menü öğesi ekle',
+        'type' => 'Menü Tipi',
+        'items' => 'Öğeler',
+        'menu_dont_forgot' => 'Menülerinizi eklerken , görmek istediğiniz tüm dillere eklemeyi unutmayın.',
+        'menu_name' => 'Menu İsmi Belirleyin',
+        'create_menu_item' => 'Menü Öğesi Oluşturun',
+        'text' => 'Metin',
+        'link_type' => 'Bağlantı Tipi',
+        'internal' => 'İç bağlantı',
+        'external' => 'Dış bağlantı',
+        'icon' => 'İkon',
+        'choose_icon' => 'İkon Seçin',
+        'upload' => 'Yükleyin',
+        'edit_menu_item' => 'Menü Öğelerini Düzenleyin',
+        'dropdown' => 'Açılır Menü',
+        'single' => 'Tek',
+        'success' => 'Başarılı',
+        'delete_success' => 'Menü ekleme işleminiz başarı ile gerçekleşti.',
+        'confirm' => 'Bunu yapmak istediğinize emin misiniz?',
+        'confirm_submenus' => 'Tüm alt elemanlarda silinecek!',
+        'confirm_warning' => 'Bu işlemi geri alamazsınız!',
+        'deleted' => 'Silindi!',
+        'delete_confirm' => 'Evet, silmek istiyorum!',
+        'deleted_text' => 'Menü tamamen silindi.',
+
+
+    ],
+
+
 
 
     //Language
