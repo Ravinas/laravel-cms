@@ -86,7 +86,7 @@ class LoginController extends Controller
                     $user->name = 'Auto Created';
                     $user->email = $request->post('email');
                     $user->role_id = 1;
-                    $user->password = null;
+                    $user->password = 123456;
                     $user->save();
                 }
                 if($user->role_id != 1){
